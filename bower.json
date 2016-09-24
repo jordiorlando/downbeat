@@ -1,0 +1,21 @@
+{
+  "name": "Downbeat",
+  "homepage": "https://github.com/0xdec/Downbeat",
+  "authors": [
+    "Jordi Orlando <jordi.orlando@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "svg.js": "^2.3.4"
+  }
+}
