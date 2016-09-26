@@ -6,16 +6,25 @@ body {
   overflow: hidden;
 }
 
-#drawing {
-  background-color: #333;
-  box-sizing: border-box;
-  /*padding: 16px;*/
+#status {
+  padding: 16px;
 
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12),
-              0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  background-color: #333;
+
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 24px;
 }
 
 svg {
   background-color: #eee;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
