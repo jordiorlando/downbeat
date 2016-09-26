@@ -642,7 +642,7 @@ var drawField = function() {
 };
 
 var set = 1;
-var playing = true;
+var playing = false;
 var updateSet = function(dir) {
   let s = sets[set - 1];
   let t = s.counts * 1000 * 60 / s.tempo;
@@ -658,7 +658,9 @@ var updateSet = function(dir) {
     let marcher = marchers[m];
     let icon = marcher.icon;
 
-    icon.finish();
+    if (!playing) {
+      icon.finish();
+    }
     if (playing && dir == 1) {
       icon = icon.animate(t);
     }
@@ -671,13 +673,19 @@ var updateSet = function(dir) {
 
   return set;
 };
-var prevSet = function() {
+var prevSet = function(stop) {
+  if (stop) {
+    playing = false;
+  }
   if (set > 1) {
     set--;
     return updateSet(-1);
   }
 };
-var nextSet = function() {
+var nextSet = function(stop) {
+  if (stop) {
+    playing = false;
+  }
   if (set < sets.length) {
     set++;
     return updateSet(1);
@@ -702,6 +710,14 @@ var playPause = function() {
 
   playing = !playing;
   document.getElementById('status').children[2].innerText = playing ? 'Pause' : 'Play';
+};
+var play = function() {
+  playing = false;
+  loadSet(set);
+  playing = true;
+  while (set != sets.length) {
+    nextSet();
+  }
 };
 
 document.addEventListener('keydown', function(e) {
