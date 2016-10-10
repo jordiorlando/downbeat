@@ -10,19 +10,35 @@
   <title>Downbeat</title>
 
   <link rel="stylesheet" href="styles/main.css">
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/svg.js/dist/svg.min.js"></script>
   <!-- <script src="bower_components/svg.pan-zoom.js/src/svg.pan-zoom.min.js"></script> -->
+  <script src="bower_components/pdfjs-dist/build/pdf.js"></script>
+  <script src="bower_components/file-saver/FileSaver.min.js"></script>
 </head>
 
 <body>
 
   <div id="drawing" style="width: 100%; height: 100%">
     <div id="status">
-      <span></span>
-      <button name="prev" onclick="prevSet(true);">Prev Set</button>
-      <button name="play" onclick="play();">Play</button>
-      <button name="next" onclick="nextSet(true);">Next Set</button>
+      <div>
+        <span></span>
+        <button name="prev" onclick="prevSet(true);">Prev Set</button>
+        <button name="play" onclick="play();">Play</button>
+        <button name="next" onclick="nextSet(true);">Next Set</button>
+        <span></span>
+      </div>
+      <div>
+        <pre>
+
+
+        </pre>
+      </div>
     </div>
+  </div>
+  <div id="audio">
+    <audio id="click1" src="audio/SeikoSQ50/High Seiko SQ50.wav" preload="auto" controls="controls">Get a better standards-compliant browser!</audio>
+    <audio id="click2" src="audio/SeikoSQ50/Low Seiko SQ50.wav" preload="auto" controls="controls">Get a better standards-compliant browser!</audio>
   </div>
   <script src="scripts/main.js"></script>
 </body>
