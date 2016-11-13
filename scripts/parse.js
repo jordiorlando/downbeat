@@ -27,14 +27,14 @@ var parseHoriz = function(str) {
   }
 
   if (data.length === 4) {
-    yard = parseInt(data[3]);
+    yard = parseInt(data[3], 10);
     offset = parseFloat(data[1]);
 
     if (data[2] === 'inside') {
       offset *= -1;
     }
   } else {
-    yard = parseInt(data[1]);
+    yard = parseInt(data[1], 10);
     offset = 0;
   }
 
@@ -92,8 +92,8 @@ PDFJS.getDocument('drill/' + drill.name + '.pdf').then(function(pdf) {
               let data = str.replace('Performer: (unnamed) ', '').split(' ');
               let performer = {
                 type: data[0],
-                num: parseInt(data[1]),
-                id: parseInt(str.substring(str.indexOf('ID:') + 3)),
+                num: parseInt(data[1], 10),
+                id: parseInt(str.substring(str.indexOf('ID:') + 3), 10),
                 sets: sets
               };
               drill.performers.push(performer);
@@ -105,13 +105,13 @@ PDFJS.getDocument('drill/' + drill.name + '.pdf').then(function(pdf) {
 
             switch ((i - ii) % 4) {
               case 0:
-                set = parseInt(str) - 1;
+                set = parseInt(str, 10) - 1;
                 sets[set] = {
-                  set: parseInt(str)
+                  set: set + 1
                 };
                 break;
               case 1:
-                sets[set].counts = parseInt(str);
+                sets[set].counts = parseInt(str, 10);
                 break;
               case 2:
                 sets[set].horiz = str.replace(/\s+/g, ' ');

@@ -7,8 +7,8 @@ class Drill {
 
     // Function to calculate the position for a given performer, set, and subset
     let pos = function(p, s, a) {
-      s = parseInt(s);
-      a = parseInt(a);
+      s = parseInt(s, 10);
+      a = parseInt(a, 10);
 
       if (p.sets[s][a].x !== undefined) {
         return {
@@ -32,7 +32,7 @@ class Drill {
       for (let s in p.sets) {
         // If set is an object, format it as an array of just one move subset
         if (!(p.sets[s] instanceof Array)) {
-          p.sets[s].type = parseInt(s) ? 'move' : 'start';
+          p.sets[s].type = parseInt(s, 10) ? 'move' : 'start';
           p.sets[s].counts = this.sets[s].counts;
           p.sets[s] = [p.sets[s]];
         }
@@ -75,7 +75,7 @@ class Drill {
 
       // Loop through all subsets until the current one is found
       for (let a in p.sets[s]) {
-        a = parseInt(a);
+        a = parseInt(a, 10);
         x = p.sets[s][a].x;
         y = p.sets[s][a].y;
 
