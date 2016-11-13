@@ -77,7 +77,7 @@ function parseHoriz(p, s) {
   let horiz = x ? (x < 0 ? 'Left: ' : 'Right: ') : '';
 
   let yard = x.abs().subtract(80).negate();
-  let offset = yard.mod(8);
+  let offset = yard.modulo(8);
   offset = offset <= 4 ? offset : offset.subtract(8);
   yard = yard.subtract(offset).divide(8).multiply(5);
 

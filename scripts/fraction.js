@@ -1,33 +1,40 @@
 class Fraction {
+  // Fraction constructor
   constructor(...args) {
     this.set(...args);
-    // console.log(this.fraction, this.valueOf());
   }
 
+  // Get whole integer portion
   get whole() {
     return this.fraction[0];
   }
 
+  // Set whole integer portion
   set whole(n) {
     this.fraction[0] = parseInt(n, 10);
   }
 
+  // Get numerator
   get numerator() {
     return this.fraction[1];
   }
 
+  // Set numerator
   set numerator(n) {
     this.fraction[1] = parseInt(n, 10);
   }
 
+  // Get denominator
   get denominator() {
     return this.fraction[2];
   }
 
+  // Set denominator
   set denominator(n) {
     this.fraction[2] = parseInt(n, 10);
   }
 
+  // Normalize the sign
   _sign() {
     for (let i in this.fraction) {
       if (this.fraction[i] < 0) {
@@ -41,6 +48,7 @@ class Fraction {
     }
   }
 
+  // Test equality against another fraction
   equals(...args) {
     let f = new Fraction(...args);
 
@@ -55,6 +63,7 @@ class Fraction {
     return this.negative === f.negative;
   }
 
+  // Set the value
   set(...args) {
     if (args[0] instanceof Fraction) {
       this.fraction = [...args[0].fraction];
@@ -90,6 +99,7 @@ class Fraction {
     return this.mixed();
   }
 
+  // Take the absolute value (returns new Fraction)
   abs() {
     let f = new Fraction(this);
 
@@ -98,6 +108,7 @@ class Fraction {
     return f;
   }
 
+  // Change the sign (returns new Fraction)
   negate() {
     let f = new Fraction(this);
 
@@ -108,6 +119,7 @@ class Fraction {
     return f;
   }
 
+  // Calculate the inverse (returns new Fraction)
   invert() {
     let f = new Fraction(this).improper();
 
@@ -118,6 +130,7 @@ class Fraction {
     return f.mixed();
   }
 
+  // Add a fraction (returns new Fraction)
   add(...args) {
     let a = new Fraction(this).improper();
     let b = new Fraction(...args).improper();
@@ -135,11 +148,13 @@ class Fraction {
     return a.mixed();
   }
 
+  // Subtract a fraction (returns new Fraction)
   subtract(...args) {
     let f = new Fraction(...args).negate();
     return this.add(f);
   }
 
+  // Multiply by a fraction (returns new Fraction)
   multiply(...args) {
     let a = new Fraction(this).improper();
     let b = new Fraction(...args).improper();
@@ -152,12 +167,14 @@ class Fraction {
     return a.mixed();
   }
 
+  // Divide by a fraction (returns new Fraction)
   divide(...args) {
     let f = new Fraction(...args).invert();
     return this.multiply(f);
   }
 
-  mod(...args) {
+  // Calculate the modulo (returns new Fraction)
+  modulo(...args) {
     let a = new Fraction(this).improper();
     let b = new Fraction(...args).improper();
 
@@ -173,6 +190,7 @@ class Fraction {
     return a.mixed();
   }
 
+  // Normalize the numerator & denominator
   normalize() {
     let gcd = function(a, b) {
       if (!b) {
@@ -190,6 +208,7 @@ class Fraction {
     return this;
   }
 
+  // Convert to a mixed fraction
   mixed() {
     while (this.fraction[1] >= this.fraction[2]) {
       this.fraction[0]++;
@@ -199,6 +218,7 @@ class Fraction {
     return this.normalize();
   }
 
+  // Convert to an improper fraction
   improper() {
     while (this.fraction[0]) {
       this.fraction[0]--;
@@ -208,6 +228,7 @@ class Fraction {
     return this.normalize();
   }
 
+  // Get the string representation
   toString() {
     let sign = this.negative ? '-' : '';
 
@@ -221,6 +242,7 @@ class Fraction {
     return `${sign}${this.whole} ${this.numerator}/${this.denominator}`;
   }
 
+  // Get the decimal approximation
   valueOf() {
     let val = this.whole + this.numerator / this.denominator;
     return this.negative ? -1 * val : val;
