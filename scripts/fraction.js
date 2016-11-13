@@ -37,7 +37,7 @@ class Fraction {
   // Normalize the sign
   _sign() {
     for (let i in this.fraction) {
-      if (this.fraction[i] < 0) {
+      if (Object.is(this.fraction[i] * 0, -0)) {
         this.fraction[i] *= -1;
         this.negative = !this.negative;
       }
@@ -71,9 +71,11 @@ class Fraction {
     } else {
       let arr = args[0] instanceof Array ? args[0] : args;
 
-      // Convert from float/decimal
+      // Convert from float/decimal to fraction
       if (arr.length === 1) {
+        arr[0] = parseFloat(arr[0]);
         let dec = Math.abs(arr[0] - Math.trunc(arr[0]));
+
         if (dec) {
           for (let d = 2; d <= 4; d++) {
             let n = dec * d;
@@ -84,12 +86,17 @@ class Fraction {
             }
           }
         }
+      } else {
+        arr[1] = parseInt(arr[1], 10);
+        arr[2] = parseInt(arr[2], 10);
       }
 
+      arr[0] = parseInt(arr[0], 10);
+
       this.fraction = [
-        parseInt(arr[0], 10) || 0,
-        parseInt(arr[1], 10) || 0,
-        parseInt(arr[2], 10) || 1
+        isNaN(arr[0]) ? 0 : arr[0],
+        isNaN(arr[1]) ? 0 : arr[1],
+        isNaN(arr[2]) ? 1 : arr[2]
       ];
       this.negative = false;
 
