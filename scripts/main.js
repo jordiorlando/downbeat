@@ -34,6 +34,7 @@ var loadDrill = function(name) {
 document.addEventListener('keydown', function(e) {
   switch (e.key) {
     case ' ':
+      e.preventDefault();
       playPause();
       break;
     case 'ArrowLeft':
