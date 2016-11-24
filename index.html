@@ -10,8 +10,8 @@
   <title>Downbeat</title>
 
   <link rel="stylesheet" href="styles/main.css">
+  <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
   <script src="bower_components/d3/d3.min.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/pdfjs-dist/build/pdf.js"></script>
   <script src="bower_components/file-saver/FileSaver.min.js"></script>
   <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
@@ -20,25 +20,151 @@
 </head>
 
 <body>
-  <div id="status">
-    <div>
-      <span></span>
-      <button name="prev" onclick="drill.prevSet();">Prev Set</button>
-      <button name="play" onclick="playPause();">Play</button>
-      <button name="next" onclick="drill.nextSet();">Next Set</button>
-      <span></span>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--scroll">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title" id="title">Title</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="http://marchingillini.com">Marching Illini</a>
+        </nav>
+      </div>
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <a href="#drill" class="mdl-layout__tab is-active">Drill</a>
+        <a href="#music" class="mdl-layout__tab">Music</a>
+        <a href="#tools" class="mdl-layout__tab">Tools</a>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Downbeat</span>
+      <nav class="mdl-navigation">
+        <!-- <a class="mdl-navigation__link" href="#announcements">Announcements</a> -->
+      </nav>
     </div>
-    <div>
-      <pre>
-
-
-      </pre>
-    </div>
+    <main class="mdl-layout__content">
+      <section class="mdl-layout__tab-panel is-active" id="drill">
+        <div class="page-content">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <div class="field-card mdl-card mdl-shadow--2dp" id="drawing"></div>
+            </div>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col">
+              <div class="control-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                  <h2 class="mdl-card__title-text">Controls</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  <span class="mdl-typography--subhead">Markings</span>
+                  <br>
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio-highschool">
+                    <input type="radio" id="radio-highschool" class="mdl-radio__button" name="markings" value="highschool">
+                    <span class="mdl-radio__label">High School</span>
+                  </label>
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio-college">
+                    <input type="radio" id="radio-college" class="mdl-radio__button" name="markings" value="college" checked>
+                    <span class="mdl-radio__label">College</span>
+                  </label>
+                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio-pro">
+                    <input type="radio" id="radio-pro" class="mdl-radio__button" name="markings" value="pro">
+                    <span class="mdl-radio__label">Pro</span>
+                  </label>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Get Started
+                  </a>
+                </div>
+                <div class="mdl-card__menu">
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-prev">
+                    <i class="material-icons">skip_previous</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-playpause">
+                    <i class="material-icons">play_arrow</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-next">
+                    <i class="material-icons">skip_next</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <div class="status-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                  <h2 class="mdl-card__title-text" id="status-title">Performer</h2>
+                </div>
+                <div class="mdl-card__supporting-text" id="status-text">
+                  <span>&nbsp;</span>
+                  <br>
+                  <span>&nbsp;</span>
+                  <br>
+                  <span>&nbsp;</span>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Get Started
+                  </a>
+                </div>
+                <div class="mdl-card__menu">
+                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">more_horiz</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <div class="status-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                  <h2 class="mdl-card__title-text">Details</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  <span>&nbsp;</span>
+                  <br>
+                  <span>&nbsp;</span>
+                  <br>
+                  <span>&nbsp;</span>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Get Started
+                  </a>
+                </div>
+                <div class="mdl-card__menu">
+                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">more_horiz</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <audio src="audio/click.wav" preload="auto" id="metronome">Get a better standards-compliant browser!</audio>
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="music">
+        <div class="page-content">
+          <canvas id="pdf"></canvas>
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="tools">
+        <div class="page-content">
+          <div>
+            <span>tuner</span>
+          </div>
+        </div>
+      </section>
+      <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__left-section">
+          <div class="mdl-logo">Downbeat</div>
+          <ul class="mdl-mini-footer__link-list">
+            <li><a href="#help">Help</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div>
+      </footer>
+    </main>
   </div>
-  <div id="drawing"></div>
-  <div id="audio">
-    <audio id="click" src="audio/click.wav" preload="auto" controls="controls">Get a better standards-compliant browser!</audio>
-  </div>
+
   <script src="scripts/fraction.js"></script>
   <script src="scripts/field.js"></script>
   <script src="scripts/drill.js"></script>

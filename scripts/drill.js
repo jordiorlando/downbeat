@@ -1,5 +1,7 @@
 class Drill {
   constructor(drill) {
+    this.field = new Field('drawing', 'd3');
+
     // Copy drill metadata and data
     this.name = drill.name;
     this.sets = drill.sets;
@@ -61,6 +63,8 @@ class Drill {
     for (let s of this.sets) {
       this.total += s.counts;
     }
+
+    this.field.drawPerformers(this.performers);
   }
 
   // Update all performer positions
@@ -105,7 +109,7 @@ class Drill {
       return `translate(${xScale(x)},${yScale(y)})`;
     };
 
-    field.field.selectAll('.performer').attr('transform', translate);
+    this.field.group.selectAll('.performer').attr('transform', translate);
   }
 
   // Go to the next count
@@ -170,11 +174,13 @@ class Drill {
 
   // Start playing until the specified count
   play(end = this.total) {
+    document.getElementById('button-playpause').children[0].textContent = 'pause';
+
     if (this.state.total < this.total) {
       this.playing = true;
 
       let func = () => {
-        document.getElementById('click').play();
+        document.getElementById('metronome').play();
         this.nextCount();
 
         let t = 1000 * 60 / this.state.tempo;
@@ -195,8 +201,18 @@ class Drill {
 
   // Pause playing
   pause() {
+    document.getElementById('button-playpause').children[0].textContent = 'play_arrow';
+
     this.playing = false;
     clearTimeout(this.timeoutID);
+  }
+
+  playPause() {
+    if (this.playing) {
+      this.pause();
+    } else {
+      this.play();
+    }
   }
 
   // Stop playing

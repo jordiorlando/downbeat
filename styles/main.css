@@ -7,31 +7,17 @@ body {
   background-color: #eee;
 }
 
-#drawing {
-  /*display: none;*/
+.field-card.mdl-card,
+.status-card.mdl-card,
+.control-card.mdl-card {
+  width: 100%;
 }
 
-#status {
-  padding: 16px;
-
-  color: #fff;
-  background-color: #333;
-
-  text-align: center;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 24px;
-}
-
-#d3 {
-  /*display: none;*/
-  /*border: 20 solid white;*/
-}
-
-#audio {
+#metronome {
   display: none;
 }
 
-/* svg {
+svg {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -39,7 +25,7 @@ body {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-} */
+}
 
 /* .performer {
   fill:   #fff;
