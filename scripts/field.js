@@ -42,26 +42,6 @@ const COLORS = {
 };
 
 const MARCHER = 3.5;
-const MULT    = 4;
-
-/* d3.json('field.json', function(data) {
-  dimensions = data;
-
-  let recurse = function(d) {
-    for (let i in d) {
-      if (d[i] instanceof Array) {
-        d[i] = new Fraction(d[i]);
-      } else if (d[i] instanceof Object) {
-        recurse(d[i]);
-      }
-    }
-  };
-
-  recurse(dimensions);
-  console.log(dimensions);
-}); */
-
-
 
 var xScale = d3.scaleLinear()
   .domain([-96, 96])
@@ -77,35 +57,22 @@ function parent() {
 
 class Field {
   constructor(elem, id) {
-    let svg = d3.select(`#${elem}`).append('svg')
+    let width = document.getElementById(elem).clientWidth;
+    let height = width * (DIMENSIONS.height + DIMENSIONS.border * 2) / (DIMENSIONS.width + DIMENSIONS.border * 2);
+
+    this.svg = d3.select(`#${elem}`).append('svg')
       .attr('id', id)
-      .attr('width', MULT*(DIMENSIONS.width + DIMENSIONS.border * 2))
-      .attr('height', MULT*(DIMENSIONS.height + DIMENSIONS.border * 2))
+      .attr('width', width)
+      .attr('height', height)
+      .attr('viewBox', [-(DIMENSIONS.width / 2 + DIMENSIONS.border), -DIMENSIONS.height, DIMENSIONS.width + DIMENSIONS.border * 2, DIMENSIONS.height].join(' '))
       .style('background-color', '#fff');
-
-    svg.append('rect')
-      .attr('width', MULT*(DIMENSIONS.width + DIMENSIONS.border * 2))
-      .attr('height', MULT*(DIMENSIONS.height + DIMENSIONS.border * 2))
-      .style('fill', 'none')
-      .style('pointer-events', 'all');
-
-    this.group = svg.append('g')
-      .attr('transform', `translate(${MULT*(DIMENSIONS.width / 2 + DIMENSIONS.border)}, ${MULT*(DIMENSIONS.height + DIMENSIONS.border)}) scale(${MULT})`);
-
-    /* svg.call(d3.zoom()
-      .translateExtent([[-MULT*DIMENSIONS.width / 2, -MULT*DIMENSIONS.height], [MULT*DIMENSIONS.width / 2, 0]])
-      .scaleExtent([MULT, MULT*5])
-      .on('zoom', () => {
-        console.log(d3.event.sourceEvent, d3.event.transform);
-        this.group.attr('transform', d3.event.transform);
-      })); */
 
     this.drawField();
   }
 
   // Draw field and markings
   drawField() {
-    this.group.append('rect')
+    this.svg.append('rect')
       .style('fill', COLORS.field)
       .style('stroke', '#fff')
       .style('stroke-width', +DIMENSIONS.line.width)
@@ -116,7 +83,7 @@ class Field {
 
     // End zones
     let endzones = [-DIMENSIONS.width / 2 + 15, DIMENSIONS.width / 2 - 15];
-    this.group.selectAll('.endzone')
+    this.svg.selectAll('.endzone')
         .data(endzones)
       .enter().append('rect')
         .style('fill', COLORS.endzone)
@@ -130,7 +97,7 @@ class Field {
 
     // 3-yard markers
     for (let h of [-141, 141]) {
-      this.group.append('line')
+      this.svg.append('line')
         .style('stroke', '#fff')
         .style('stroke-width', +DIMENSIONS.line.width)
         .attr('x1', h)
@@ -146,7 +113,7 @@ class Field {
 
       for (let h of [-x, x]) {
         for (let r of [-45, 45]) {
-          this.group.append('line')
+          this.svg.append('line')
             .style('stroke', '#fff')
             .style('stroke-width', +DIMENSIONS.line.width)
             .style('opacity', 0)
@@ -165,7 +132,7 @@ class Field {
     for (let i = -50; i <= 50; i += 5) {
       yardlines.push(i * 8 / 5);
     }
-    this.group.selectAll('.yardline')
+    this.svg.selectAll('.yardline')
         .data(yardlines)
       .enter().append('g')
         .attr('class', 'yardline')
@@ -262,10 +229,10 @@ class Field {
       })
       .exit().remove();
 
-    // this.group.selectAll('.')
+    // this.svg.selectAll('.')
 
     /* // Field grid
-    let grid = draw.group();
+    let grid = draw.svg();
 
     // Vertical 4-step lines
     for (let i = 7.5; i < 160; i += 7.5) {
@@ -313,7 +280,7 @@ class Field {
     }
 
     // Performer icon
-    this.group.selectAll('.performer')
+    this.svg.selectAll('.performer')
         .data(performers, d => parseName(d))
       .enter().append('g')
         .attr('class', 'performer')
@@ -353,7 +320,7 @@ class Field {
       /* p.icon.first().fill({
         color: COLORS.performer[p.selected ? 'select' : 'fill']
       }); */
-      this.group.select(`#performer_${parseName(p).replace('\\', '\\\\').replace('*', '\\*')}`)
+      this.svg.select(`#performer_${parseName(p).replace('\\', '\\\\').replace('*', '\\*')}`)
         .select('circle')
         .style('fill', COLORS.performer[p.selected ? 'select' : 'fill']);
 
@@ -379,7 +346,7 @@ class Field {
         this.markings(type, markings[type]);
       }
     } else {
-      this.group.selectAll(`.${markings}`).style('opacity', show ? 1 : 0);
+      this.svg.selectAll(`.${markings}`).style('opacity', show ? 1 : 0);
     }
   }
 }
