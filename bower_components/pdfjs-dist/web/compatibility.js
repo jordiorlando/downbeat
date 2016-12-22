@@ -12,6 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint strict: ["error", "function"] */
+/* eslint-disable no-extend-native */
 /* globals VBArray, PDFJS */
 
 (function compatibilityWrapper() {
@@ -270,7 +272,7 @@ if (typeof PDFJS === 'undefined') {
       // initialize result and counters
       var bc = 0, bs, buffer, idx = 0, output = '';
       // get next character
-      buffer = input.charAt(idx++);
+      (buffer = input.charAt(idx++));
       // character found in table?
       // initialize bit storage and add its ascii value
       ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,

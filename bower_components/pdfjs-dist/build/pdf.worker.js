@@ -23,8 +23,8 @@
  }
 }(this, function (exports) {
  'use strict';
- var pdfjsVersion = '1.6.377';
- var pdfjsBuild = '47f03b6';
+ var pdfjsVersion = '1.6.414';
+ var pdfjsBuild = '3b3a179';
  var pdfjsFilePath = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : null;
  var pdfjsLibs = {};
  (function pdfjsWrapper() {
@@ -9981,6 +9981,7 @@
     t['controlHT'] = 0x0009;
     t['controlLF'] = 0x000A;
     t['controlNAK'] = 0x0015;
+    t['controlNULL'] = 0x0000;
     t['controlRS'] = 0x001E;
     t['controlSI'] = 0x000F;
     t['controlSO'] = 0x000E;
@@ -12732,6 +12733,122 @@
     t['zuhiragana'] = 0x305A;
     t['zukatakana'] = 0x30BA;
     t['.notdef'] = 0x0000;
+    t['angbracketleftbig'] = 0x2329;
+    t['angbracketleftBig'] = 0x2329;
+    t['angbracketleftbigg'] = 0x2329;
+    t['angbracketleftBigg'] = 0x2329;
+    t['angbracketrightBig'] = 0x232A;
+    t['angbracketrightbig'] = 0x232A;
+    t['angbracketrightBigg'] = 0x232A;
+    t['angbracketrightbigg'] = 0x232A;
+    t['arrowhookleft'] = 0x21AA;
+    t['arrowhookright'] = 0x21A9;
+    t['arrowlefttophalf'] = 0x21BC;
+    t['arrowleftbothalf'] = 0x21BD;
+    t['arrownortheast'] = 0x2197;
+    t['arrownorthwest'] = 0x2196;
+    t['arrowrighttophalf'] = 0x21C0;
+    t['arrowrightbothalf'] = 0x21C1;
+    t['arrowsoutheast'] = 0x2198;
+    t['arrowsouthwest'] = 0x2199;
+    t['backslashbig'] = 0x2216;
+    t['backslashBig'] = 0x2216;
+    t['backslashBigg'] = 0x2216;
+    t['backslashbigg'] = 0x2216;
+    t['bardbl'] = 0x2016;
+    t['bracehtipdownleft'] = 0xFE37;
+    t['bracehtipdownright'] = 0xFE37;
+    t['bracehtipupleft'] = 0xFE38;
+    t['bracehtipupright'] = 0xFE38;
+    t['braceleftBig'] = 0x007B;
+    t['braceleftbig'] = 0x007B;
+    t['braceleftbigg'] = 0x007B;
+    t['braceleftBigg'] = 0x007B;
+    t['bracerightBig'] = 0x007D;
+    t['bracerightbig'] = 0x007D;
+    t['bracerightbigg'] = 0x007D;
+    t['bracerightBigg'] = 0x007D;
+    t['bracketleftbig'] = 0x005B;
+    t['bracketleftBig'] = 0x005B;
+    t['bracketleftbigg'] = 0x005B;
+    t['bracketleftBigg'] = 0x005B;
+    t['bracketrightBig'] = 0x005D;
+    t['bracketrightbig'] = 0x005D;
+    t['bracketrightbigg'] = 0x005D;
+    t['bracketrightBigg'] = 0x005D;
+    t['ceilingleftbig'] = 0x2308;
+    t['ceilingleftBig'] = 0x2308;
+    t['ceilingleftBigg'] = 0x2308;
+    t['ceilingleftbigg'] = 0x2308;
+    t['ceilingrightbig'] = 0x2309;
+    t['ceilingrightBig'] = 0x2309;
+    t['ceilingrightbigg'] = 0x2309;
+    t['ceilingrightBigg'] = 0x2309;
+    t['circledotdisplay'] = 0x2299;
+    t['circledottext'] = 0x2299;
+    t['circlemultiplydisplay'] = 0x2297;
+    t['circlemultiplytext'] = 0x2297;
+    t['circleplusdisplay'] = 0x2295;
+    t['circleplustext'] = 0x2295;
+    t['contintegraldisplay'] = 0x222E;
+    t['contintegraltext'] = 0x222E;
+    t['coproductdisplay'] = 0x2210;
+    t['coproducttext'] = 0x2210;
+    t['floorleftBig'] = 0x230A;
+    t['floorleftbig'] = 0x230A;
+    t['floorleftbigg'] = 0x230A;
+    t['floorleftBigg'] = 0x230A;
+    t['floorrightbig'] = 0x230B;
+    t['floorrightBig'] = 0x230B;
+    t['floorrightBigg'] = 0x230B;
+    t['floorrightbigg'] = 0x230B;
+    t['hatwide'] = 0x0302;
+    t['hatwider'] = 0x0302;
+    t['hatwidest'] = 0x0302;
+    t['intercal'] = 0x1D40;
+    t['integraldisplay'] = 0x222B;
+    t['integraltext'] = 0x222B;
+    t['intersectiondisplay'] = 0x22C2;
+    t['intersectiontext'] = 0x22C2;
+    t['logicalanddisplay'] = 0x2227;
+    t['logicalandtext'] = 0x2227;
+    t['logicalordisplay'] = 0x2228;
+    t['logicalortext'] = 0x2228;
+    t['parenleftBig'] = 0x0028;
+    t['parenleftbig'] = 0x0028;
+    t['parenleftBigg'] = 0x0028;
+    t['parenleftbigg'] = 0x0028;
+    t['parenrightBig'] = 0x0029;
+    t['parenrightbig'] = 0x0029;
+    t['parenrightBigg'] = 0x0029;
+    t['parenrightbigg'] = 0x0029;
+    t['prime'] = 0x2032;
+    t['productdisplay'] = 0x220F;
+    t['producttext'] = 0x220F;
+    t['radicalbig'] = 0x221A;
+    t['radicalBig'] = 0x221A;
+    t['radicalBigg'] = 0x221A;
+    t['radicalbigg'] = 0x221A;
+    t['radicalbt'] = 0x221A;
+    t['radicaltp'] = 0x221A;
+    t['radicalvertex'] = 0x221A;
+    t['slashbig'] = 0x002F;
+    t['slashBig'] = 0x002F;
+    t['slashBigg'] = 0x002F;
+    t['slashbigg'] = 0x002F;
+    t['summationdisplay'] = 0x2211;
+    t['summationtext'] = 0x2211;
+    t['tildewide'] = 0x02DC;
+    t['tildewider'] = 0x02DC;
+    t['tildewidest'] = 0x02DC;
+    t['uniondisplay'] = 0x22C3;
+    t['unionmultidisplay'] = 0x228E;
+    t['unionmultitext'] = 0x228E;
+    t['unionsqdisplay'] = 0x2294;
+    t['unionsqtext'] = 0x2294;
+    t['uniontext'] = 0x22C3;
+    t['vextenddouble'] = 0x2225;
+    t['vextendsingle'] = 0x2223;
    });
    var getDingbatsGlyphsUnicode = getLookupTableFactory(function (t) {
     t['space'] = 0x0020;
@@ -33189,18 +33306,18 @@
    }();
    var CipherTransform = function CipherTransformClosure() {
     function CipherTransform(stringCipherConstructor, streamCipherConstructor) {
-     this.stringCipherConstructor = stringCipherConstructor;
-     this.streamCipherConstructor = streamCipherConstructor;
+     this.StringCipherConstructor = stringCipherConstructor;
+     this.StreamCipherConstructor = streamCipherConstructor;
     }
     CipherTransform.prototype = {
      createStream: function CipherTransform_createStream(stream, length) {
-      var cipher = new this.streamCipherConstructor();
+      var cipher = new this.StreamCipherConstructor();
       return new DecryptStream(stream, length, function cipherTransformDecryptStream(data, finalize) {
        return cipher.decryptBlock(data, finalize);
       });
      },
      decryptString: function CipherTransform_decryptString(s) {
-      var cipher = new this.stringCipherConstructor();
+      var cipher = new this.StringCipherConstructor();
       var data = stringToBytes(s);
       data = cipher.decryptBlock(data, true);
       return bytesToString(data);
@@ -33485,17 +33602,17 @@
        return new NullCipher();
       };
      }
-     if ('V2' === cfm.name) {
+     if (cfm.name === 'V2') {
       return function cipherTransformFactoryBuildCipherConstructorV2() {
        return new ARCFourCipher(buildObjectKey(num, gen, key, false));
       };
      }
-     if ('AESV2' === cfm.name) {
+     if (cfm.name === 'AESV2') {
       return function cipherTransformFactoryBuildCipherConstructorAESV2() {
        return new AES128Cipher(buildObjectKey(num, gen, key, true));
       };
      }
-     if ('AESV3' === cfm.name) {
+     if (cfm.name === 'AESV3') {
       return function cipherTransformFactoryBuildCipherConstructorAESV3() {
        return new AES256Cipher(key);
       };
@@ -37810,13 +37927,15 @@
       originalCharCode |= 0;
       var glyphId = charCodeToGlyphId[originalCharCode];
       var fontCharCode = originalCharCode;
+      var hasUnicodeValue = false;
       if (!isIdentityUnicode && toUnicode.has(originalCharCode)) {
+       hasUnicodeValue = true;
        var unicode = toUnicode.get(fontCharCode);
        if (unicode.length === 1) {
         fontCharCode = unicode.charCodeAt(0);
        }
       }
-      if ((usedFontCharCodes[fontCharCode] !== undefined || isProblematicUnicodeLocation(fontCharCode) || isSymbolic && isIdentityUnicode) && nextAvailableFontCharCode <= PRIVATE_USE_OFFSET_END) {
+      if ((usedFontCharCodes[fontCharCode] !== undefined || isProblematicUnicodeLocation(fontCharCode) || isSymbolic && !hasUnicodeValue) && nextAvailableFontCharCode <= PRIVATE_USE_OFFSET_END) {
        do {
         fontCharCode = nextAvailableFontCharCode++;
         if (SKIP_PRIVATE_USE_RANGE_F000_TO_F01F && fontCharCode === 0xF000) {
@@ -39509,6 +39628,7 @@
    function type1FontGlyphMapping(properties, builtInEncoding, glyphNames) {
     var charCodeToGlyphId = Object.create(null);
     var glyphId, charCode, baseEncoding;
+    var isSymbolicFont = !!(properties.flags & FontFlags.Symbolic);
     if (properties.baseEncodingName) {
      baseEncoding = getEncoding(properties.baseEncodingName);
      for (charCode = 0; charCode < baseEncoding.length; charCode++) {
@@ -39519,7 +39639,7 @@
        charCodeToGlyphId[charCode] = 0;
       }
      }
-    } else if (!!(properties.flags & FontFlags.Symbolic)) {
+    } else if (isSymbolicFont) {
      for (charCode in builtInEncoding) {
       charCodeToGlyphId[charCode] = builtInEncoding[charCode];
      }
@@ -45951,10 +46071,10 @@
        }
        if (!font.vertical) {
         textChunk.lastAdvanceWidth = width;
-        textChunk.width += width * textChunk.textAdvanceScale;
+        textChunk.width += width;
        } else {
         textChunk.lastAdvanceHeight = height;
-        textChunk.height += Math.abs(height * textChunk.textAdvanceScale);
+        textChunk.height += Math.abs(height);
        }
        return textChunk;
       }
@@ -45975,6 +46095,8 @@
        if (!textContentItem.initialized) {
         return;
        }
+       textContentItem.width *= textContentItem.textAdvanceScale;
+       textContentItem.height *= textContentItem.textAdvanceScale;
        textContent.items.push(runBidiTransform(textContentItem));
        textContentItem.initialized = false;
        textContentItem.str.length = 0;
@@ -46087,16 +46209,16 @@
            advance = items[j] * textState.fontSize / 1000;
            var breakTextRun = false;
            if (textState.font.vertical) {
-            offset = advance * (textState.textHScale * textState.textMatrix[2] + textState.textMatrix[3]);
-            textState.translateTextMatrix(0, advance);
+            offset = advance;
+            textState.translateTextMatrix(0, offset);
             breakTextRun = textContentItem.textRunBreakAllowed && advance > textContentItem.fakeMultiSpaceMax;
             if (!breakTextRun) {
              textContentItem.height += offset;
             }
            } else {
             advance = -advance;
-            offset = advance * (textState.textHScale * textState.textMatrix[0] + textState.textMatrix[1]);
-            textState.translateTextMatrix(advance, 0);
+            offset = advance * textState.textHScale;
+            textState.translateTextMatrix(offset, 0);
             breakTextRun = textContentItem.textRunBreakAllowed && advance > textContentItem.fakeMultiSpaceMax;
             if (!breakTextRun) {
              textContentItem.width += offset;
@@ -47866,6 +47988,8 @@
       switch (fieldType) {
       case 'Tx':
        return new TextWidgetAnnotation(parameters);
+      case 'Btn':
+       return new ButtonWidgetAnnotation(parameters);
       case 'Ch':
        return new ChoiceWidgetAnnotation(parameters);
       }
@@ -48293,17 +48417,72 @@
     });
     return TextWidgetAnnotation;
    }();
+   var ButtonWidgetAnnotation = function ButtonWidgetAnnotationClosure() {
+    function ButtonWidgetAnnotation(params) {
+     WidgetAnnotation.call(this, params);
+     this.data.checkBox = !this.hasFieldFlag(AnnotationFieldFlag.RADIO) && !this.hasFieldFlag(AnnotationFieldFlag.PUSHBUTTON);
+     if (this.data.checkBox) {
+      if (!isName(this.data.fieldValue)) {
+       return;
+      }
+      this.data.fieldValue = this.data.fieldValue.name;
+     }
+     this.data.radioButton = this.hasFieldFlag(AnnotationFieldFlag.RADIO) && !this.hasFieldFlag(AnnotationFieldFlag.PUSHBUTTON);
+     if (this.data.radioButton) {
+      this.data.fieldValue = this.data.buttonValue = null;
+      var fieldParent = params.dict.get('Parent');
+      if (!isDict(fieldParent) || !fieldParent.has('V')) {
+       return;
+      }
+      var fieldParentValue = fieldParent.get('V');
+      if (!isName(fieldParentValue)) {
+       return;
+      }
+      this.data.fieldValue = fieldParentValue.name;
+      var appearanceStates = params.dict.get('AP');
+      if (!isDict(appearanceStates)) {
+       return;
+      }
+      var normalAppearanceState = appearanceStates.get('N');
+      if (!isDict(normalAppearanceState)) {
+       return;
+      }
+      var keys = normalAppearanceState.getKeys();
+      for (var i = 0, ii = keys.length; i < ii; i++) {
+       if (keys[i] !== 'Off') {
+        this.data.buttonValue = keys[i];
+        break;
+       }
+      }
+     }
+    }
+    Util.inherit(ButtonWidgetAnnotation, WidgetAnnotation, {
+     getOperatorList: function ButtonWidgetAnnotation_getOperatorList(evaluator, task, renderForms) {
+      var operatorList = new OperatorList();
+      if (renderForms) {
+       return Promise.resolve(operatorList);
+      }
+      if (this.appearance) {
+       return Annotation.prototype.getOperatorList.call(this, evaluator, task, renderForms);
+      }
+      return Promise.resolve(operatorList);
+     }
+    });
+    return ButtonWidgetAnnotation;
+   }();
    var ChoiceWidgetAnnotation = function ChoiceWidgetAnnotationClosure() {
     function ChoiceWidgetAnnotation(params) {
      WidgetAnnotation.call(this, params);
      this.data.options = [];
-     var options = params.dict.getArray('Opt');
+     var options = params.dict.get('Opt');
      if (isArray(options)) {
+      var xref = params.xref;
       for (var i = 0, ii = options.length; i < ii; i++) {
-       var option = options[i];
+       var option = xref.fetchIfRef(options[i]);
+       var isOptionArray = isArray(option);
        this.data.options[i] = {
-        exportValue: isArray(option) ? option[0] : option,
-        displayValue: isArray(option) ? option[1] : option
+        exportValue: isOptionArray ? xref.fetchIfRef(option[0]) : option,
+        displayValue: isOptionArray ? xref.fetchIfRef(option[1]) : option
        };
       }
      }
