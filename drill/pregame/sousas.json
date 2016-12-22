@@ -1,0 +1,1220 @@
+{
+  "performers": [
+    {
+      "type": "8",
+      "squad": 1,
+      "position": "A",
+      "sets": [
+        {
+          "x": -13,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 1,
+      "position": "B",
+      "sets": [
+        {
+          "x": -15,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 1,
+      "position": "C",
+      "sets": [
+        {
+          "x": -11,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 1,
+      "position": "D",
+      "sets": [
+        {
+          "x": -9,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 2,
+      "position": "A",
+      "sets": [
+        {
+          "x": 9,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 2,
+      "position": "B",
+      "sets": [
+        {
+          "x": 11,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 2,
+      "position": "C",
+      "sets": [
+        {
+          "x": 15,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 2,
+      "position": "D",
+      "sets": [
+        {
+          "x": 13,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 3,
+      "position": "A",
+      "sets": [
+        {
+          "x": 1,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 3,
+      "position": "B",
+      "sets": [
+        {
+          "x": 3,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 3,
+      "position": "C",
+      "sets": [
+        {
+          "x": 7,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 3,
+      "position": "D",
+      "sets": [
+        {
+          "x": 5,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 4,
+      "position": "A",
+      "sets": [
+        {
+          "x": -5,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 4,
+      "position": "B",
+      "sets": [
+        {
+          "x": -7,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 4,
+      "position": "C",
+      "sets": [
+        {
+          "x": -3,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    },
+    {
+      "type": "8",
+      "squad": 4,
+      "position": "D",
+      "sets": [
+        {
+          "x": -1,
+          "y": 82
+        },
+        {
+          "name": "I-A'",
+          "tempo": 138,
+          "counts": 48
+        },
+        {
+          "name": "I-A''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A'''",
+          "tempo": 138,
+          "counts": 24
+        },
+        {
+          "name": "I-A RUN-ON",
+          "tempo": 138,
+          "counts": 32
+        },
+        {
+          "name": "I-B SECONDARY RUN-ON",
+          "tempo": 138,
+          "counts": 12
+        },
+        {
+          "name": "II-A",
+          "tempo": 138,
+          "counts": 40
+        },
+        {
+          "name": "II-B UI LOGOS",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-C FLOAT OUT",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-D FLOAT BACK",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-E",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-F",
+          "tempo": 138,
+          "counts": 16
+        },
+        {
+          "name": "II-G",
+          "tempo": 138,
+          "counts": 8
+        },
+        {
+          "name": "II-H",
+          "tempo": 138,
+          "counts": 24
+        }
+      ]
+    }
+  ]
+}
