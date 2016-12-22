@@ -23,8 +23,8 @@
  }
 }(this, function (exports) {
  'use strict';
- var pdfjsVersion = '1.6.332';
- var pdfjsBuild = '8a1ed8a';
+ var pdfjsVersion = '1.6.377';
+ var pdfjsBuild = '47f03b6';
  var pdfjsFilePath = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : null;
  var pdfjsLibs = {};
  (function pdfjsWrapper() {
@@ -2715,7 +2715,7 @@
      var chars = '';
      for (var i = 0; i < bytes.length; i += 2) {
       var code = bytes.charCodeAt(i) * 256 + bytes.charCodeAt(i + 1);
-      chars += code >= 32 && code < 127 && code !== 60 && code !== 62 && code !== 38 && false ? String.fromCharCode(code) : '&#x' + (0x10000 + code).toString(16).substring(1) + ';';
+      chars += code >= 32 && code < 127 && code !== 60 && code !== 62 && code !== 38 ? String.fromCharCode(code) : '&#x' + (0x10000 + code).toString(16).substring(1) + ';';
      }
      return '>' + chars;
     });
@@ -6745,7 +6745,7 @@
        return;
       }
       var name = fontObj.loadedName || 'sans-serif';
-      var bold = fontObj.black ? fontObj.bold ? '900' : 'bold' : fontObj.bold ? 'bold' : 'normal';
+      var bold = fontObj.black ? '900' : fontObj.bold ? 'bold' : 'normal';
       var italic = fontObj.italic ? 'italic' : 'normal';
       var typeface = '"' + name + '", ' + fontObj.fallbackName;
       var browserFontSize = size < MIN_FONT_SIZE ? MIN_FONT_SIZE : size > MAX_FONT_SIZE ? MAX_FONT_SIZE : size;
@@ -7858,6 +7858,9 @@
      },
      get ref() {
       return this.pageInfo.ref;
+     },
+     get userUnit() {
+      return this.pageInfo.userUnit;
      },
      get view() {
       return this.pageInfo.view;

@@ -23,8 +23,8 @@
  }
 }(this, function (exports) {
  'use strict';
- var pdfjsVersion = '1.6.332';
- var pdfjsBuild = '8a1ed8a';
+ var pdfjsVersion = '1.6.377';
+ var pdfjsBuild = '47f03b6';
  var pdfjsFilePath = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : null;
  var pdfjsLibs = {};
  (function pdfjsWrapper() {
@@ -407,751 +407,6 @@
     return ArithmeticDecoder;
    }();
    exports.ArithmeticDecoder = ArithmeticDecoder;
-  }));
-  (function (root, factory) {
-   factory(root.pdfjsCoreBidi = {});
-  }(this, function (exports) {
-   var baseTypes = [
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'S',
-    'B',
-    'S',
-    'WS',
-    'B',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'B',
-    'B',
-    'B',
-    'S',
-    'WS',
-    'ON',
-    'ON',
-    'ET',
-    'ET',
-    'ET',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'CS',
-    'ON',
-    'CS',
-    'ON',
-    'EN',
-    'EN',
-    'EN',
-    'EN',
-    'EN',
-    'EN',
-    'EN',
-    'EN',
-    'EN',
-    'EN',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'B',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'BN',
-    'CS',
-    'ON',
-    'ET',
-    'ET',
-    'ET',
-    'ET',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'L',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ET',
-    'ET',
-    'EN',
-    'EN',
-    'ON',
-    'L',
-    'ON',
-    'ON',
-    'ON',
-    'EN',
-    'L',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'ON',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'ON',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'ON',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L',
-    'L'
-   ];
-   var arabicTypes = [
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'CS',
-    'AL',
-    'ON',
-    'ON',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AN',
-    'AN',
-    'AN',
-    'AN',
-    'AN',
-    'AN',
-    'AN',
-    'AN',
-    'AN',
-    'AN',
-    'ET',
-    'AN',
-    'AN',
-    'AL',
-    'AL',
-    'AL',
-    'NSM',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'ON',
-    'NSM',
-    'NSM',
-    'NSM',
-    'NSM',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL',
-    'AL'
-   ];
-   function isOdd(i) {
-    return (i & 1) !== 0;
-   }
-   function isEven(i) {
-    return (i & 1) === 0;
-   }
-   function findUnequal(arr, start, value) {
-    for (var j = start, jj = arr.length; j < jj; ++j) {
-     if (arr[j] !== value) {
-      return j;
-     }
-    }
-    return j;
-   }
-   function setValues(arr, start, end, value) {
-    for (var j = start; j < end; ++j) {
-     arr[j] = value;
-    }
-   }
-   function reverseValues(arr, start, end) {
-    for (var i = start, j = end - 1; i < j; ++i, --j) {
-     var temp = arr[i];
-     arr[i] = arr[j];
-     arr[j] = temp;
-    }
-   }
-   function createBidiText(str, isLTR, vertical) {
-    return {
-     str: str,
-     dir: vertical ? 'ttb' : isLTR ? 'ltr' : 'rtl'
-    };
-   }
-   var chars = [];
-   var types = [];
-   function bidi(str, startLevel, vertical) {
-    var isLTR = true;
-    var strLength = str.length;
-    if (strLength === 0 || vertical) {
-     return createBidiText(str, isLTR, vertical);
-    }
-    chars.length = strLength;
-    types.length = strLength;
-    var numBidi = 0;
-    var i, ii;
-    for (i = 0; i < strLength; ++i) {
-     chars[i] = str.charAt(i);
-     var charCode = str.charCodeAt(i);
-     var charType = 'L';
-     if (charCode <= 0x00ff) {
-      charType = baseTypes[charCode];
-     } else if (0x0590 <= charCode && charCode <= 0x05f4) {
-      charType = 'R';
-     } else if (0x0600 <= charCode && charCode <= 0x06ff) {
-      charType = arabicTypes[charCode & 0xff];
-     } else if (0x0700 <= charCode && charCode <= 0x08AC) {
-      charType = 'AL';
-     }
-     if (charType === 'R' || charType === 'AL' || charType === 'AN') {
-      numBidi++;
-     }
-     types[i] = charType;
-    }
-    if (numBidi === 0) {
-     isLTR = true;
-     return createBidiText(str, isLTR);
-    }
-    if (startLevel === -1) {
-     if (strLength / numBidi < 0.3) {
-      isLTR = true;
-      startLevel = 0;
-     } else {
-      isLTR = false;
-      startLevel = 1;
-     }
-    }
-    var levels = [];
-    for (i = 0; i < strLength; ++i) {
-     levels[i] = startLevel;
-    }
-    var e = isOdd(startLevel) ? 'R' : 'L';
-    var sor = e;
-    var eor = sor;
-    var lastType = sor;
-    for (i = 0; i < strLength; ++i) {
-     if (types[i] === 'NSM') {
-      types[i] = lastType;
-     } else {
-      lastType = types[i];
-     }
-    }
-    lastType = sor;
-    var t;
-    for (i = 0; i < strLength; ++i) {
-     t = types[i];
-     if (t === 'EN') {
-      types[i] = lastType === 'AL' ? 'AN' : 'EN';
-     } else if (t === 'R' || t === 'L' || t === 'AL') {
-      lastType = t;
-     }
-    }
-    for (i = 0; i < strLength; ++i) {
-     t = types[i];
-     if (t === 'AL') {
-      types[i] = 'R';
-     }
-    }
-    for (i = 1; i < strLength - 1; ++i) {
-     if (types[i] === 'ES' && types[i - 1] === 'EN' && types[i + 1] === 'EN') {
-      types[i] = 'EN';
-     }
-     if (types[i] === 'CS' && (types[i - 1] === 'EN' || types[i - 1] === 'AN') && types[i + 1] === types[i - 1]) {
-      types[i] = types[i - 1];
-     }
-    }
-    for (i = 0; i < strLength; ++i) {
-     if (types[i] === 'EN') {
-      var j;
-      for (j = i - 1; j >= 0; --j) {
-       if (types[j] !== 'ET') {
-        break;
-       }
-       types[j] = 'EN';
-      }
-      for (j = i + 1; j < strLength; ++j) {
-       if (types[j] !== 'ET') {
-        break;
-       }
-       types[j] = 'EN';
-      }
-     }
-    }
-    for (i = 0; i < strLength; ++i) {
-     t = types[i];
-     if (t === 'WS' || t === 'ES' || t === 'ET' || t === 'CS') {
-      types[i] = 'ON';
-     }
-    }
-    lastType = sor;
-    for (i = 0; i < strLength; ++i) {
-     t = types[i];
-     if (t === 'EN') {
-      types[i] = lastType === 'L' ? 'L' : 'EN';
-     } else if (t === 'R' || t === 'L') {
-      lastType = t;
-     }
-    }
-    for (i = 0; i < strLength; ++i) {
-     if (types[i] === 'ON') {
-      var end = findUnequal(types, i + 1, 'ON');
-      var before = sor;
-      if (i > 0) {
-       before = types[i - 1];
-      }
-      var after = eor;
-      if (end + 1 < strLength) {
-       after = types[end + 1];
-      }
-      if (before !== 'L') {
-       before = 'R';
-      }
-      if (after !== 'L') {
-       after = 'R';
-      }
-      if (before === after) {
-       setValues(types, i, end, before);
-      }
-      i = end - 1;
-     }
-    }
-    for (i = 0; i < strLength; ++i) {
-     if (types[i] === 'ON') {
-      types[i] = e;
-     }
-    }
-    for (i = 0; i < strLength; ++i) {
-     t = types[i];
-     if (isEven(levels[i])) {
-      if (t === 'R') {
-       levels[i] += 1;
-      } else if (t === 'AN' || t === 'EN') {
-       levels[i] += 2;
-      }
-     } else {
-      if (t === 'L' || t === 'AN' || t === 'EN') {
-       levels[i] += 1;
-      }
-     }
-    }
-    var highestLevel = -1;
-    var lowestOddLevel = 99;
-    var level;
-    for (i = 0, ii = levels.length; i < ii; ++i) {
-     level = levels[i];
-     if (highestLevel < level) {
-      highestLevel = level;
-     }
-     if (lowestOddLevel > level && isOdd(level)) {
-      lowestOddLevel = level;
-     }
-    }
-    for (level = highestLevel; level >= lowestOddLevel; --level) {
-     var start = -1;
-     for (i = 0, ii = levels.length; i < ii; ++i) {
-      if (levels[i] < level) {
-       if (start >= 0) {
-        reverseValues(chars, start, i);
-        start = -1;
-       }
-      } else if (start < 0) {
-       start = i;
-      }
-     }
-     if (start >= 0) {
-      reverseValues(chars, start, levels.length);
-     }
-    }
-    for (i = 0, ii = chars.length; i < ii; ++i) {
-     var ch = chars[i];
-     if (ch === '<' || ch === '>') {
-      chars[i] = '';
-     }
-    }
-    return createBidiText(chars.join(''), isLTR);
-   }
-   exports.bidi = bidi;
   }));
   (function (root, factory) {
    factory(root.pdfjsCoreCharsets = {});
@@ -5692,6 +4947,755 @@
    exports.stringToUTF8String = stringToUTF8String;
    exports.utf8StringToString = utf8StringToString;
    exports.warn = warn;
+  }));
+  (function (root, factory) {
+   factory(root.pdfjsCoreBidi = {}, root.pdfjsSharedUtil);
+  }(this, function (exports, sharedUtil) {
+   var warn = sharedUtil.warn;
+   var baseTypes = [
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'S',
+    'B',
+    'S',
+    'WS',
+    'B',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'B',
+    'B',
+    'B',
+    'S',
+    'WS',
+    'ON',
+    'ON',
+    'ET',
+    'ET',
+    'ET',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'ES',
+    'CS',
+    'ES',
+    'CS',
+    'CS',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'CS',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'B',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'BN',
+    'CS',
+    'ON',
+    'ET',
+    'ET',
+    'ET',
+    'ET',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'L',
+    'ON',
+    'ON',
+    'BN',
+    'ON',
+    'ON',
+    'ET',
+    'ET',
+    'EN',
+    'EN',
+    'ON',
+    'L',
+    'ON',
+    'ON',
+    'ON',
+    'EN',
+    'L',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'ON',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'ON',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'ON',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L',
+    'L'
+   ];
+   var arabicTypes = [
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'ON',
+    'ON',
+    'AL',
+    'ET',
+    'ET',
+    'AL',
+    'CS',
+    'AL',
+    'ON',
+    'ON',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'AL',
+    'AL',
+    '',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'AN',
+    'ET',
+    'AN',
+    'AN',
+    'AL',
+    'AL',
+    'AL',
+    'NSM',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'AN',
+    'ON',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'AL',
+    'AL',
+    'NSM',
+    'NSM',
+    'ON',
+    'NSM',
+    'NSM',
+    'NSM',
+    'NSM',
+    'AL',
+    'AL',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'EN',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL',
+    'AL'
+   ];
+   function isOdd(i) {
+    return (i & 1) !== 0;
+   }
+   function isEven(i) {
+    return (i & 1) === 0;
+   }
+   function findUnequal(arr, start, value) {
+    for (var j = start, jj = arr.length; j < jj; ++j) {
+     if (arr[j] !== value) {
+      return j;
+     }
+    }
+    return j;
+   }
+   function setValues(arr, start, end, value) {
+    for (var j = start; j < end; ++j) {
+     arr[j] = value;
+    }
+   }
+   function reverseValues(arr, start, end) {
+    for (var i = start, j = end - 1; i < j; ++i, --j) {
+     var temp = arr[i];
+     arr[i] = arr[j];
+     arr[j] = temp;
+    }
+   }
+   function createBidiText(str, isLTR, vertical) {
+    return {
+     str: str,
+     dir: vertical ? 'ttb' : isLTR ? 'ltr' : 'rtl'
+    };
+   }
+   var chars = [];
+   var types = [];
+   function bidi(str, startLevel, vertical) {
+    var isLTR = true;
+    var strLength = str.length;
+    if (strLength === 0 || vertical) {
+     return createBidiText(str, isLTR, vertical);
+    }
+    chars.length = strLength;
+    types.length = strLength;
+    var numBidi = 0;
+    var i, ii;
+    for (i = 0; i < strLength; ++i) {
+     chars[i] = str.charAt(i);
+     var charCode = str.charCodeAt(i);
+     var charType = 'L';
+     if (charCode <= 0x00ff) {
+      charType = baseTypes[charCode];
+     } else if (0x0590 <= charCode && charCode <= 0x05f4) {
+      charType = 'R';
+     } else if (0x0600 <= charCode && charCode <= 0x06ff) {
+      charType = arabicTypes[charCode & 0xff];
+      if (!charType) {
+       warn('Bidi: invalid Unicode character ' + charCode.toString(16));
+      }
+     } else if (0x0700 <= charCode && charCode <= 0x08AC) {
+      charType = 'AL';
+     }
+     if (charType === 'R' || charType === 'AL' || charType === 'AN') {
+      numBidi++;
+     }
+     types[i] = charType;
+    }
+    if (numBidi === 0) {
+     isLTR = true;
+     return createBidiText(str, isLTR);
+    }
+    if (startLevel === -1) {
+     if (strLength / numBidi < 0.3) {
+      isLTR = true;
+      startLevel = 0;
+     } else {
+      isLTR = false;
+      startLevel = 1;
+     }
+    }
+    var levels = [];
+    for (i = 0; i < strLength; ++i) {
+     levels[i] = startLevel;
+    }
+    var e = isOdd(startLevel) ? 'R' : 'L';
+    var sor = e;
+    var eor = sor;
+    var lastType = sor;
+    for (i = 0; i < strLength; ++i) {
+     if (types[i] === 'NSM') {
+      types[i] = lastType;
+     } else {
+      lastType = types[i];
+     }
+    }
+    lastType = sor;
+    var t;
+    for (i = 0; i < strLength; ++i) {
+     t = types[i];
+     if (t === 'EN') {
+      types[i] = lastType === 'AL' ? 'AN' : 'EN';
+     } else if (t === 'R' || t === 'L' || t === 'AL') {
+      lastType = t;
+     }
+    }
+    for (i = 0; i < strLength; ++i) {
+     t = types[i];
+     if (t === 'AL') {
+      types[i] = 'R';
+     }
+    }
+    for (i = 1; i < strLength - 1; ++i) {
+     if (types[i] === 'ES' && types[i - 1] === 'EN' && types[i + 1] === 'EN') {
+      types[i] = 'EN';
+     }
+     if (types[i] === 'CS' && (types[i - 1] === 'EN' || types[i - 1] === 'AN') && types[i + 1] === types[i - 1]) {
+      types[i] = types[i - 1];
+     }
+    }
+    for (i = 0; i < strLength; ++i) {
+     if (types[i] === 'EN') {
+      var j;
+      for (j = i - 1; j >= 0; --j) {
+       if (types[j] !== 'ET') {
+        break;
+       }
+       types[j] = 'EN';
+      }
+      for (j = i + 1; j < strLength; ++j) {
+       if (types[j] !== 'ET') {
+        break;
+       }
+       types[j] = 'EN';
+      }
+     }
+    }
+    for (i = 0; i < strLength; ++i) {
+     t = types[i];
+     if (t === 'WS' || t === 'ES' || t === 'ET' || t === 'CS') {
+      types[i] = 'ON';
+     }
+    }
+    lastType = sor;
+    for (i = 0; i < strLength; ++i) {
+     t = types[i];
+     if (t === 'EN') {
+      types[i] = lastType === 'L' ? 'L' : 'EN';
+     } else if (t === 'R' || t === 'L') {
+      lastType = t;
+     }
+    }
+    for (i = 0; i < strLength; ++i) {
+     if (types[i] === 'ON') {
+      var end = findUnequal(types, i + 1, 'ON');
+      var before = sor;
+      if (i > 0) {
+       before = types[i - 1];
+      }
+      var after = eor;
+      if (end + 1 < strLength) {
+       after = types[end + 1];
+      }
+      if (before !== 'L') {
+       before = 'R';
+      }
+      if (after !== 'L') {
+       after = 'R';
+      }
+      if (before === after) {
+       setValues(types, i, end, before);
+      }
+      i = end - 1;
+     }
+    }
+    for (i = 0; i < strLength; ++i) {
+     if (types[i] === 'ON') {
+      types[i] = e;
+     }
+    }
+    for (i = 0; i < strLength; ++i) {
+     t = types[i];
+     if (isEven(levels[i])) {
+      if (t === 'R') {
+       levels[i] += 1;
+      } else if (t === 'AN' || t === 'EN') {
+       levels[i] += 2;
+      }
+     } else {
+      if (t === 'L' || t === 'AN' || t === 'EN') {
+       levels[i] += 1;
+      }
+     }
+    }
+    var highestLevel = -1;
+    var lowestOddLevel = 99;
+    var level;
+    for (i = 0, ii = levels.length; i < ii; ++i) {
+     level = levels[i];
+     if (highestLevel < level) {
+      highestLevel = level;
+     }
+     if (lowestOddLevel > level && isOdd(level)) {
+      lowestOddLevel = level;
+     }
+    }
+    for (level = highestLevel; level >= lowestOddLevel; --level) {
+     var start = -1;
+     for (i = 0, ii = levels.length; i < ii; ++i) {
+      if (levels[i] < level) {
+       if (start >= 0) {
+        reverseValues(chars, start, i);
+        start = -1;
+       }
+      } else if (start < 0) {
+       start = i;
+      }
+     }
+     if (start >= 0) {
+      reverseValues(chars, start, levels.length);
+     }
+    }
+    for (i = 0, ii = chars.length; i < ii; ++i) {
+     var ch = chars[i];
+     if (ch === '<' || ch === '>') {
+      chars[i] = '';
+     }
+    }
+    return createBidiText(chars.join(''), isLTR);
+   }
+   exports.bidi = bidi;
   }));
   (function (root, factory) {
    factory(root.pdfjsCoreCFFParser = {}, root.pdfjsSharedUtil, root.pdfjsCoreCharsets, root.pdfjsCoreEncodings);
@@ -20458,6 +20462,10 @@
     t['ArialBlack-Bold'] = 'Helvetica-Bold';
     t['ArialBlack-BoldItalic'] = 'Helvetica-BoldOblique';
     t['ArialBlack-Italic'] = 'Helvetica-Oblique';
+    t['Arial-Black'] = 'Helvetica';
+    t['Arial-Black-Bold'] = 'Helvetica-Bold';
+    t['Arial-Black-BoldItalic'] = 'Helvetica-BoldOblique';
+    t['Arial-Black-Italic'] = 'Helvetica-Oblique';
     t['Arial'] = 'Helvetica';
     t['Arial-Bold'] = 'Helvetica-Bold';
     t['Arial-BoldItalic'] = 'Helvetica-BoldOblique';
@@ -20531,6 +20539,7 @@
     t['MS-PMincho-Bold'] = 'MS PMincho-Bold';
     t['MS-PMincho-BoldItalic'] = 'MS PMincho-BoldItalic';
     t['MS-PMincho-Italic'] = 'MS PMincho-Italic';
+    t['NuptialScript'] = 'Times-Italic';
     t['Wingdings'] = 'ZapfDingbats';
    });
    var getSerifFonts = getLookupTableFactory(function (t) {
@@ -20631,6 +20640,7 @@
     t['New York'] = true;
     t['Nimbus Roman'] = true;
     t['NPS Rawlinson Roadway'] = true;
+    t['NuptialScript'] = true;
     t['Palatino'] = true;
     t['Perpetua'] = true;
     t['Plantin'] = true;
@@ -23520,7 +23530,7 @@
      var chars = '';
      for (var i = 0; i < bytes.length; i += 2) {
       var code = bytes.charCodeAt(i) * 256 + bytes.charCodeAt(i + 1);
-      chars += code >= 32 && code < 127 && code !== 60 && code !== 62 && code !== 38 && false ? String.fromCharCode(code) : '&#x' + (0x10000 + code).toString(16).substring(1) + ';';
+      chars += code >= 32 && code < 127 && code !== 60 && code !== 62 && code !== 38 ? String.fromCharCode(code) : '&#x' + (0x10000 + code).toString(16).substring(1) + ';';
      }
      return '>' + chars;
     });
@@ -37593,8 +37603,11 @@
       var filter = dict.get('Filter', 'F'), filterName;
       if (isName(filter)) {
        filterName = filter.name;
-      } else if (isArray(filter) && isName(filter[0])) {
-       filterName = filter[0].name;
+      } else if (isArray(filter)) {
+       var filterZero = this.xref.fetchIfRef(filter[0]);
+       if (isName(filterZero)) {
+        filterName = filterZero.name;
+       }
       }
       var startPos = stream.pos, length, i, ii;
       if (filterName === 'DCTDecode' || filterName === 'DCT') {
@@ -37718,7 +37731,7 @@
       var params = dict.get('DecodeParms', 'DP');
       if (isName(filter)) {
        if (isArray(params)) {
-        params = params[0];
+        params = this.xref.fetchIfRef(params[0]);
        }
        return this.makeFilter(stream, filter.name, length, params);
       }
@@ -37727,13 +37740,13 @@
        var filterArray = filter;
        var paramsArray = params;
        for (var i = 0, ii = filterArray.length; i < ii; ++i) {
-        filter = filterArray[i];
+        filter = this.xref.fetchIfRef(filterArray[i]);
         if (!isName(filter)) {
          error('Bad filter name: ' + filter);
         }
         params = null;
         if (isArray(paramsArray) && i in paramsArray) {
-         params = paramsArray[i];
+         params = this.xref.fetchIfRef(paramsArray[i]);
         }
         stream = this.makeFilter(stream, filter.name, maybeLength, params);
         maybeLength = null;
@@ -37747,9 +37760,6 @@
        return new NullStream(stream);
       }
       try {
-       if (params && this.xref) {
-        params = this.xref.fetchIfRef(params);
-       }
        var xrefStreamStats = this.xref.stats.streamTypes;
        if (name === 'FlateDecode' || name === 'Fl') {
         xrefStreamStats[StreamType.FLATE] = true;
@@ -40992,7 +41002,7 @@
        for (charCode in GlyphMapForStandardFonts) {
         map[+charCode] = GlyphMapForStandardFonts[charCode];
        }
-       if (/ArialBlack/i.test(name)) {
+       if (/Arial-?Black/i.test(name)) {
         var SupplementalGlyphMapForArialBlack = getSupplementalGlyphMapForArialBlack();
         for (charCode in SupplementalGlyphMapForArialBlack) {
          map[+charCode] = SupplementalGlyphMapForArialBlack[charCode];
@@ -44588,7 +44598,7 @@
        return;
       }
       var name = fontObj.loadedName || 'sans-serif';
-      var bold = fontObj.black ? fontObj.bold ? '900' : 'bold' : fontObj.bold ? 'bold' : 'normal';
+      var bold = fontObj.black ? '900' : fontObj.bold ? 'bold' : 'normal';
       var italic = fontObj.italic ? 'italic' : 'normal';
       var typeface = '"' + name + '", ' + fontObj.fallbackName;
       var browserFontSize = size < MIN_FONT_SIZE ? MIN_FONT_SIZE : size > MAX_FONT_SIZE ? MAX_FONT_SIZE : size;
@@ -46673,6 +46683,9 @@
      get ref() {
       return this.pageInfo.ref;
      },
+     get userUnit() {
+      return this.pageInfo.userUnit;
+     },
      get view() {
       return this.pageInfo.view;
      },
@@ -47762,11 +47775,8 @@
       }
      }
      cs = xref.fetchIfRef(cs);
-     var mode;
      if (isName(cs)) {
-      mode = cs.name;
-      this.mode = mode;
-      switch (mode) {
+      switch (cs.name) {
       case 'DeviceGray':
       case 'G':
        return 'DeviceGrayCS';
@@ -47782,11 +47792,10 @@
         null
        ];
       default:
-       error('unrecognized colorspace ' + mode);
+       error('unrecognized colorspace ' + cs.name);
       }
      } else if (isArray(cs)) {
-      mode = xref.fetchIfRef(cs[0]).name;
-      this.mode = mode;
+      var mode = xref.fetchIfRef(cs[0]).name;
       var numComps, params, alt, whitePoint, blackPoint, gamma;
       switch (mode) {
       case 'DeviceGray':
@@ -47869,12 +47878,7 @@
       case 'Separation':
       case 'DeviceN':
        var name = xref.fetchIfRef(cs[1]);
-       numComps = 1;
-       if (isName(name)) {
-        numComps = 1;
-       } else if (isArray(name)) {
-        numComps = name.length;
-       }
+       numComps = isArray(name) ? name.length : 1;
        alt = ColorSpace.parseToIR(cs[2], xref, res);
        var tintFnIR = PDFFunction.getIR(xref, xref.fetchIfRef(cs[3]));
        return [
@@ -47962,22 +47966,16 @@
       var scaled = new Float32Array(numComps);
       var tinted = new Float32Array(baseNumComps);
       var i, j;
-      if (usesZeroToOneRange) {
-       for (i = 0; i < count; i++) {
-        for (j = 0; j < numComps; j++) {
-         scaled[j] = src[srcOffset++] * scale;
-        }
-        tintFn(scaled, 0, tinted, 0);
+      for (i = 0; i < count; i++) {
+       for (j = 0; j < numComps; j++) {
+        scaled[j] = src[srcOffset++] * scale;
+       }
+       tintFn(scaled, 0, tinted, 0);
+       if (usesZeroToOneRange) {
         for (j = 0; j < baseNumComps; j++) {
          baseBuf[pos++] = tinted[j] * 255;
         }
-       }
-      } else {
-       for (i = 0; i < count; i++) {
-        for (j = 0; j < numComps; j++) {
-         scaled[j] = src[srcOffset++] * scale;
-        }
-        tintFn(scaled, 0, tinted, 0);
+       } else {
         base.getRgbItem(tinted, 0, baseBuf, pos);
         pos += baseNumComps;
        }
@@ -48010,27 +48008,25 @@
     function IndexedCS(base, highVal, lookup) {
      this.name = 'Indexed';
      this.numComps = 1;
-     this.defaultColor = new Uint8Array([0]);
+     this.defaultColor = new Uint8Array(this.numComps);
      this.base = base;
      this.highVal = highVal;
      var baseNumComps = base.numComps;
      var length = baseNumComps * highVal;
-     var lookupArray;
      if (isStream(lookup)) {
-      lookupArray = new Uint8Array(length);
+      this.lookup = new Uint8Array(length);
       var bytes = lookup.getBytes(length);
-      lookupArray.set(bytes);
+      this.lookup.set(bytes);
      } else if (isString(lookup)) {
-      lookupArray = new Uint8Array(length);
+      this.lookup = new Uint8Array(length);
       for (var i = 0; i < length; ++i) {
-       lookupArray[i] = lookup.charCodeAt(i);
+       this.lookup[i] = lookup.charCodeAt(i);
       }
      } else if (lookup instanceof Uint8Array || lookup instanceof Array) {
-      lookupArray = lookup;
+      this.lookup = lookup;
      } else {
       error('Unrecognized lookup table: ' + lookup);
      }
-     this.lookup = lookupArray;
     }
     IndexedCS.prototype = {
      getRgb: ColorSpace.prototype.getRgb,
@@ -48066,7 +48062,7 @@
     function DeviceGrayCS() {
      this.name = 'DeviceGray';
      this.numComps = 1;
-     this.defaultColor = new Float32Array([0]);
+     this.defaultColor = new Float32Array(this.numComps);
     }
     DeviceGrayCS.prototype = {
      getRgb: ColorSpace.prototype.getRgb,
@@ -48102,11 +48098,7 @@
     function DeviceRgbCS() {
      this.name = 'DeviceRGB';
      this.numComps = 3;
-     this.defaultColor = new Float32Array([
-      0,
-      0,
-      0
-     ]);
+     this.defaultColor = new Float32Array(this.numComps);
     }
     DeviceRgbCS.prototype = {
      getRgb: ColorSpace.prototype.getRgb,
@@ -48162,12 +48154,8 @@
     function DeviceCmykCS() {
      this.name = 'DeviceCMYK';
      this.numComps = 4;
-     this.defaultColor = new Float32Array([
-      0,
-      0,
-      0,
-      1
-     ]);
+     this.defaultColor = new Float32Array(this.numComps);
+     this.defaultColor[3] = 1;
     }
     DeviceCmykCS.prototype = {
      getRgb: ColorSpace.prototype.getRgb,
@@ -48198,7 +48186,7 @@
     function CalGrayCS(whitePoint, blackPoint, gamma) {
      this.name = 'CalGray';
      this.numComps = 1;
-     this.defaultColor = new Float32Array([0]);
+     this.defaultColor = new Float32Array(this.numComps);
      if (!whitePoint) {
       error('WhitePoint missing - required for color space CalGray');
      }
@@ -48310,7 +48298,7 @@
     function CalRGBCS(whitePoint, blackPoint, gamma, matrix) {
      this.name = 'CalRGB';
      this.numComps = 3;
-     this.defaultColor = new Float32Array(3);
+     this.defaultColor = new Float32Array(this.numComps);
      if (!whitePoint) {
       error('WhitePoint missing - required for color space CalRGB');
      }
@@ -48510,11 +48498,7 @@
     function LabCS(whitePoint, blackPoint, range) {
      this.name = 'Lab';
      this.numComps = 3;
-     this.defaultColor = new Float32Array([
-      0,
-      0,
-      0
-     ]);
+     this.defaultColor = new Float32Array(this.numComps);
      if (!whitePoint) {
       error('WhitePoint missing - required for color space Lab');
      }
@@ -52879,8 +52863,13 @@
       if (baseEncodingName) {
        properties.defaultEncoding = getEncoding(baseEncodingName).slice();
       } else {
-       encoding = properties.type === 'TrueType' ? WinAnsiEncoding : StandardEncoding;
-       if (!!(properties.flags & FontFlags.Symbolic)) {
+       var isSymbolicFont = !!(properties.flags & FontFlags.Symbolic);
+       var isNonsymbolicFont = !!(properties.flags & FontFlags.Nonsymbolic);
+       encoding = StandardEncoding;
+       if (properties.type === 'TrueType' && !isNonsymbolicFont) {
+        encoding = WinAnsiEncoding;
+       }
+       if (isSymbolicFont) {
         encoding = MacRomanEncoding;
         if (!properties.file) {
          if (/Symbol/i.test(properties.name)) {
@@ -53046,14 +53035,14 @@
        widths = dict.get('W');
        if (widths) {
         for (i = 0, ii = widths.length; i < ii; i++) {
-         start = widths[i++];
+         start = xref.fetchIfRef(widths[i++]);
          code = xref.fetchIfRef(widths[i]);
          if (isArray(code)) {
           for (j = 0, jj = code.length; j < jj; j++) {
-           glyphsWidths[start++] = code[j];
+           glyphsWidths[start++] = xref.fetchIfRef(code[j]);
           }
          } else {
-          var width = widths[++i];
+          var width = xref.fetchIfRef(widths[++i]);
           for (j = start; j <= code; j++) {
            glyphsWidths[j] = width;
           }
@@ -53061,7 +53050,7 @@
         }
        }
        if (properties.vertical) {
-        var vmetrics = dict.get('DW2') || [
+        var vmetrics = dict.getArray('DW2') || [
          880,
          -1000
         ];
@@ -53073,21 +53062,21 @@
         vmetrics = dict.get('W2');
         if (vmetrics) {
          for (i = 0, ii = vmetrics.length; i < ii; i++) {
-          start = vmetrics[i++];
+          start = xref.fetchIfRef(vmetrics[i++]);
           code = xref.fetchIfRef(vmetrics[i]);
           if (isArray(code)) {
            for (j = 0, jj = code.length; j < jj; j++) {
             glyphsVMetrics[start++] = [
-             code[j++],
-             code[j++],
-             code[j]
+             xref.fetchIfRef(code[j++]),
+             xref.fetchIfRef(code[j++]),
+             xref.fetchIfRef(code[j])
             ];
            }
           } else {
            var vmetric = [
-            vmetrics[++i],
-            vmetrics[++i],
-            vmetrics[++i]
+            xref.fetchIfRef(vmetrics[++i]),
+            xref.fetchIfRef(vmetrics[++i]),
+            xref.fetchIfRef(vmetrics[++i])
            ];
            for (j = start; j <= code; j++) {
             glyphsVMetrics[j] = vmetric;
@@ -53102,7 +53091,7 @@
        if (widths) {
         j = firstChar;
         for (i = 0, ii = widths.length; i < ii; i++) {
-         glyphsWidths[j++] = widths[i];
+         glyphsWidths[j++] = xref.fetchIfRef(widths[i]);
         }
         defaultWidth = parseFloat(descriptor.get('MissingWidth')) || 0;
        } else {
@@ -55077,6 +55066,7 @@
    var info = sharedUtil.info;
    var isArray = sharedUtil.isArray;
    var isArrayBuffer = sharedUtil.isArrayBuffer;
+   var isNum = sharedUtil.isNum;
    var isString = sharedUtil.isString;
    var shadow = sharedUtil.shadow;
    var stringToBytes = sharedUtil.stringToBytes;
@@ -55100,6 +55090,7 @@
    var Annotation = coreAnnotation.Annotation;
    var AnnotationFactory = coreAnnotation.AnnotationFactory;
    var Page = function PageClosure() {
+    var DEFAULT_USER_UNIT = 1.0;
     var LETTER_SIZE_MEDIABOX = [
      0,
      0,
@@ -55122,11 +55113,12 @@
      getPageProp: function Page_getPageProp(key) {
       return this.pageDict.get(key);
      },
-     getInheritedPageProp: function Page_getInheritedPageProp(key) {
+     getInheritedPageProp: function Page_getInheritedPageProp(key, getArray) {
       var dict = this.pageDict, valueArray = null, loopCount = 0;
       var MAX_LOOP_COUNT = 100;
+      getArray = getArray || false;
       while (dict) {
-       var value = dict.get(key);
+       var value = getArray ? dict.getArray(key) : dict.get(key);
        if (value) {
         if (!valueArray) {
          valueArray = [];
@@ -55154,23 +55146,33 @@
       return shadow(this, 'resources', this.getInheritedPageProp('Resources'));
      },
      get mediaBox() {
-      var obj = this.getInheritedPageProp('MediaBox');
-      if (!isArray(obj) || obj.length !== 4) {
-       obj = LETTER_SIZE_MEDIABOX;
+      var mediaBox = this.getInheritedPageProp('MediaBox', true);
+      if (!isArray(mediaBox) || mediaBox.length !== 4) {
+       return shadow(this, 'mediaBox', LETTER_SIZE_MEDIABOX);
       }
-      return shadow(this, 'mediaBox', obj);
+      return shadow(this, 'mediaBox', mediaBox);
+     },
+     get cropBox() {
+      var cropBox = this.getInheritedPageProp('CropBox', true);
+      if (!isArray(cropBox) || cropBox.length !== 4) {
+       return shadow(this, 'cropBox', this.mediaBox);
+      }
+      return shadow(this, 'cropBox', cropBox);
+     },
+     get userUnit() {
+      var obj = this.getPageProp('UserUnit');
+      if (!isNum(obj) || obj <= 0) {
+       obj = DEFAULT_USER_UNIT;
+      }
+      return shadow(this, 'userUnit', obj);
      },
      get view() {
-      var mediaBox = this.mediaBox;
-      var cropBox = this.getInheritedPageProp('CropBox');
-      if (!isArray(cropBox) || cropBox.length !== 4) {
+      var mediaBox = this.mediaBox, cropBox = this.cropBox;
+      if (mediaBox === cropBox) {
        return shadow(this, 'view', mediaBox);
       }
-      cropBox = Util.intersect(cropBox, mediaBox);
-      if (!cropBox) {
-       return shadow(this, 'view', mediaBox);
-      }
-      return shadow(this, 'view', cropBox);
+      var intersection = Util.intersect(cropBox, mediaBox);
+      return shadow(this, 'view', intersection || mediaBox);
      },
      get rotate() {
       var rotate = this.getInheritedPageProp('Rotate') || 0;
@@ -56243,16 +56245,19 @@
       return pdfManager.getPage(data.pageIndex).then(function (page) {
        var rotatePromise = pdfManager.ensure(page, 'rotate');
        var refPromise = pdfManager.ensure(page, 'ref');
+       var userUnitPromise = pdfManager.ensure(page, 'userUnit');
        var viewPromise = pdfManager.ensure(page, 'view');
        return Promise.all([
         rotatePromise,
         refPromise,
+        userUnitPromise,
         viewPromise
        ]).then(function (results) {
         return {
          rotate: results[0],
          ref: results[1],
-         view: results[2]
+         userUnit: results[2],
+         view: results[3]
         };
        });
       });
