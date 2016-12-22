@@ -1,8 +1,8 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="372" height="172" version="1.1"
-     viewBox="-186 -166 372 172"
+<svg width="1480" height="680" version="1.1"
+     viewBox="-185 -165 370 170"
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink">
   <desc>American Football Field</desc>
@@ -12,7 +12,7 @@
       stroke: #fff;
     }
     .stroke {
-      stroke-width: 0.333;
+      stroke-width: 0.5;
     }
 
     .white-stroke {
@@ -39,49 +39,35 @@
   </style>
 
   <defs>
-    <g id="yardmarker">
-      <line x1="0" y1="1" x2="0" y2="-1"/>
-    </g>
-
-    <g id="yardmarkers">
-      <use x="-6" y="0" xlink:href="#yardmarker"/>
-      <use x="-3" y="0" xlink:href="#yardmarker"/>
-      <use x="3" y="0" xlink:href="#yardmarker"/>
-      <use x="6" y="0" xlink:href="#yardmarker"/>
-    </g>
-
-    <g id="line">
+    <!-- pro: 70.75-18.5 college: 60-40 highschool: 53 1/3 -->
+    <g id="yardline">
       <line x1="0" y1="0" x2="0" y2="-160"/>
 
       <!-- Front Sideline -->
-      <use x="0" y="-1.75" xlink:href="#yardmarkers"/>
-
-      <!-- Front Hash -->
-      <use x="0" y="-59" xlink:href="#yardmarkers"/>
-
-      <!-- Back Hash -->
-      <use x="0" y="-101" xlink:href="#yardmarkers"/>
-
-      <!-- Back Sideline -->
-      <use x="0" y="-158.25" xlink:href="#yardmarkers"/>
-    </g>
-
-    <!-- pro: 70.75-18.5 college: 60-40 highschool: 53 1/3 -->
-    <g id="goalline">
-      <use x="0" y="0" xlink:href="#line"/>
-
-      <use x="-9" y="-80" xlink:href="#yardmarker"/>
-      <use x="9" y="-80" xlink:href="#yardmarker"/>
-    </g>
-
-    <g id="yardline">
-      <use x="0" y="0" xlink:href="#line"/>
+      <line x1="-6" y1="0" x2="-6" y2="-3"/>
+      <line x1="-3" y1="0" x2="-3" y2="-3"/>
+      <line x1="3" y1="0" x2="3" y2="-3"/>
+      <line x1="6" y1="0" x2="6" y2="-3"/>
 
       <!-- Front Hash -->
       <line x1="-1.5" y1="-100" x2="1.5" y2="-100"/>
+      <line x1="-6" y1="-57" x2="-6" y2="-60"/>
+      <line x1="-3" y1="-57" x2="-3" y2="-60"/>
+      <line x1="3" y1="-57" x2="3" y2="-60"/>
+      <line x1="6" y1="-57" x2="6" y2="-60"/>
 
       <!-- Back Hash -->
       <line x1="-1.5" y1="-60" x2="1.5" y2="-60"/>
+      <line x1="-6" y1="-100" x2="-6" y2="-103"/>
+      <line x1="-3" y1="-100" x2="-3" y2="-103"/>
+      <line x1="3" y1="-100" x2="3" y2="-103"/>
+      <line x1="6" y1="-100" x2="6" y2="-103"/>
+
+      <!-- Back Sideline -->
+      <line x1="-6" y1="-157" x2="-6" y2="-160"/>
+      <line x1="-3" y1="-157" x2="-3" y2="-160"/>
+      <line x1="3" y1="-157" x2="3" y2="-160"/>
+      <line x1="6" y1="-157" x2="6" y2="-160"/>
     </g>
 
     <g id="endzone">
@@ -92,12 +78,12 @@
 
 
   <!-- field background -->
-  <rect x="-183" y="-163" width="366" height="166" stroke-width="6" class="white-stroke green-fill"/>
+  <rect x="-182.5" y="-162.5" width="365" height="165" stroke-width="5" class="white-stroke green-fill"/>
 
 
 
   <!-- left goal -->
-  <use x="-150" y="0" class="stroke white-stroke" xlink:href="#goalline"/>
+  <use x="-150" y="0" class="stroke white-stroke" xlink:href="#yardline"/>
 
   <!-- left 5 -->
   <use x="-135" y="0" class="stroke white-stroke" xlink:href="#yardline"/>
@@ -124,8 +110,6 @@
 
   <!-- left 35 -->
   <use x="-45" y="0" class="stroke white-stroke" xlink:href="#yardline"/>
-  <line x1="-46" y1="-79" x2="-44" y2="-81" class="stroke white-stroke"/>
-  <line x1="-46" y1="-81" x2="-44" y2="-79" class="stroke white-stroke"/>
 
   <!-- left 40 -->
   <text x="-30" y="-17.1875" text-anchor="middle" font-family="Arial" font-size="10" class="numbers">40</text>
@@ -147,8 +131,6 @@
 
   <!-- right 35 -->
   <use x="45" y="0" class="stroke white-stroke" xlink:href="#yardline"/>
-  <line x1="46" y1="-79" x2="44" y2="-81" class="stroke white-stroke"/>
-  <line x1="46" y1="-81" x2="44" y2="-79" class="stroke white-stroke"/>
 
   <!-- right 30 -->
   <text x="60" y="-17.1875" text-anchor="middle" font-family="Arial" font-size="10" class="numbers">30</text>
@@ -174,7 +156,7 @@
   <use x="135" y="0" class="stroke white-stroke" xlink:href="#yardline"/>
 
   <!-- right goal -->
-  <use x="150" y="0" class="stroke white-stroke" xlink:href="#goalline"/>
+  <use x="150" y="0" class="stroke white-stroke" xlink:href="#yardline"/>
 
 
 

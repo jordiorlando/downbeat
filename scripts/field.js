@@ -228,49 +228,6 @@ class Field {
         }
       })
       .exit().remove();
-
-    // this.svg.selectAll('.')
-
-    /* // Field grid
-    let grid = draw.svg();
-
-    // Vertical 4-step lines
-    for (let i = 7.5; i < 160; i += 7.5) {
-      grid.line(-DIMENSIONS.width / 2 + 30, -i, DIMENSIONS.width / 2 - 30, -i)
-          .stroke({
-            color: '#fff',
-            width: 0.2,
-            opacity: 0.25
-          });
-    }
-
-    // Horizontal 4-step lines
-    for (let i = -DIMENSIONS.width / 2 + 37.5; i < DIMENSIONS.width / 2 - 30; i += 15) {
-      grid.line(i, 0, i, -DIMENSIONS.height)
-          .stroke({
-            color: '#fff',
-            width: 0.2,
-            opacity: 0.25
-          });
-    }
-
-    // Zero points
-    for (let i = -DIMENSIONS.width / 2 + 45; i < DIMENSIONS.width / 2 - 30; i += 15) {
-      for (let ii = 0; ii < DIMENSIONS.height; ii += 15) {
-        grid.circle(+DIMENSIONS.line.width * 3)
-            .center(
-              i,
-              -ii
-            )
-            .fill({
-              color: '#fff',
-              opacity: 0.5
-            })
-            .stroke({
-              width: 0
-            });
-      }
-    } */
   }
 
   // Draw all performers
