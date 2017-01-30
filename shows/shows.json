@@ -1,6 +1,13 @@
 {
   "shows": [
     {
+      "name": "pregame",
+      "drill": [
+        "revised"
+      ],
+      "music": []
+    },
+    {
       "name": "show_4",
       "drill": [
         "show_4"
