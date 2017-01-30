@@ -1,72 +1,10 @@
 class Drill {
-  constructor(drill) {
+  constructor(show, name) {
     this.field = new Field('drawing', 'd3');
 
-    // Copy drill metadata and data
-    this.name = drill.name;
-    this.sets = drill.sets;
-    this.performers = drill.performers;
+    this.load(show, name);
 
-    // Function to calculate the position for a given performer, set, and subset
-    let pos = function(p, s, a) {
-      s = parseInt(s, 10);
-      a = parseInt(a, 10);
-
-      if (p.sets[s][a].x !== undefined) {
-        return {
-          x: p.sets[s][a].x,
-          y: p.sets[s][a].y
-        };
-      } else if (a > 0) {
-        return pos(p, s, a - 1);
-      } else if (s > 0) {
-        return pos(p, s - 1, p.sets[s - 1].length - 1);
-      }
-
-      return {
-        x: 0,
-        y: 0
-      };
-    };
-
-    // Calculate positions for every subset
-    for (let p of this.performers) {
-      for (let s in p.sets) {
-        // If set is an object, format it as an array of just one move subset
-        if (!(p.sets[s] instanceof Array)) {
-          p.sets[s].type = parseInt(s, 10) ? 'move' : 'start';
-          p.sets[s].counts = this.sets[s].counts;
-          p.sets[s] = [p.sets[s]];
-        }
-
-        // Calculate the position and format it as a fraction
-        for (let a in p.sets[s]) {
-          let xy = pos(p, s, a);
-          p.sets[s][a].x = xy.x instanceof Fraction ? xy.x : new Fraction(xy.x);
-          p.sets[s][a].y = xy.y instanceof Fraction ? xy.y : new Fraction(xy.y);
-        }
-      }
-    }
-
-    // Set the starting state
-    this.state = {
-      total:  0,
-      set:    0,
-      count:  0,
-      tempo:  this.sets[0].tempo,
-      pulse:  this.sets[0].pulse,
-      counts: this.sets[0].countsdrill
-    };
-
-    // Total number of counts in this drill
-    this.total = 0;
-    for (let s of this.sets) {
-      this.total += s.counts;
-    }
-
-    this.field.drawPerformers(this.performers);
-
-    document.getElementById('title').textContent = this.name;
+    // Add event listeners
     document.getElementById('button-prev').addEventListener('click', () => this.prevSet());
     document.getElementById('button-playpause').addEventListener('click', () => this.playPause());
     document.getElementById('button-next').addEventListener('click', () => this.nextSet());
@@ -96,13 +34,77 @@ class Drill {
     }
   }
 
-  load(name) {
-    d3.json(`drill/${name}.json`, function(data) {
-      
+  load(show, name) {
+    d3.json(`shows/${show}/${name}.json`, data => {
+      document.getElementById('title').textContent = data.name;
 
-      drill.move();
+      // Copy drill metadata and data
+      this.name = data.name;
+      this.sets = data.sets;
+      this.performers = data.performers;
+
+      // Calculate positions for every subset
+      for (let p of this.performers) {
+        for (let s in p.sets) {
+          // If set is an object, format it as an array of just one move subset
+          if (!(p.sets[s] instanceof Array)) {
+            p.sets[s].type = parseInt(s, 10) ? 'move' : 'start';
+            p.sets[s].counts = this.sets[s].counts;
+            p.sets[s] = [p.sets[s]];
+          }
+
+          // Calculate the position and format it as a fraction
+          for (let a in p.sets[s]) {
+            let xy = this.getPos(p, s, a);
+            p.sets[s][a].x = xy.x instanceof Fraction ? xy.x : new Fraction(xy.x);
+            p.sets[s][a].y = xy.y instanceof Fraction ? xy.y : new Fraction(xy.y);
+          }
+        }
+      }
+
+      // Set the starting state
+      this.state = {
+        total:  0,
+        set:    0,
+        count:  0,
+        tempo:  this.sets[0].tempo,
+        pulse:  this.sets[0].pulse,
+        counts: this.sets[0].countsdrill
+      };
+
+      // Total number of counts in this drill
+      this.total = 0;
+      for (let s of this.sets) {
+        this.total += s.counts;
+      }
+
+      this.field.drawPerformers(this.performers);
+
+      this.move();
       // selectByName(parseName(drill.performers[0]));
     });
+  }
+
+  // Function to calculate the position for a given performer, set, and subset
+  getPos(p, s, a) {
+    s = parseInt(s, 10);
+    a = parseInt(a, 10);
+
+    if (p.sets[s][a].x !== undefined) {
+      return {
+        x: p.sets[s][a].x,
+        y: p.sets[s][a].y
+      };
+    } else if (a > 0) {
+      return this.getPos(p, s, a - 1);
+    } else if (s > 0) {
+      return this.getPos(p, s - 1, p.sets[s - 1].length - 1);
+    }
+
+    return {
+      x: 0,
+      y: 0
+    };
   }
 
   // Update all performer positions
