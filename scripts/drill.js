@@ -107,6 +107,15 @@ class Drill {
     };
   }
 
+  select(name) {
+    for (let p of drill.performers) {
+      if (parseName(p).toUpperCase() === name.toUpperCase()) {
+        this.field.select(p);
+        return p;
+      }
+    }
+  }
+
   // Update all performer positions
   move() {
     console.log(this.state);

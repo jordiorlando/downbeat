@@ -80,15 +80,6 @@ function parseVert(p, s) {
   return p.sets[s].vert || vert;
 }
 
-function selectByName(name) {
-  for (let p of drill.performers) {
-    if (parseName(p).toUpperCase() === name.toUpperCase()) {
-      select(p);
-      return p;
-    }
-  }
-}
-
 var load = function(name) {
   d3.json('shows/shows.json', function(data) {
     shows = data.shows;
