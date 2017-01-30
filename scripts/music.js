@@ -18,7 +18,7 @@ class Music {
     PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
     PDFJS.getDocument(`../shows/${show}/${name}.pdf`).then(pdf => {
       this.pdf = pdf;
-      // document.getElementById('page_count').textContent = pdf.numPages;
+      document.getElementById('music_page_count').textContent = pdf.numPages;
       this.renderPage(this.pageNum);
     });
   }
@@ -51,7 +51,7 @@ class Music {
     });
 
     // Update page counters
-    // document.getElementById('page_num').textContent = pageNum;
+    document.getElementById('music_page_num').textContent = this.pageNum;
   }
 
   queueRenderPage(num) {

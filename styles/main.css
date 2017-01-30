@@ -17,9 +17,10 @@ body {
   display: none;
 }
 
-#pdf {
+.pdf {
   margin: auto;
   display: block;
+  text-align: center;
   /*height: 800px;*/
 }
 
