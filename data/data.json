@@ -1,0 +1,86 @@
+{
+  "seasons": [
+    {
+      "name": "traditional",
+      "shows": [
+        {
+          "name": "pregame",
+          "parts": [
+            "Revised Entrance #3",
+            "Patriotic Medley",
+            "Star Spangled Banner",
+            "Illinois Loyalty",
+            "Oskee Wow Wow",
+            "William Tell"
+          ]
+        },
+        {
+          "name": "halftime",
+          "parts": [
+            "Three in One"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2016",
+      "shows": [
+        {
+          "name": "Exhibition 1 - Urbana High School",
+          "parts": [
+            "Daft Punk Medley"
+          ]
+        },
+        {
+          "name": "Show 1 - Lovie Smith Show",
+          "parts": [
+            "Karn Evil 9",
+            "You Really Got Me",
+            "Everybody Needs Some Lovie - Gimmie Some Lovie"
+          ]
+        },
+        {
+          "name": "Show 2 - Band Day Show",
+          "parts": [
+            "Confident",
+            "Downtown"
+          ]
+        },
+        {
+          "name": "Show 3 - Canadian Brass Show",
+          "parts": [
+            "Beale Street",
+            "Penny Lane"
+          ]
+        },
+        {
+          "name": "Show 4 - Buddy Rich Show",
+          "parts": [
+            "Buddy Rich Show"
+          ]
+        },
+        {
+          "name": "Show 5 - Homecoming Rhapsody in Orange and Blues",
+          "parts": [
+            "Rhapsody in Blue"
+          ]
+        },
+        {
+          "name": "Show 6 - Alumni Band & Folsom Prison Blues",
+          "parts": [
+            "Folsom Prison Blues"
+          ]
+        },
+        {
+          "name": "Show 7 - Dads Day Show",
+          "parts": [
+            "76 Trombones",
+            "Go, Cubs, Go",
+            "Dads Day Mix 2000",
+            "Lassus Trombone"
+          ]
+        }
+      ]
+    }
+  ]
+}

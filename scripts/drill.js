@@ -1,8 +1,8 @@
 class Drill {
-  constructor(show, name) {
+  constructor(season, show, part) {
     this.field = new Field('drawing', 'd3');
 
-    this.load(show, name);
+    this.load(season, show, part);
 
     // Add event listeners
     document.getElementById('button-prev').addEventListener('click', () => this.prevSet());
@@ -34,14 +34,14 @@ class Drill {
     }
   }
 
-  load(show, name) {
-    d3.json(`shows/${show}/${name}.json`, data => {
-      document.getElementById('title').textContent = data.name;
+  load(season, show, part) {
+    d3.json(`data/${season}/${show}/${part}/drill/drill.json`, d => {
+      document.getElementById('title').textContent = d.name;
 
       // Copy drill metadata and data
-      this.name = data.name;
-      this.sets = data.sets;
-      this.performers = data.performers;
+      this.name = d.name;
+      this.sets = d.sets;
+      this.performers = d.performers;
 
       // Calculate positions for every subset
       for (let p of this.performers) {

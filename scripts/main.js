@@ -1,4 +1,4 @@
-var shows, drill, music;
+var shows, data, drill, music;
 var drillElem = document.getElementById('drill');
 var musicElem = document.getElementById('music');
 
@@ -82,14 +82,22 @@ function parseVert(p, s) {
   return p.sets[s].vert || vert;
 }
 
-var load = function(name) {
-  d3.json('shows/shows.json', function(data) {
-    shows = data.shows;
+var load = function(season, show, part) {
+  d3.json('data/data.json', d => {
+    data = d;
 
-    for (let show of shows) {
-      if (show.name === name) {
-        drill = new Drill(show.name, show.drill[0]);
-        music = new Music(show.name, show.music.name, show.music.parts[0]);
+    for (let i in data.seasons) {
+      if (data.seasons[i].name === season) {
+        for (let j in data.seasons[i].shows) {
+          if (data.seasons[i].shows[j].name === show) {
+            for (let k in data.seasons[i].shows[j].parts) {
+              if (data.seasons[i].shows[j].parts[k] === part) {
+                drill = new Drill(season, show, part);
+                music = new Music(season, show, part);
+              }
+            }
+          }
+        }
       }
     }
   });
@@ -123,5 +131,5 @@ document.addEventListener('keydown', function(e) {
 
 
 
-load('show_4');
+load('2016', 'Show 4 - Buddy Rich Show', 'Buddy Rich Show');
 // loadDrill('pregame/revised');

@@ -1,13 +1,13 @@
 class Music {
-  constructor(show, name, part) {
-    this.load(show, name, part);
+  constructor(season, show, part) {
+    this.load(season, show, part);
 
     // Add event listeners
     document.getElementById('button-prev-page').addEventListener('click', () => this.prevPage());
     document.getElementById('button-next-page').addEventListener('click', () => this.nextPage());
   }
 
-  load(show, name, part) {
+  load(season, show, part) {
     this.pageNum = 1;
     this.pageRendering = false;
     this.pageNumPending = null;
@@ -16,12 +16,12 @@ class Music {
     this.ctx = this.canvas.getContext('2d');
 
     PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
-    PDFJS.getDocument(`../shows/${show}/${name} - ${part}.pdf`).then(pdf => {
+    PDFJS.getDocument(`../data/${season}/${show}/${part}/music/score.pdf`).then(pdf => {
       this.pdf = pdf;
 
       // Update music information
-      document.getElementById('music_title').textContent = name;
-      document.getElementById('music_part').textContent = part;
+      document.getElementById('music_title').textContent = show;
+      document.getElementById('music_part').textContent = 'score';
       document.getElementById('music_page_count').textContent = pdf.numPages;
 
       this.renderPage(this.pageNum);
