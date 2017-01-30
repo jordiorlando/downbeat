@@ -89,7 +89,7 @@ var load = function(name) {
     for (let show of shows) {
       if (show.name === name) {
         drill = new Drill(show.name, show.drill[0]);
-        music = new Music(show.name, `${show.music.name} - ${show.music.parts[0]}`);
+        music = new Music(show.name, show.music.name, show.music.parts[0]);
       }
     }
   });

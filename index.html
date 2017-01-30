@@ -142,8 +142,12 @@
         </div>
       </section>
       <section class="mdl-layout__tab-panel" id="music">
-        <div class="page-content">
-          <div class="pdf">
+        <div class="page-content pdf">
+          <div>
+            <span><span id="music_title"></span> - <span id="music_part"></span></span>
+          </div>
+          <canvas id="pdf"></canvas>
+          <div>
             <button class="mdl-button mdl-js-button mdl-button--icon" id="button-prev-page">
               <i class="material-icons">keyboard_arrow_left</i>
             </button>
@@ -152,7 +156,6 @@
               <i class="material-icons">keyboard_arrow_right</i>
             </button>
           </div>
-          <canvas class="pdf" id="pdf"></canvas>
         </div>
       </section>
       <section class="mdl-layout__tab-panel" id="tools">
