@@ -1,4 +1,6 @@
 var shows, drill, music;
+var drillElem = document.getElementById('drill');
+var musicElem = document.getElementById('music');
 
 function parseName(p) {
   return p.squad === undefined ? p.type + p.num : p.squad + p.position;
@@ -92,9 +94,6 @@ var load = function(name) {
     }
   });
 }
-
-let drillElem = document.getElementById('drill');
-let musicElem = document.getElementById('music');
 
 document.addEventListener('keydown', function(e) {
   if (drillElem.classList.contains('is-active')) {
