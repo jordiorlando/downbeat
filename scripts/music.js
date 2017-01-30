@@ -1,12 +1,13 @@
 class Music {
-  constructor(name) {
-    this.load(name);
+  constructor(show, name) {
+    this.load(show, name);
 
+    // Add event listeners
     document.getElementById('button-prev-page').addEventListener('click', () => this.prevPage());
     document.getElementById('button-next-page').addEventListener('click', () => this.nextPage());
   }
 
-  load(name) {
+  load(show, name) {
     this.pageNum = 1;
     this.pageRendering = false;
     this.pageNumPending = null;
@@ -15,7 +16,7 @@ class Music {
     this.ctx = this.canvas.getContext('2d');
 
     PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
-    PDFJS.getDocument(`../music/${name}.pdf`).then(pdf => {
+    PDFJS.getDocument(`../shows/${show}/${name}.pdf`).then(pdf => {
       this.pdf = pdf;
       // document.getElementById('page_count').textContent = pdf.numPages;
       this.renderPage(this.pageNum);
