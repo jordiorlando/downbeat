@@ -17,6 +17,12 @@ body {
   display: none;
 }
 
+#pdf {
+  margin: auto;
+  display: block;
+  /*height: 800px;*/
+}
+
 svg {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
