@@ -1,0 +1,16 @@
+{
+  "shows": [
+    {
+      "name": "show_4",
+      "drill": [
+        "show_4"
+      ],
+      "music": {
+        "name": "Buddy Rich Show",
+        "parts": [
+          "score"
+        ]
+      }
+    }
+  ]
+}

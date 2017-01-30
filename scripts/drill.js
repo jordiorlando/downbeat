@@ -55,7 +55,7 @@ class Drill {
       count:  0,
       tempo:  this.sets[0].tempo,
       pulse:  this.sets[0].pulse,
-      counts: this.sets[0].counts
+      counts: this.sets[0].countsdrill
     };
 
     // Total number of counts in this drill
@@ -65,6 +65,44 @@ class Drill {
     }
 
     this.field.drawPerformers(this.performers);
+
+    document.getElementById('title').textContent = this.name;
+    document.getElementById('button-prev').addEventListener('click', () => this.prevSet());
+    document.getElementById('button-playpause').addEventListener('click', () => this.playPause());
+    document.getElementById('button-next').addEventListener('click', () => this.nextSet());
+
+    for (let marking of ['highschool', 'college', 'pro']) {
+      /* let checkbox = document.getElementById(`switch-${marking}`);
+
+      checkbox.addEventListener('click', e => drill.field.markings(marking, !e.target.parentNode.classList.contains('is-checked')));
+
+      checkbox.parentNode.addEventListener('mdl-componentupgraded', e => drill.field.markings(marking, e.target.parentNode.classList.contains('is-checked'))); */
+
+      let radio = document.getElementById(`radio-${marking}`);
+      let field = this.field;
+
+      radio.addEventListener('click', function() {
+        let markings = {
+          highschool: false,
+          college: false,
+          pro: false
+        };
+        markings[this.value] = true;
+
+        field.markings(markings);
+      });
+
+      radio.parentNode.addEventListener('mdl-componentupgraded', e => this.field.markings(marking, e.target.parentNode.classList.contains('is-checked')));
+    }
+  }
+
+  load(name) {
+    d3.json(`drill/${name}.json`, function(data) {
+      
+
+      drill.move();
+      // selectByName(parseName(drill.performers[0]));
+    });
   }
 
   // Update all performer positions

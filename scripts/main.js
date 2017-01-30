@@ -1,4 +1,4 @@
-var drill;
+var shows, drill, music;
 
 function parseName(p) {
   return p.squad === undefined ? p.type + p.num : p.squad + p.position;
@@ -93,38 +93,24 @@ var loadDrill = function(name) {
   d3.json(`drill/${name}.json`, function(data) {
     drill = new Drill(data);
 
-    document.getElementById('title').textContent = drill.name;
-    document.getElementById('button-prev').addEventListener('click', () => drill.prevSet());
-    document.getElementById('button-playpause').addEventListener('click', () => drill.playPause());
-    document.getElementById('button-next').addEventListener('click', () => drill.nextSet());
-
-    for (let marking of ['highschool', 'college', 'pro']) {
-      /* let checkbox = document.getElementById(`switch-${marking}`);
-
-      checkbox.addEventListener('click', e => drill.field.markings(marking, !e.target.parentNode.classList.contains('is-checked')));
-
-      checkbox.parentNode.addEventListener('mdl-componentupgraded', e => drill.field.markings(marking, e.target.parentNode.classList.contains('is-checked'))); */
-
-      let radio = document.getElementById(`radio-${marking}`);
-
-      radio.addEventListener('click', function() {
-        let markings = {
-          highschool: false,
-          college: false,
-          pro: false
-        };
-        markings[this.value] = true;
-
-        drill.field.markings(markings);
-      });
-
-      radio.parentNode.addEventListener('mdl-componentupgraded', e => drill.field.markings(marking, e.target.parentNode.classList.contains('is-checked')));
-    }
-
     drill.move();
     // selectByName(parseName(drill.performers[0]));
   });
 };
+
+var load = function(name) {
+  d3.json('shows/shows.json', function(data) {
+    shows = data.shows;
+
+    for (let show of shows) {
+      if (show.name === name) {
+        loadDrill(`${show.name}/${show.drill[0]}`);
+
+        music = new Music(`${show.name}/${show.music.name} - ${show.music.parts[0]}`);
+      }
+    }
+  });
+}
 
 document.addEventListener('keydown', function(e) {
   switch (e.key) {
@@ -143,5 +129,5 @@ document.addEventListener('keydown', function(e) {
 
 
 
-loadDrill('show_4/show_4');
+load('show_4');
 // loadDrill('pregame/revised');
