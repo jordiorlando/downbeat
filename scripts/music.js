@@ -3,8 +3,8 @@ class Music {
     this.load(season, show, part);
 
     // Add event listeners
-    document.getElementById('button-prev-page').addEventListener('click', () => this.prevPage());
-    document.getElementById('button-next-page').addEventListener('click', () => this.nextPage());
+    document.getElementById('music-button-prev').addEventListener('click', () => this.prevPage());
+    document.getElementById('music-button-next').addEventListener('click', () => this.nextPage());
   }
 
   load(season, show, part) {
@@ -20,9 +20,9 @@ class Music {
       this.pdf = pdf;
 
       // Update music information
-      document.getElementById('music_title').textContent = show;
-      document.getElementById('music_part').textContent = 'score';
-      document.getElementById('music_page_count').textContent = pdf.numPages;
+      document.getElementById('music-title').textContent = show;
+      document.getElementById('music-part').textContent = 'score';
+      document.getElementById('music-page-count').textContent = pdf.numPages;
 
       this.renderPage(this.pageNum);
     });
@@ -56,7 +56,7 @@ class Music {
     });
 
     // Update page counters
-    document.getElementById('music_page_num').textContent = this.pageNum;
+    document.getElementById('music-page-num').textContent = this.pageNum;
   }
 
   queueRenderPage(num) {

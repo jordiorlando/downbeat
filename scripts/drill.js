@@ -5,9 +5,9 @@ class Drill {
     this.load(season, show, part);
 
     // Add event listeners
-    document.getElementById('button-prev').addEventListener('click', () => this.prevSet());
-    document.getElementById('button-playpause').addEventListener('click', () => this.playPause());
-    document.getElementById('button-next').addEventListener('click', () => this.nextSet());
+    document.getElementById('drill-button-prev').addEventListener('click', () => this.prevSet());
+    document.getElementById('drill-button-playpause').addEventListener('click', () => this.playPause());
+    document.getElementById('drill-button-next').addEventListener('click', () => this.nextSet());
 
     for (let marking of ['highschool', 'college', 'pro']) {
       /* let checkbox = document.getElementById(`switch-${marking}`);
@@ -36,7 +36,7 @@ class Drill {
 
   load(season, show, part) {
     d3.json(`data/${season}/${show}/${part}/drill/drill.json`, d => {
-      document.getElementById('title').textContent = d.name;
+      document.getElementById('drill-title').textContent = d.name;
 
       // Copy drill metadata and data
       this.name = d.name;
@@ -223,7 +223,7 @@ class Drill {
 
   // Start playing until the specified count
   play(end = this.total) {
-    document.getElementById('button-playpause').children[0].textContent = 'pause';
+    document.getElementById('drill-button-playpause').children[0].textContent = 'pause';
 
     if (this.state.total < this.total) {
       this.playing = true;
@@ -250,7 +250,7 @@ class Drill {
 
   // Pause playing
   pause() {
-    document.getElementById('button-playpause').children[0].textContent = 'play_arrow';
+    document.getElementById('drill-button-playpause').children[0].textContent = 'play_arrow';
 
     this.playing = false;
     clearTimeout(this.timeoutID);

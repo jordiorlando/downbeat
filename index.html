@@ -23,7 +23,7 @@
   <div class="mdl-layout mdl-js-layout">
     <header class="mdl-layout__header mdl-layout__header--scroll">
       <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title" id="title">Title</span>
+        <span class="mdl-layout-title" id="title">Downbeat</span>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="http://marchingillini.com">Marching Illini</a>
@@ -46,18 +46,24 @@
         <div class="page-content">
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--12-col">
-              <div class="field-card mdl-card mdl-shadow--2dp" id="drawing"></div>
-            </div>
-          </div>
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">
-              <div class="control-card mdl-card mdl-shadow--2dp">
+              <div class="field-card mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text">Controls</h2>
+                  <h2 class="mdl-card__title-text" id="drill-title">Title</h2>
                 </div>
-                <div class="mdl-card__supporting-text">
-                  <span class="mdl-typography--subhead">Markings</span>
-                  <br>
+                <div class="mdl-card__media">
+                  <div id="drawing"></div>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="drill-button-prev">
+                    <i class="material-icons">skip_previous</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="drill-button-playpause">
+                    <i class="material-icons">play_arrow</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="drill-button-next">
+                    <i class="material-icons">skip_next</i>
+                  </button>
+                  <!-- <span class="mdl-typography--subhead">Markings</span> -->
                   <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio-highschool">
                     <input type="radio" id="radio-highschool" class="mdl-radio__button" name="markings" value="highschool">
                     <span class="mdl-radio__label">High School</span>
@@ -71,41 +77,6 @@
                     <span class="mdl-radio__label">Pro</span>
                   </label>
                 </div>
-                <div class="mdl-card__actions mdl-card--border">
-                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Get Started
-                  </a>
-                </div>
-                <div class="mdl-card__menu">
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-prev">
-                    <i class="material-icons">skip_previous</i>
-                  </button>
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-playpause">
-                    <i class="material-icons">play_arrow</i>
-                  </button>
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-next">
-                    <i class="material-icons">skip_next</i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="mdl-cell mdl-cell--4-col">
-              <div class="status-card mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text" id="status-title">Performer</h2>
-                </div>
-                <div class="mdl-card__supporting-text" id="status-text">
-                  <span>&nbsp;</span>
-                  <br>
-                  <span>&nbsp;</span>
-                  <br>
-                  <span>&nbsp;</span>
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Get Started
-                  </a>
-                </div>
                 <div class="mdl-card__menu">
                   <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                     <i class="material-icons">more_horiz</i>
@@ -113,12 +84,14 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--4-col">
               <div class="status-card mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text">Details</h2>
+                  <h2 class="mdl-card__title-text" id="status-title">Performer</h2>
                 </div>
-                <div class="mdl-card__supporting-text">
+                <div class="mdl-card__supporting-text" id="status-text">
                   <span>&nbsp;</span>
                   <br>
                   <span>&nbsp;</span>
@@ -147,17 +120,17 @@
             <div class="mdl-cell mdl-cell--12-col">
               <div class="music-card mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text"><span id="music_title">Title</span> - <span id="music_part">Part</span></h2>
+                  <h2 class="mdl-card__title-text"><span id="music-title">Title</span>&nbsp;-&nbsp;<span id="music-part">Part</span></h2>
                 </div>
-                <div class="mdl-card__supporting-text">
+                <div class="mdl-card__media">
                   <canvas id="pdf"></canvas>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-prev-page">
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="music-button-prev">
                     <i class="material-icons">keyboard_arrow_left</i>
                   </button>
-                  <span><span id="music_page_num"></span> / <span id="music_page_count"></span></span>
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-next-page">
+                  <span><span id="music-page-num"></span> / <span id="music-page-count"></span></span>
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="music-button-next">
                     <i class="material-icons">keyboard_arrow_right</i>
                   </button>
                 </div>
