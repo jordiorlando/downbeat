@@ -89,41 +89,45 @@ function selectByName(name) {
   }
 }
 
-var loadDrill = function(name) {
-  d3.json(`drill/${name}.json`, function(data) {
-    drill = new Drill(data);
-
-    drill.move();
-    // selectByName(parseName(drill.performers[0]));
-  });
-};
-
 var load = function(name) {
   d3.json('shows/shows.json', function(data) {
     shows = data.shows;
 
     for (let show of shows) {
       if (show.name === name) {
-        loadDrill(`${show.name}/${show.drill[0]}`);
-
-        music = new Music(`${show.name}/${show.music.name} - ${show.music.parts[0]}`);
+        drill = new Drill(show.name, show.drill[0]);
+        music = new Music(show.name, `${show.music.name} - ${show.music.parts[0]}`);
       }
     }
   });
 }
 
+let drillElem = document.getElementById('drill');
+let musicElem = document.getElementById('music');
+
 document.addEventListener('keydown', function(e) {
-  switch (e.key) {
-    case ' ':
-      e.preventDefault();
-      drill.playPause();
-      break;
-    case 'ArrowLeft':
-      drill.prevSet();
-      break;
-    case 'ArrowRight':
-      drill.nextSet();
-      break;
+  if (drillElem.classList.contains('is-active')) {
+    switch (e.key) {
+      case ' ':
+        e.preventDefault();
+        drill.playPause();
+        break;
+      case 'ArrowLeft':
+        drill.prevSet();
+        break;
+      case 'ArrowRight':
+        drill.nextSet();
+        break;
+    }
+  } else if (musicElem.classList.contains('is-active')) {
+    switch (e.key) {
+      case 'ArrowLeft':
+        music.prevPage();
+        break;
+      case 'ArrowRight':
+        music.nextPage();
+        break;
+    }
   }
 }, false);
 
