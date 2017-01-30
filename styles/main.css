@@ -9,19 +9,17 @@ body {
 
 .field-card.mdl-card,
 .status-card.mdl-card,
-.control-card.mdl-card {
+.control-card.mdl-card,
+.music-card.mdl-card {
   width: 100%;
+}
+
+.music-card {
+  text-align: center;
 }
 
 #metronome {
   display: none;
-}
-
-.pdf {
-  margin: auto;
-  display: block;
-  text-align: center;
-  /*height: 800px;*/
 }
 
 svg {
@@ -32,6 +30,11 @@ svg {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
+}
+
+canvas {
+  border: 1px solid black;
+  /*height: 800px;*/
 }
 
 /* .performer {

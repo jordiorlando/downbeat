@@ -142,19 +142,32 @@
         </div>
       </section>
       <section class="mdl-layout__tab-panel" id="music">
-        <div class="page-content pdf">
-          <div>
-            <span><span id="music_title"></span> - <span id="music_part"></span></span>
-          </div>
-          <canvas id="pdf"></canvas>
-          <div>
-            <button class="mdl-button mdl-js-button mdl-button--icon" id="button-prev-page">
-              <i class="material-icons">keyboard_arrow_left</i>
-            </button>
-            <span><span id="music_page_num"></span> / <span id="music_page_count"></span></span>
-            <button class="mdl-button mdl-js-button mdl-button--icon" id="button-next-page">
-              <i class="material-icons">keyboard_arrow_right</i>
-            </button>
+        <div class="page-content">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <div class="music-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                  <h2 class="mdl-card__title-text"><span id="music_title">Title</span> - <span id="music_part">Part</span></h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  <canvas id="pdf"></canvas>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-prev-page">
+                    <i class="material-icons">keyboard_arrow_left</i>
+                  </button>
+                  <span><span id="music_page_num"></span> / <span id="music_page_count"></span></span>
+                  <button class="mdl-button mdl-js-button mdl-button--icon" id="button-next-page">
+                    <i class="material-icons">keyboard_arrow_right</i>
+                  </button>
+                </div>
+                <div class="mdl-card__menu">
+                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">more_horiz</i>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
