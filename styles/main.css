@@ -9,13 +9,13 @@ body {
 
 .field-card.mdl-card,
 .status-card.mdl-card,
-.control-card.mdl-card,
 .music-card.mdl-card {
   width: 100%;
+  text-align: center;
 }
 
-.music-card {
-  text-align: center;
+.mdl-card__media {
+  background-color: #fff !important;
 }
 
 #metronome {
@@ -34,7 +34,6 @@ svg {
 
 canvas {
   border: 1px solid black;
-  /*height: 800px;*/
 }
 
 /* .performer {

@@ -50,9 +50,7 @@
                 <div class="mdl-card__title">
                   <h2 class="mdl-card__title-text" id="drill-title">Title</h2>
                 </div>
-                <div class="mdl-card__media">
-                  <div id="drawing"></div>
-                </div>
+                <div class="mdl-card__media" id="drawing"></div>
                 <div class="mdl-card__actions mdl-card--border">
                   <button class="mdl-button mdl-js-button mdl-button--icon" id="drill-button-prev">
                     <i class="material-icons">skip_previous</i>
@@ -63,6 +61,7 @@
                   <button class="mdl-button mdl-js-button mdl-button--icon" id="drill-button-next">
                     <i class="material-icons">skip_next</i>
                   </button>
+                  <br>
                   <!-- <span class="mdl-typography--subhead">Markings</span> -->
                   <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio-highschool">
                     <input type="radio" id="radio-highschool" class="mdl-radio__button" name="markings" value="highschool">
@@ -78,9 +77,16 @@
                   </label>
                 </div>
                 <div class="mdl-card__menu">
-                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="drill-menu-button">
                     <i class="material-icons">more_horiz</i>
                   </button>
+                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                      for="drill-menu-button">
+                    <li class="mdl-menu__item">Some Action</li>
+                    <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>
+                    <li disabled class="mdl-menu__item">Disabled Action</li>
+                    <li class="mdl-menu__item">Yet Another Action</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -98,16 +104,6 @@
                   <br>
                   <span>&nbsp;</span>
                 </div>
-                <div class="mdl-card__actions mdl-card--border">
-                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Get Started
-                  </a>
-                </div>
-                <div class="mdl-card__menu">
-                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                    <i class="material-icons">more_horiz</i>
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -120,7 +116,9 @@
             <div class="mdl-cell mdl-cell--12-col">
               <div class="music-card mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text"><span id="music-title">Title</span>&nbsp;-&nbsp;<span id="music-part">Part</span></h2>
+                  <h2 class="mdl-card__title-text" id="music-title">Title</h2>
+                  <br>
+                  <span class="mdl-card__subtitle-text" id="music-part">Part</span>
                 </div>
                 <div class="mdl-card__media">
                   <canvas id="pdf"></canvas>
