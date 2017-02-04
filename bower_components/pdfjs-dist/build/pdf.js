@@ -23,8 +23,8 @@
  }
 }(this, function (exports) {
  'use strict';
- var pdfjsVersion = '1.7.233';
- var pdfjsBuild = '8d684b5';
+ var pdfjsVersion = '1.7.246';
+ var pdfjsBuild = 'cae8d97c';
  var pdfjsFilePath = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : null;
  var pdfjsLibs = {};
  (function pdfjsWrapper() {
@@ -3780,6 +3780,7 @@
   }(this, function (exports, sharedUtil, displayDOMUtils) {
    var AnnotationBorderStyleType = sharedUtil.AnnotationBorderStyleType;
    var AnnotationType = sharedUtil.AnnotationType;
+   var stringToPDFString = sharedUtil.stringToPDFString;
    var Util = sharedUtil.Util;
    var addLinkAttributes = displayDOMUtils.addLinkAttributes;
    var LinkTarget = displayDOMUtils.LinkTarget;
@@ -4322,8 +4323,14 @@
    var FileAttachmentAnnotationElement = function FileAttachmentAnnotationElementClosure() {
     function FileAttachmentAnnotationElement(parameters) {
      AnnotationElement.call(this, parameters, true);
-     this.filename = getFilenameFromUrl(parameters.data.file.filename);
-     this.content = parameters.data.file.content;
+     var file = this.data.file;
+     this.filename = getFilenameFromUrl(file.filename);
+     this.content = file.content;
+     this.linkService.onFileAttachmentAnnotation({
+      id: stringToPDFString(file.filename),
+      filename: file.filename,
+      content: file.content
+     });
     }
     Util.inherit(FileAttachmentAnnotationElement, AnnotationElement, {
      render: function FileAttachmentAnnotationElement_render() {
@@ -4357,7 +4364,7 @@
        if (!data) {
         continue;
        }
-       var properties = {
+       var element = annotationElementFactory.create({
         data: data,
         layer: parameters.div,
         page: parameters.page,
@@ -4366,8 +4373,7 @@
         downloadManager: parameters.downloadManager,
         imageResourcesPath: parameters.imageResourcesPath || getDefaultSetting('imageResourcesPath'),
         renderInteractiveForms: parameters.renderInteractiveForms || false
-       };
-       var element = annotationElementFactory.create(properties);
+       });
        if (element.isRenderable) {
         parameters.div.appendChild(element.render());
        }
@@ -6685,13 +6691,7 @@
        needRestore = true;
       }
       if (this.pendingEOFill) {
-       if (ctx.mozFillRule !== undefined) {
-        ctx.mozFillRule = 'evenodd';
-        ctx.fill();
-        ctx.mozFillRule = 'nonzero';
-       } else {
-        ctx.fill('evenodd');
-       }
+       ctx.fill('evenodd');
        this.pendingEOFill = false;
       } else {
        ctx.fill();
@@ -7523,13 +7523,7 @@
       var ctx = this.ctx;
       if (this.pendingClip) {
        if (this.pendingClip === EO_CLIP) {
-        if (ctx.mozFillRule !== undefined) {
-         ctx.mozFillRule = 'evenodd';
-         ctx.clip();
-         ctx.mozFillRule = 'nonzero';
-        } else {
-         ctx.clip('evenodd');
-        }
+        ctx.clip('evenodd');
        } else {
         ctx.clip();
        }
@@ -7569,7 +7563,6 @@
    var MessageHandler = sharedUtil.MessageHandler;
    var MissingPDFException = sharedUtil.MissingPDFException;
    var PageViewport = sharedUtil.PageViewport;
-   var PasswordResponses = sharedUtil.PasswordResponses;
    var PasswordException = sharedUtil.PasswordException;
    var StatTimer = sharedUtil.StatTimer;
    var UnexpectedResponseException = sharedUtil.UnexpectedResponseException;
@@ -9034,6 +9027,7 @@
  exports.renderTextLayer = pdfjsLibs.pdfjsDisplayTextLayer.renderTextLayer;
  exports.AnnotationLayer = pdfjsLibs.pdfjsDisplayAnnotationLayer.AnnotationLayer;
  exports.CustomStyle = pdfjsLibs.pdfjsDisplayDOMUtils.CustomStyle;
+ exports.createPromiseCapability = pdfjsLibs.pdfjsSharedUtil.createPromiseCapability;
  exports.PasswordResponses = pdfjsLibs.pdfjsSharedUtil.PasswordResponses;
  exports.InvalidPDFException = pdfjsLibs.pdfjsSharedUtil.InvalidPDFException;
  exports.MissingPDFException = pdfjsLibs.pdfjsSharedUtil.MissingPDFException;
