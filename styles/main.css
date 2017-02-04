@@ -9,7 +9,8 @@ body {
 
 .field-card.mdl-card,
 .status-card.mdl-card,
-.music-card.mdl-card {
+.music-card.mdl-card,
+.tools-card.mdl-card {
   width: 100%;
   text-align: center;
 }
