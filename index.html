@@ -10,7 +10,6 @@
   <title>Downbeat</title>
 
   <link rel="stylesheet" href="styles/main.css">
-  <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
   <script src="bower_components/d3/d3.min.js"></script>
   <script src="bower_components/pdfjs-dist/build/pdf.js"></script>
   <script src="bower_components/file-saver/FileSaver.min.js"></script>
@@ -38,7 +37,7 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Downbeat</span>
       <nav class="mdl-navigation">
-        <!-- <a class="mdl-navigation__link" href="#announcements">Announcements</a> -->
+        <a class="mdl-navigation__link" href="#announcements">Announcements</a>
       </nav>
     </div>
     <main class="mdl-layout__content">
@@ -81,11 +80,11 @@
                     <i class="material-icons">more_horiz</i>
                   </button>
                   <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                      for="drill-menu-button">
-                    <li class="mdl-menu__item">Some Action</li>
+                      for="drill-menu-button" id="drill-menu">
+                    <!-- <li class="mdl-menu__item">Some Action</li>
                     <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>
                     <li disabled class="mdl-menu__item">Disabled Action</li>
-                    <li class="mdl-menu__item">Yet Another Action</li>
+                    <li class="mdl-menu__item">Yet Another Action</li> -->
                   </ul>
                 </div>
               </div>
@@ -117,8 +116,8 @@
               <div class="music-card mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
                   <h2 class="mdl-card__title-text" id="music-title">Title</h2>
-                  <br>
-                  <span class="mdl-card__subtitle-text" id="music-part">Part</span>
+                  <!-- <br>
+                  <span class="mdl-card__subtitle-text" id="music-part">Part</span> -->
                 </div>
                 <div class="mdl-card__media">
                   <canvas id="pdf"></canvas>
@@ -137,11 +136,11 @@
                     <i class="material-icons">more_horiz</i>
                   </button>
                   <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                      for="music-menu-button">
-                    <li class="mdl-menu__item">Some Action</li>
+                      for="music-menu-button" id="music-menu">
+                    <!-- <li class="mdl-menu__item">Some Action</li>
                     <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>
                     <li disabled class="mdl-menu__item">Disabled Action</li>
-                    <li class="mdl-menu__item">Yet Another Action</li>
+                    <li class="mdl-menu__item">Yet Another Action</li> -->
                   </ul>
                 </div>
               </div>

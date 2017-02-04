@@ -21,7 +21,7 @@ class Music {
 
       // Update music information
       document.getElementById('music-title').textContent = show;
-      document.getElementById('music-part').textContent = 'score';
+      //document.getElementById('music-part').textContent = 'score';
       document.getElementById('music-page-count').textContent = pdf.numPages;
 
       this.renderPage(this.pageNum);

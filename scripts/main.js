@@ -82,20 +82,53 @@ function parseVert(p, s) {
   return p.sets[s].vert || vert;
 }
 
+var drillMenuElement = document.getElementById('drill-menu');
+var musicMenuElement = document.getElementById('music-menu');
+
 var load = function(season, show, part) {
   d3.json('data/data.json', d => {
     data = d;
 
-    for (let i in data.seasons) {
-      if (data.seasons[i].name === season) {
-        for (let j in data.seasons[i].shows) {
-          if (data.seasons[i].shows[j].name === show) {
-            for (let k in data.seasons[i].shows[j].parts) {
-              if (data.seasons[i].shows[j].parts[k] === part) {
-                drill = new Drill(season, show, part);
-                music = new Music(season, show, part);
-              }
-            }
+    for (let i of data.seasons) {
+      for (let j of i.shows) {
+        if (j.scores.length) {
+          let showMenuItem = document.createElement('li');
+          showMenuItem.classList.add('mdl-menu__item');
+          showMenuItem.classList.add('mdl-menu__item--full-bleed-divider');
+          showMenuItem.setAttribute('disabled', 'disabled');
+          showMenuItem.innerText = j.name;
+          drillMenuElement.appendChild(showMenuItem);
+
+          showMenuItem = document.createElement('li');
+          showMenuItem.classList.add('mdl-menu__item');
+          showMenuItem.classList.add('mdl-menu__item--full-bleed-divider');
+          showMenuItem.setAttribute('disabled', 'disabled');
+          showMenuItem.innerText = j.name;
+          musicMenuElement.appendChild(showMenuItem);
+        }
+        for (let k of j.scores) {
+          if (k.drill.length) {
+            let menuItem = document.createElement('li');
+            menuItem.classList.add('mdl-menu__item');
+            menuItem.innerText = k.name;
+            menuItem.addEventListener('click', () => {
+              drill.load(i.name, j.name, k.name);
+            });
+            drillMenuElement.appendChild(menuItem);
+          }
+          if (k.music.length) {
+            let menuItem = document.createElement('li');
+            menuItem.classList.add('mdl-menu__item');
+            menuItem.innerText = k.name;
+            menuItem.addEventListener('click', () => {
+              music.load(i.name, j.name, k.name);
+            });
+            musicMenuElement.appendChild(menuItem);
+          }
+
+          if (i.name === season && j.name === show && k.name === part) {
+            drill = new Drill(season, show, part);
+            music = new Music(season, show, part);
           }
         }
       }
