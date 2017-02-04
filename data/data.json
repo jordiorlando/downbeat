@@ -1,222 +1,160 @@
 {
-  "seasons": [
-    {
-      "name": "traditional",
-      "shows": [
-        {
-          "name": "pregame",
-          "scores": [
-            {
-              "name": "Revised Entrance #3",
-              "drill": [
-                "drill"
-              ],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Patriotic Medley",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Star Spangled Banner",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Illinois Loyalty",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Oskee Wow Wow",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "William Tell",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "halftime",
-          "scores": [
-            {
-              "name": "Three in One",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        }
-      ]
+  "Traditional": {
+    "Pregame": {
+      "Revised Entrance #3": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Patriotic Medley": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Star Spangled Banner": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Illinois Loyalty": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Oskee Wow Wow": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "William Tell": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      }
     },
-    {
-      "name": "2016",
-      "shows": [
-        {
-          "name": "Exhibition 1 - Urbana High School",
-          "scores": [
-            {
-              "name": "Daft Punk Medley",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Show 1 - Lovie Smith Show",
-          "scores": [
-            {
-              "name": "Karn Evil 9",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "You Really Got Me",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Everybody Needs Some Lovie - Gimmie Some Lovie",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Show 2 - Band Day Show",
-          "scores": [
-            {
-              "name": "Confident",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Downtown",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Show 3 - Canadian Brass Show",
-          "scores": [
-            {
-              "name": "Beale Street",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Penny Lane",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Show 4 - Buddy Rich Show",
-          "scores": [
-            {
-              "name": "Buddy Rich Show",
-              "drill": [
-                "drill"
-              ],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Show 5 - Homecoming Rhapsody in Orange and Blues",
-          "scores": [
-            {
-              "name": "Rhapsody in Blue",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Show 6 - Alumni Band & Folsom Prison Blues",
-          "scores": [
-            {
-              "name": "Folsom Prison Blues",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Show 7 - Dads Day Show",
-          "scores": [
-            {
-              "name": "76 Trombones",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Go, Cubs, Go",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Dads Day Mix 2000",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            },
-            {
-              "name": "Lassus Trombone",
-              "drill": [],
-              "music": [
-                "score"
-              ]
-            }
-          ]
-        }
-      ]
+    "Halftime": {
+      "Three in One": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      }
     }
-  ]
+  },
+  "2016": {
+    "Exhibition 1 - Urbana High School": {
+      "Daft Punk Medley": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      }
+    },
+    "Show 1 - Lovie Smith Show": {
+      "Karn Evil 9": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "You Really Got Me": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Everybody Needs Some Lovie - Gimmie Some Lovie": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      }
+    },
+    "Show 2 - Band Day Show": {
+      "Confident": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Downtown": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      }
+    },
+    "Show 3 - Canadian Brass Show": {
+      "Beale Street": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Penny Lane": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      }
+    },
+    "Show 4 - Buddy Rich Show": {
+      "Buddy Rich Show": {
+        "drill": [
+          "drill"
+        ],
+        "music": [
+          "score"
+        ]
+      }
+    },
+    "Show 5 - Homecoming Rhapsody in Orange and Blues": {
+      "Rhapsody in Blue": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      }
+    },
+    "Show 6 - Alumni Band & Folsom Prison Blues": {
+      "Folsom Prison Blues": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      }
+    },
+    "Show 7 - Dads Day Show": {
+      "76 Trombones": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Go, Cubs, Go": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Dads Day Mix 2000": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      },
+      "Lassus Trombone": {
+        "drill": [],
+        "music": [
+          "score"
+        ]
+      }
+    }
+  }
 }

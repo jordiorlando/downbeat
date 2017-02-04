@@ -89,44 +89,60 @@ var load = function(season, show, part) {
   d3.json('data/data.json', d => {
     data = d;
 
-    for (let i of data.seasons) {
-      for (let j of i.shows) {
-        if (j.scores.length) {
-          let showMenuItem = document.createElement('li');
-          showMenuItem.classList.add('mdl-menu__item');
-          showMenuItem.classList.add('mdl-menu__item--full-bleed-divider');
-          showMenuItem.setAttribute('disabled', 'disabled');
-          showMenuItem.innerText = j.name;
-          drillMenuElement.appendChild(showMenuItem);
+    for (let i in data) {
+      for (let j in data[i]) {
+        let hasDrill = false;
+        let hasMusic = false;
 
-          showMenuItem = document.createElement('li');
-          showMenuItem.classList.add('mdl-menu__item');
-          showMenuItem.classList.add('mdl-menu__item--full-bleed-divider');
-          showMenuItem.setAttribute('disabled', 'disabled');
-          showMenuItem.innerText = j.name;
-          musicMenuElement.appendChild(showMenuItem);
-        }
-        for (let k of j.scores) {
-          if (k.drill.length) {
+        for (let k in data[i][j]) {
+          if (data[i][j][k].drill.length) {
+            if (!hasDrill) {
+              if (drillMenuElement.lastChild) {
+                drillMenuElement.lastChild.classList.add('mdl-menu__item--full-bleed-divider');
+              }
+
+              let menuItem = document.createElement('li');
+              menuItem.classList.add('mdl-menu__item');
+              menuItem.setAttribute('disabled', 'disabled');
+              menuItem.innerText = j;
+              drillMenuElement.appendChild(menuItem);
+
+              hasDrill = true;
+            }
+
             let menuItem = document.createElement('li');
             menuItem.classList.add('mdl-menu__item');
-            menuItem.innerText = k.name;
+            menuItem.innerText = k;
             menuItem.addEventListener('click', () => {
-              drill.load(i.name, j.name, k.name);
+              drill.load(i, j, k);
             });
             drillMenuElement.appendChild(menuItem);
           }
-          if (k.music.length) {
+          if (data[i][j][k].music.length) {
+            if (!hasMusic) {
+              if (musicMenuElement.lastChild) {
+                musicMenuElement.lastChild.classList.add('mdl-menu__item--full-bleed-divider');
+              }
+
+              let menuItem = document.createElement('li');
+              menuItem.classList.add('mdl-menu__item');
+              menuItem.setAttribute('disabled', 'disabled');
+              menuItem.innerText = j;
+              musicMenuElement.appendChild(menuItem);
+
+              hasMusic = true;
+            }
+
             let menuItem = document.createElement('li');
             menuItem.classList.add('mdl-menu__item');
-            menuItem.innerText = k.name;
+            menuItem.innerText = k;
             menuItem.addEventListener('click', () => {
-              music.load(i.name, j.name, k.name);
+              music.load(i, j, k);
             });
             musicMenuElement.appendChild(menuItem);
           }
 
-          if (i.name === season && j.name === show && k.name === part) {
+          if (i === season && j === show && k === part) {
             drill = new Drill(season, show, part);
             music = new Music(season, show, part);
           }
