@@ -7,6 +7,18 @@ body {
   background-color: #eee;
 }
 
+.mdl-layout__header {
+  padding-left: 48px !important;
+  min-height: 48px !important;
+}
+.mdl-layout__drawer-button {
+  margin: 0 !important;
+}
+.mdl-layout__tab-bar-container,
+.mdl-layout__tab-bar {
+  height: 48px !important;
+}
+
 .field-card.mdl-card,
 .status-card.mdl-card,
 .music-card.mdl-card,
