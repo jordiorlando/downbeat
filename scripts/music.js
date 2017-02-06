@@ -15,7 +15,7 @@ class Music {
     this.canvas = document.getElementById('pdf');
     this.ctx = this.canvas.getContext('2d');
 
-    PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
+    PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.min.js';
     PDFJS.getDocument(`../data/${season}/${show}/${part}/music/score.pdf`).then(pdf => {
       this.pdf = pdf;
 
