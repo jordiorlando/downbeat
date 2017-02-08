@@ -1,8 +1,10 @@
 {
   "Traditional": {
     "Pregame": {
-      "Revised Entrance #3": {
-        "drill": [],
+      "Revised Entrance 3": {
+        "drill": [
+          "drill"
+        ],
         "music": [
           "score"
         ]
