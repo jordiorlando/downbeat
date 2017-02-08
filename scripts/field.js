@@ -231,7 +231,7 @@ class Field {
   }
 
   // Draw all performers
-  drawPerformers(performers) {
+  load(performers) {
     for (let p of performers) {
       p.selected = false;
     }

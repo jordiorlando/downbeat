@@ -78,7 +78,7 @@ class Drill {
         this.total += s.counts;
       }
 
-      this.field.drawPerformers(this.performers);
+      this.field.load(this.performers);
 
       this.move();
       // selectByName(parseName(drill.performers[0]));
