@@ -20,7 +20,7 @@ class Music {
       this.pdf = pdf;
 
       // Update music information
-      document.getElementById('music-title').textContent = show;
+      document.getElementById('music-title').textContent = part;
       //document.getElementById('music-part').textContent = 'score';
       document.getElementById('music-page-count').textContent = pdf.numPages;
 

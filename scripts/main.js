@@ -1,4 +1,5 @@
 var shows, data, drill, music;
+var devMode = true;
 var drillElem = document.getElementById('drill');
 var musicElem = document.getElementById('music');
 
@@ -86,7 +87,7 @@ var drillMenuElement = document.getElementById('drill-menu');
 var musicMenuElement = document.getElementById('music-menu');
 
 var load = function(season, show, part) {
-  d3.json('data/data.json', d => {
+  d3.json(`data/${devMode ? 'dev' : 'data'}.json`, d => {
     data = d;
 
     for (let i in data) {
@@ -180,5 +181,8 @@ document.addEventListener('keydown', function(e) {
 
 
 
-load('2016', 'Show 4 - Buddy Rich Show', 'Buddy Rich Show');
-// loadDrill('pregame/revised');
+if (devMode) {
+  load('dev', 'Show 1', 'The Stars and Stripes Forever');
+} else {
+  load('2016', 'Show 4 - Buddy Rich Show', 'Buddy Rich Show');
+}
