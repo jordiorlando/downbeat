@@ -197,6 +197,17 @@ class Fraction {
     return a.mixed();
   }
 
+  // Calculate the square root (returns new Fraction or decimal approximation)
+  sqrt() {
+    let a = new Fraction(this).improper();
+    a.numerator = Math.sqrt(a.numerator);
+    a.denominator = Math.sqrt(a.denominator);
+
+    let approx = Math.sqrt(this);
+
+    return approx === a.valueOf() ? a.mixed() : approx;
+  }
+
   // Normalize the numerator & denominator
   normalize() {
     let gcd = function(a, b) {

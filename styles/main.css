@@ -1,39 +1,34 @@
 html,
 body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  /*overflow: hidden;*/
-  background-color: #eee;
+  /*margin: 0;*/
+  /*width: 100%;*/
+  /*height: 100%;*/
+  overflow: hidden;
+  /*background-color: #eee;*/
 }
 
-.mdl-layout__header {
-  padding-left: 48px !important;
-  min-height: 48px !important;
+.icon {
+  width: 16px;
+  height: 16px;
 }
-.mdl-layout__drawer-button {
-  margin: 0 !important;
-}
-.mdl-layout__tab-bar-container,
-.mdl-layout__tab-bar {
-  height: 48px !important;
-}
-
-.field-card.mdl-card,
-.status-card.mdl-card,
-.music-card.mdl-card,
-.tools-card.mdl-card {
-  width: 100%;
-  text-align: center;
-}
-
-.mdl-card__media {
-  background-color: #fff !important;
+.icon-dark {
+  fill: #fff;
 }
 
 #metronome {
   display: none;
 }
+
+/* this part adds an icon after external links, using FontAwesome*/
+/* a[href^="http://"]:after, a[href^="https://"]:after {
+    content: "\f08e";
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: none;
+    padding-left: 3px;
+} */
 
 svg {
   -webkit-touch-callout: none;

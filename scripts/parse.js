@@ -151,3 +151,8 @@ PDFJS.getDocument('drill/' + drill.name + '.pdf').then(function(pdf) {
     page.then(processPage);
   }
 });
+
+function parseDrill(file) {
+  PDFJS.getDocument(file.name).then(function(pdf) {
+  });
+}

@@ -5,166 +5,150 @@
   <meta charset="utf-8">
   <meta name="keywords" content="0xdec,marching band,drill,music">
   <meta name="description" content="">
-  <meta name="author" content="Jordi Orlando">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Jordi Pakey-Rodriguez">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Downbeat</title>
 
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <!-- Open Iconic CSS -->
+  <link rel="stylesheet" href="bower_components/open-iconic/font/css/open-iconic-bootstrap.min.css">
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="styles/main.css">
-  <script src="bower_components/d3/d3.min.js"></script>
-  <script src="bower_components/pdfjs-dist/build/pdf.min.js"></script>
-  <script src="bower_components/file-saver/FileSaver.min.js"></script>
-  <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
-  <script src="bower_components/material-design-lite/material.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row mdl-layout__tab-bar mdl-js-ripple-effect">
-        <a href="#drill" class="mdl-layout__tab is-active">Drill</a>
-        <a href="#music" class="mdl-layout__tab">Music</a>
-        <a href="#tools" class="mdl-layout__tab">Tools</a>
-      </div>
-    </header>
-    <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">Downbeat</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="#announcements">Announcements</a>
-        <a class="mdl-navigation__link" href="http://marchingillini.com">Marching Illini</a>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between text-nowrap">
+    <!-- <a class="navbar-brand" href="#">Downbeat</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <span class="navbar-brand mb-0 h1">Downbeat</span>
+      <ul class="navbar-nav nav" id="tab-bar" role="tablist"> <!--nav-tabs-->
+        <li class="nav-item">
+          <a class="nav-link active" id="drill-tab" data-toggle="tab" href="#drill" role="tab" aria-controls="drill" aria-expanded="true">Drill</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="music-tab" data-toggle="tab" href="#music" role="tab" aria-controls="music">Music</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="tools-tab" data-toggle="tab" href="#tools" role="tab" aria-controls="tools">Tools</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">Settings</a>
+        </li>
+      </ul>
+      <!-- <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#drill">Drill <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="#music">Music</a>
+        <a class="nav-item nav-link" href="#tools">Tools</a>
+      </div> -->
     </div>
-    <main class="mdl-layout__content">
-      <section class="mdl-layout__tab-panel is-active" id="drill">
-        <div class="page-content">
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">
-              <div class="field-card mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text" id="drill-title">Title</h2>
-                </div>
-                <div class="mdl-card__media" id="drawing"></div>
-                <div class="mdl-card__actions mdl-card--border">
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="drill-button-prev">
-                    <i class="material-icons">skip_previous</i>
-                  </button>
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="drill-button-playpause">
-                    <i class="material-icons">play_arrow</i>
-                  </button>
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="drill-button-next">
-                    <i class="material-icons">skip_next</i>
-                  </button>
-                  <br>
-                  <!-- <span class="mdl-typography--subhead">Markings</span> -->
-                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio-highschool">
-                    <input type="radio" id="radio-highschool" class="mdl-radio__button" name="markings" value="highschool">
-                    <span class="mdl-radio__label">High School</span>
-                  </label>
-                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio-college">
-                    <input type="radio" id="radio-college" class="mdl-radio__button" name="markings" value="college" checked>
-                    <span class="mdl-radio__label">College</span>
-                  </label>
-                  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio-pro">
-                    <input type="radio" id="radio-pro" class="mdl-radio__button" name="markings" value="pro">
-                    <span class="mdl-radio__label">Pro</span>
-                  </label>
-                </div>
-                <div class="mdl-card__menu">
-                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="drill-menu-button">
-                    <i class="material-icons">more_horiz</i>
-                  </button>
-                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                      for="drill-menu-button" id="drill-menu"></ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">
-              <div class="status-card mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text" id="status-title">Performer</h2>
-                </div>
-                <div class="mdl-card__supporting-text" id="status-text">
-                  <span>&nbsp;</span>
-                  <br>
-                  <span>&nbsp;</span>
-                  <br>
-                  <span>&nbsp;</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <audio src="audio/click.wav" preload="auto" id="metronome">Get a better standards-compliant browser!</audio>
+
+    <div class="d-flex justify-content-around">
+      <!-- <span class="navbar-text mb-0 h3"></span> -->
+      <div class="dropdown">
+        <a class="nav-link navbar-text mb-0 h3" href="#" role="button" id="title" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Select show
+        </a>
+        <div class="dropdown-menu" aria-labelledby="title" id="drill-menu">
+          <h6 class="dropdown-header">Drill</h6>
         </div>
-      </section>
-      <section class="mdl-layout__tab-panel" id="music">
-        <div class="page-content">
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">
-              <div class="music-card mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text" id="music-title">Title</h2>
-                  <!-- <br>
-                  <span class="mdl-card__subtitle-text" id="music-part">Part</span> -->
-                </div>
-                <div class="mdl-card__media">
-                  <canvas id="pdf"></canvas>
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="music-button-prev">
-                    <i class="material-icons">keyboard_arrow_left</i>
-                  </button>
-                  <span><span id="music-page-num"></span> / <span id="music-page-count"></span></span>
-                  <button class="mdl-button mdl-js-button mdl-button--icon" id="music-button-next">
-                    <i class="material-icons">keyboard_arrow_right</i>
-                  </button>
-                </div>
-                <div class="mdl-card__menu">
-                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="music-menu-button">
-                    <i class="material-icons">more_horiz</i>
-                  </button>
-                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                      for="music-menu-button" id="music-menu"></ul>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-around justify-content-lg-end justify-content-xl-end flex-wrap navbar-text w-100">
+      <div class="px-3 d-none flex-column align-items-center" id="status-performer">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="px-3 d-none flex-column align-items-center" id="status-position">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="px-3 d-flex flex-column align-items-center">
+        <span>Set</span>
+        <span id="status-set">1</span>
+      </div>
+      <div class="px-3 d-flex flex-column align-items-center">
+        <span>Counts</span>
+        <span id="status-count">0</span>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary" id="drill-button-prev"><img src="bower_components/open-iconic/svg/media-step-backward.svg" alt="media-step-backward" class="icon"></button>
+        <button type="button" class="btn btn-secondary" id="drill-button-playpause"><img src="bower_components/open-iconic/svg/media-play.svg" alt="media-play" class="icon"></button>
+        <button type="button" class="btn btn-secondary" id="drill-button-next"><img src="bower_components/open-iconic/svg/media-step-forward.svg" alt="media-step-forward" class="icon"></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="tab-content" id="tab-content">
+      <div class="tab-pane fade show active" id="drill" role="tabpanel" aria-labelledby="drill-tab">
+        <div id="drawing"></div>
+        <audio src="audio/click.wav" preload="auto" id="metronome">Get a better standards-compliant browser!</audio>
+      </div>
+      <div class="tab-pane fade" id="music" role="tabpanel" aria-labelledby="music-tab">
+        <h2 id="music-title">Title</h2>
+        <!-- <br>
+        <span class="mdl-card__subtitle-text" id="music-part">Part</span> -->
+        <div class="music-card">
+          <canvas id="pdf"></canvas>
+          <div>
+            <button class="mdl-button mdl-js-button mdl-button--icon" id="music-button-prev">
+              <i class="material-icons">keyboard_arrow_left</i>
+            </button>
+            <span><span id="music-page-num"></span> / <span id="music-page-count"></span></span>
+            <button class="mdl-button mdl-js-button mdl-button--icon" id="music-button-next">
+              <i class="material-icons">keyboard_arrow_right</i>
+            </button>
+          </div>
+          <div class="mdl-card__menu">
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="music-menu-button">
+              <i class="material-icons">more_horiz</i>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="music-menu-button" id="music-menu"></ul>
           </div>
         </div>
-      </section>
-      <section class="mdl-layout__tab-panel" id="tools">
-        <div class="page-content">
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">
-              <div class="tools-card mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text" id="tools-title">Tuner</h2>
-                </div>
-                <div class="mdl-card__media"></div>
-                <div class="mdl-card__actions mdl-card--border"></div>
-                <div class="mdl-card__menu">
-                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="tools-menu-button">
-                    <i class="material-icons">more_horiz</i>
-                  </button>
-                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                      for="tools-menu-button" id="tools-menu"></ul>
-                </div>
-              </div>
-            </div>
+      </div>
+      <div class="tab-pane fade" id="tools" role="tabpanel" aria-labelledby="tools-tab">
+        <h2 class="mdl-card__title-text" id="tools-title">Tuner</h2>
+        <div class="tools-card">
+          <div class="mdl-card__menu">
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="tools-menu-button">
+              <i class="material-icons">more_horiz</i>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="tools-menu-button" id="tools-menu"></ul>
           </div>
         </div>
-      </section>
-      <footer class="mdl-mini-footer">
-        <div class="mdl-mini-footer__left-section">
-          <div class="mdl-logo">Downbeat</div>
-          <ul class="mdl-mini-footer__link-list">
-            <li><a href="#help">Help</a></li>
-            <li><a href="#about">About</a></li>
-          </ul>
+      </div>
+      <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+        <h3>Field Markings</h3>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-secondary" id="checkbox-highschool">
+            <input type="checkbox" autocomplete="off"> High School
+          </label>
+          <label class="btn btn-secondary active" id="checkbox-college">
+            <input type="checkbox" checked autocomplete="off"> College
+          </label>
+          <label class="btn btn-secondary" id="checkbox-pro">
+            <input type="checkbox" autocomplete="off"> Pro
+          </label>
         </div>
-      </footer>
-    </main>
+      </div>
+    </div>
   </div>
+
+  <script src="bower_components/d3/d3.min.js"></script>
+  <script src="bower_components/pdfjs-dist/build/pdf.min.js"></script>
+  <script src="bower_components/file-saver/FileSaver.min.js"></script>
+
+  <!-- jQuery , Popper, and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
   <script src="scripts/fraction.js"></script>
   <script src="scripts/field.js"></script>

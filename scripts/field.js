@@ -236,12 +236,14 @@ class Field {
       p.selected = false;
     }
 
+    this.svg.selectAll('.performer').remove();
+
     // Performer icon
     this.svg.selectAll('.performer')
-        .data(performers, d => parseName(d))
+        .data(performers, d => drill.parseName(d))
       .enter().append('g')
         .attr('class', 'performer')
-        .attr('id', d => `performer_${parseName(d)}`)
+        .attr('id', d => `performer_${drill.parseName(d)}`)
         .style('cursor', 'pointer')
         .on('click', p => this.select(p))
       .append('circle')
@@ -253,7 +255,7 @@ class Field {
         .attr('cy', 0)
         .select(parent)
       .append('text')
-        .text(d => parseName(d))
+        .text(d => drill.parseName(d))
         .style('fill', COLORS.performer.text)
         .attr('font-family', 'Helvetica')
         .attr('font-size', MARCHER / 2)
@@ -277,19 +279,11 @@ class Field {
       /* p.icon.first().fill({
         color: COLORS.performer[p.selected ? 'select' : 'fill']
       }); */
-      this.svg.select(`#performer_${parseName(p).replace('\\', '\\\\').replace('*', '\\*')}`)
+      this.svg.select(`#performer_${drill.parseName(p).replace('\\', '\\\\').replace('*', '\\*')}`)
         .select('circle')
         .style('fill', COLORS.performer[p.selected ? 'select' : 'fill']);
 
-      if (p.selected) {
-        document.getElementById('status-text').children[0].textContent = parseName(p);
-        document.getElementById('status-text').children[2].textContent = parseHoriz(p, drill.state.set);
-        document.getElementById('status-text').children[4].textContent = parseVert(p, drill.state.set);
-      } else {
-        for (let i = 0; i < 3; i++) {
-          document.getElementById('status-text').children[i * 2].textContent = String.fromCharCode(160);
-        }
-      }
+      drill.refresh();
     }
   }
 
