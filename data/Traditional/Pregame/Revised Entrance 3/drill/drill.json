@@ -1,6 +1,8 @@
 {
   "schema": "0.0.1",
   "name": "Revised Entrance #3",
+  "music": "Revised Entrance #3",
+  "next": "Patriotic Medley",
   "sets": [
     {
       "name": "START",
@@ -212,10 +214,18 @@
         [
           {
             "type": "move",
-            "counts": 32,
+            "counts": 28,
+            "x": 0,
+            "y": [42, 2, 3],
+            "face": "DOT",
+            "step": "run-on"
+          },
+          {
+            "type": "move",
+            "counts": 4,
             "x": -4,
             "y": [42, 2, 3],
-            "face": "left",
+            "face": "DOT",
             "step": "run-on"
           },
           {
@@ -229,7 +239,7 @@
             "counts": 4,
             "x": -8,
             "y": [42, 2, 3],
-            "face": "left",
+            "face": "DOT",
             "step": "shephard's walk"
           },
           {
@@ -293,7 +303,7 @@
             "counts": 8,
             "x": -48,
             "y": 32,
-            "face": "back"
+            "face": "DOT"
           }
         ],
         [
@@ -302,7 +312,7 @@
             "counts": 16,
             "x": -64,
             "y": 32,
-            "face": "right"
+            "face": "side 2"
           }
         ],
         [
@@ -336,7 +346,7 @@
             "counts": 8,
             "x": [-21, 1, 3],
             "y": 0,
-            "face": "right"
+            "face": "DOT"
           }
         ],
         [
@@ -376,10 +386,18 @@
         [
           {
             "type": "move",
-            "counts": 32,
+            "counts": 28,
+            "x": 0,
+            "y": [42, 2, 3],
+            "face": "DOT",
+            "step": "run-on"
+          },
+          {
+            "type": "move",
+            "counts": 4,
             "x": 4,
             "y": [42, 2, 3],
-            "face": "right",
+            "face": "DOT",
             "step": "run-on"
           },
           {
@@ -393,7 +411,7 @@
             "counts": 4,
             "x": 8,
             "y": [42, 2, 3],
-            "face": "right",
+            "face": "DOT",
             "step": "shephard's walk"
           },
           {
@@ -457,7 +475,7 @@
             "counts": 8,
             "x": 48,
             "y": 32,
-            "face": "back"
+            "face": "DOT"
           }
         ],
         [
@@ -466,7 +484,7 @@
             "counts": 16,
             "x": 64,
             "y": 32,
-            "face": "left"
+            "face": "side 1"
           }
         ],
         [
@@ -500,7 +518,7 @@
             "counts": 8,
             "x": [21, 1, 3],
             "y": 0,
-            "face": "left"
+            "face": "DOT"
           }
         ],
         [
@@ -524,6 +542,378 @@
           {
             "type": "hold",
             "counts": 20
+          }
+        ]
+      ]
+    },
+    {
+      "type": "",
+      "squad": 11,
+      "position": "B",
+      "sets": [
+        {
+          "x": -98,
+          "y": 50
+        },
+        [
+          {
+            "type": "mark-time",
+            "counts": 48,
+            "step": "fast-chair"
+          }
+        ],
+        [
+          {
+            "type": "mark-time",
+            "counts": 4,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 7,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 13,
+            "x": -72,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          }
+        ],
+        [
+          {
+            "type": "move",
+            "counts": 15,
+            "x": -42,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 2,
+            "x": -41,
+            "y": 48,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "hold",
+            "counts": 7
+          }
+        ]
+      ]
+    },
+    {
+      "type": "",
+      "squad": 11,
+      "position": "C",
+      "sets": [
+        {
+          "x": -98,
+          "y": 50
+        },
+        [
+          {
+            "type": "mark-time",
+            "counts": 48,
+            "step": "fast-chair"
+          }
+        ],
+        [
+          {
+            "type": "mark-time",
+            "counts": 4,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 8,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 12,
+            "x": -74,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          }
+        ],
+        [
+          {
+            "type": "move",
+            "counts": 17,
+            "x": -40,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 2,
+            "x": -39,
+            "y": 48,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "hold",
+            "counts": 5
+          }
+        ]
+      ]
+    },
+    {
+      "type": "A",
+      "squad": 35,
+      "position": "A",
+      "sets": [
+        {
+          "x": -98,
+          "y": 50
+        },
+        [
+          {
+            "type": "mark-time",
+            "counts": 48,
+            "step": "fast-chair"
+          }
+        ],
+        [
+          {
+            "type": "mark-time",
+            "counts": 4,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 10,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 10,
+            "x": -78,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          }
+        ],
+        [
+          {
+            "type": "move",
+            "counts": 21,
+            "x": -36,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 2,
+            "x": -35,
+            "y": 48,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "hold",
+            "counts": 1
+          }
+        ]
+      ]
+    },
+    {
+      "type": "A",
+      "squad": 35,
+      "position": "B",
+      "sets": [
+        {
+          "x": -98,
+          "y": 50
+        },
+        [
+          {
+            "type": "mark-time",
+            "counts": 48,
+            "step": "fast-chair"
+          }
+        ],
+        [
+          {
+            "type": "mark-time",
+            "counts": 4,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 9,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 11,
+            "x": -76,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          }
+        ],
+        [
+          {
+            "type": "move",
+            "counts": 19,
+            "x": -38,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 2,
+            "x": -37,
+            "y": 48,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "hold",
+            "counts": 3
+          }
+        ]
+      ]
+    },
+    {
+      "type": "A",
+      "squad": 35,
+      "position": "C",
+      "sets": [
+        {
+          "x": -98,
+          "y": 50
+        },
+        [
+          {
+            "type": "mark-time",
+            "counts": 48,
+            "step": "fast-chair"
+          }
+        ],
+        [
+          {
+            "type": "mark-time",
+            "counts": 4,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 6,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 14,
+            "x": -70,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          }
+        ],
+        [
+          {
+            "type": "move",
+            "counts": 13,
+            "x": -44,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 2,
+            "x": -43,
+            "y": 48,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "hold",
+            "counts": 9
+          }
+        ]
+      ]
+    },
+    {
+      "type": "A",
+      "squad": 35,
+      "position": "D",
+      "sets": [
+        {
+          "x": -98,
+          "y": 50
+        },
+        [
+          {
+            "type": "mark-time",
+            "counts": 48,
+            "step": "fast-chair"
+          }
+        ],
+        [
+          {
+            "type": "mark-time",
+            "counts": 4,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 5,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 15,
+            "x": -68,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          }
+        ],
+        [
+          {
+            "type": "move",
+            "counts": 11,
+            "x": -46,
+            "y": 50,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "move",
+            "counts": 2,
+            "x": -45,
+            "y": 48,
+            "step": "fast-chair",
+            "pulse": "double"
+          },
+          {
+            "type": "hold",
+            "counts": 11
           }
         ]
       ]

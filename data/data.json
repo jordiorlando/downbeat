@@ -21,6 +21,12 @@
           "score"
         ]
       },
+      "Visitors Fight Song": {
+        "drill": [
+          "drill"
+        ],
+        "music": []
+      },
       "Illinois Loyalty": {
         "drill": [],
         "music": [
@@ -38,6 +44,10 @@
         "music": [
           "score"
         ]
+      },
+      "Tunnel Entrance": {
+        "drill": [],
+        "music": []
       }
     },
     "Halftime": {
