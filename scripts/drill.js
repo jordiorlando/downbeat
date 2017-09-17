@@ -14,6 +14,14 @@ class Drill {
       this.field.markings(marking, checkbox.classList.contains('active'));
       checkbox.addEventListener('click', e => drill.field.markings(marking, !e.target.classList.contains('active')));
     }
+
+    for (let theme of ['bw', 'color']) {
+      let radio = document.getElementById(`radio-${theme}`);
+      if (radio.classList.contains('active')) {
+        this.field.theme(theme);
+      }
+      radio.addEventListener('click', e => drill.field.theme(theme, !e.target.classList.contains('active')));
+    }
   }
 
   load(season, show, part) {

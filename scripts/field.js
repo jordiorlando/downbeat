@@ -7,7 +7,11 @@ const DIMENSIONS = {
     length: 2
   },
   numbers: {
-    top: 27,
+    top: {
+      highschool: 27,
+      college: 27,
+      pro: 42
+    },
     width: 4,
     height: 6
   },
@@ -31,8 +35,6 @@ const DIMENSIONS = {
 };
 
 const COLORS = {
-  field:    '#689f38',
-  endzone:  '#e04e39',
   performer: {
     fill:   '#fff',
     stroke: '#13294b',
@@ -73,37 +75,35 @@ class Field {
   // Draw field and markings
   drawField() {
     this.svg.append('rect')
-      .style('fill', COLORS.field)
-      .style('stroke', '#fff')
       .style('stroke-width', +DIMENSIONS.line.width)
       .attr('x', -DIMENSIONS.width / 2)
       .attr('y', -DIMENSIONS.height)
       .attr('width', DIMENSIONS.width)
-      .attr('height', DIMENSIONS.height);
+      .attr('height', DIMENSIONS.height)
+      .attr('class', 'field-turf field-theme');
 
     // End zones
     let endzones = [-DIMENSIONS.width / 2 + 15, DIMENSIONS.width / 2 - 15];
     this.svg.selectAll('.endzone')
         .data(endzones)
       .enter().append('rect')
-        .style('fill', COLORS.endzone)
-        .style('stroke', '#fff')
         .style('stroke-width', +DIMENSIONS.line.width)
         .attr('x', d => d - 15)
         .attr('y', -DIMENSIONS.height)
         .attr('width', 30)
         .attr('height', DIMENSIONS.height)
+        .attr('class', 'field-endzone field-theme')
       .exit().remove();
 
     // 3-yard markers
     for (let h of [-141, 141]) {
       this.svg.append('line')
-        .style('stroke', '#fff')
         .style('stroke-width', +DIMENSIONS.line.width)
         .attr('x1', h)
         .attr('y1', -(DIMENSIONS.height - DIMENSIONS.line.length) / 2)
         .attr('x2', h)
-        .attr('y2', -(DIMENSIONS.height + DIMENSIONS.line.length) / 2);
+        .attr('y2', -(DIMENSIONS.height + DIMENSIONS.line.length) / 2)
+        .attr('class', 'field-lines field-theme');
     }
 
     // Tee markers
@@ -114,15 +114,13 @@ class Field {
       for (let h of [-x, x]) {
         for (let r of [-45, 45]) {
           this.svg.append('line')
-            .style('stroke', '#fff')
             .style('stroke-width', +DIMENSIONS.line.width)
-            .style('opacity', 0)
             .attr('x1', h)
             .attr('y1', -(y - DIMENSIONS.line.length / 2))
             .attr('x2', h)
             .attr('y2', -(y + DIMENSIONS.line.length / 2))
             .attr('transform', `rotate(${r},${h},${-y})`)
-            .attr('class', type);
+            .attr('class', `${type} field-lines field-theme`);
         }
       }
     }
@@ -138,12 +136,12 @@ class Field {
         .attr('class', 'yardline')
         .attr('transform', d => `translate(${xScale(d)},0)`)
       .append('line')
-        .style('stroke', '#fff')
         .style('stroke-width', +DIMENSIONS.line.width)
         .attr('x1', 0)
         .attr('y1', 0)
         .attr('x2', 0)
         .attr('y2', -DIMENSIONS.height)
+        .attr('class', 'field-lines field-theme')
         .select(parent)
       .each(function(d, i) {
         let fifty = Math.floor(yardlines.length / 2);
@@ -164,26 +162,25 @@ class Field {
           }
 
           d3.select(this).append('line')
-            .style('stroke', '#fff')
             .style('stroke-width', +DIMENSIONS.line.width)
-            .style('opacity', type ? 0 : 1)
             .attr('x1', x1)
             .attr('y1', -y1)
             .attr('x2', x2)
             .attr('y2', -y2)
-            .attr('class', type);
+            .attr('class', `${type} field-lines field-theme`);
         };
 
-        let drawText = (x, y, size, dir, text) => {
+        let drawText = (x, y, size, dir, text, type) => {
           d3.select(this).append('text')
             .text(text)
-            .style('fill', '#fff')
             .attr('font-family', 'Helvetica')
             .attr('font-size', size)
+            .attr('line-height', 1)
             .attr('text-anchor', 'middle')
             .attr('x', x)
             .attr('y', -y)
-            .attr('transform', `rotate(${dir * 180},${x},${-y})`);
+            .attr('transform', `rotate(${dir * 180},${x},${-y})`)
+            .attr('class', `${type} field-numbers field-theme`);
         };
 
         // Hash marks
@@ -219,11 +216,13 @@ class Field {
 
         // Yard numbers
         if (i && (i < yardlines.length - 1) && (i % 2 === 0)) {
-          let arr = [DIMENSIONS.numbers.top - DIMENSIONS.numbers.height];
-          arr.push(DIMENSIONS.height - arr[0]);
+          for (let type in DIMENSIONS.numbers.top) {
+            let arr = [DIMENSIONS.numbers.top[type] - DIMENSIONS.numbers.height];
+            arr.push(DIMENSIONS.height - arr[0]);
 
-          for (let v in arr) {
-            drawText(0, arr[v], DIMENSIONS.numbers.height, v, 50 - Math.abs(yardlines[i] * 5 / 8));
+            for (let v in arr) {
+              drawText(0, arr[v], DIMENSIONS.numbers.height, v, 50 - Math.abs(yardlines[i] * 5 / 8), type);
+            }
           }
         }
       })
@@ -297,7 +296,13 @@ class Field {
         this.markings(type, markings[type]);
       }
     } else {
-      this.svg.selectAll(`.${markings}`).style('opacity', show ? 1 : 0);
+      this.svg.selectAll(`.${markings}`).classed('d-none', !show);
+    }
+  }
+
+  theme(theme) {
+    for (let t of ['bw', 'color']) {
+      this.svg.selectAll('.field-theme').classed(`field-theme-${t}`, theme === t);
     }
   }
 }
