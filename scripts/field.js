@@ -59,15 +59,11 @@ function parent() {
 
 class Field {
   constructor(elem, id) {
-    let width = document.getElementById(elem).clientWidth;
-    let height = width * (DIMENSIONS.height + DIMENSIONS.border * 2) / (DIMENSIONS.width + DIMENSIONS.border * 2);
-
     this.svg = d3.select(`#${elem}`).append('svg')
+      // .classed('field-svg', true)
       .attr('id', id)
-      .attr('width', width)
-      .attr('height', height)
-      .attr('viewBox', [-(DIMENSIONS.width / 2 + DIMENSIONS.border), -DIMENSIONS.height, DIMENSIONS.width + DIMENSIONS.border * 2, DIMENSIONS.height].join(' '))
-      .style('background-color', '#fff');
+      .attr('preserveAspectRatio', 'xMidYMid meet')
+      .attr('viewBox', [-(DIMENSIONS.width / 2 + DIMENSIONS.border), -DIMENSIONS.height, DIMENSIONS.width + DIMENSIONS.border * 2, DIMENSIONS.height].join(' '));
 
     this.drawField();
   }

@@ -7,14 +7,6 @@ body {
   /*background-color: #eee;*/
 }
 
-.icon {
-  width: 16px;
-  height: 16px;
-}
-.icon-dark {
-  fill: #fff;
-}
-
 #metronome {
   display: none;
 }
@@ -28,6 +20,22 @@ body {
     display: inline-block;
     text-decoration: none;
     padding-left: 3px;
+} */
+
+/* .field-container {
+  display: inline-block;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  vertical-align: top;
+  overflow: hidden;
+}
+.field-svg {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
 } */
 
 svg {
@@ -44,6 +52,7 @@ svg {
 canvas {
   border: 1px solid black;
 }
+
 
 .field-turf.field-theme-bw {
   fill: #fff;

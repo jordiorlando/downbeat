@@ -5,9 +5,18 @@ class Drill {
     this.load(season, show, part);
 
     // Add event listeners
-    document.getElementById('drill-button-prev').addEventListener('click', () => this.prevSet());
-    document.getElementById('drill-button-playpause').addEventListener('click', () => this.playPause());
-    document.getElementById('drill-button-next').addEventListener('click', () => this.nextSet());
+    this.elements = {
+      button: {},
+      checkbox: {},
+      radio: {}
+    };
+    for (let button of ['volume', 'prev', 'playpause', 'next']) {
+      this.elements.button[button] = document.getElementById(`button-${button}`);
+    }
+    this.elements.button.volume.addEventListener('click', () => this.muteUnmute());
+    this.elements.button.prev.addEventListener('click', () => this.prevSet());
+    this.elements.button.playpause.addEventListener('click', () => this.playPause());
+    this.elements.button.next.addEventListener('click', () => this.nextSet());
 
     for (let marking of ['highschool', 'college', 'pro']) {
       let checkbox = document.getElementById(`checkbox-${marking}`);
@@ -96,12 +105,11 @@ class Drill {
                   let dx = x.subtract(px);
                   let dy = y.subtract(py);
                   let dp = dx.multiply(dx).add(dy.multiply(dy)).sqrt();
-                  let ss = counts * 8 / dp;
-                  p.sets[s][a].stepsize = `${ss} to 5`;
-                  // console.log(dx, dy, dp, ss, 'to', 5)
+                  if (!dp.equals(0)) {
+                    p.sets[s][a].stepsize = new Fraction(counts * 8).divide(dp);
+                    // console.log(dx, dy, dp, ss, 'to', 5)
+                  }
                 }
-              } else {
-                p.sets[s][a].stepsize = p.sets[s][a].type;
               }
 
               p.sets[s][a].positions.push({
@@ -136,6 +144,7 @@ class Drill {
     });
   }
 
+  // HACK: unify function arguments or store a subset mapping?
   subset(p, s, c) {
     // Loop through all subsets until the current one is found
     for (let a in p.sets[s]) {
@@ -222,10 +231,10 @@ class Drill {
     }
 
     this.state.set    = s;
-    this.state.count  = this.sets[this.state.set].counts;
-    this.state.tempo  = this.sets[this.state.set].tempo;
-    this.state.pulse  = this.sets[this.state.set].pulse;
-    this.state.counts = this.sets[this.state.set].counts;
+    this.state.count  = 0;
+    this.state.tempo  = this.sets[s].tempo;
+    this.state.pulse  = this.sets[s].pulse;
+    this.state.counts = this.sets[s].counts;
 
     this.move();
 
@@ -237,7 +246,8 @@ class Drill {
 
   // Go to the previous set
   prevSet() {
-    this.set(this.state.set - 1);
+    // FIXME: spend a full count-time at count 0 before moving to count 1 when calling prevSet() while this.playing = true
+    this.set(this.state.count > 1 ? this.state.set : this.state.set - 1)
   }
 
   // Go to the next set
@@ -245,16 +255,35 @@ class Drill {
     this.set(this.state.set + 1);
   }
 
+  mute() {
+    this.elements.button.volume.children[0].classList.replace('zmdi-volume-up', 'zmdi-volume-off');
+    this.muted = true;
+  }
+
+  unmute() {
+    this.elements.button.volume.children[0].classList.replace('zmdi-volume-off', 'zmdi-volume-up');
+    this.muted = false;
+  }
+
+  muteUnmute() {
+    if (this.muted) {
+      this.unmute();
+    } else {
+      this.mute();
+    }
+  }
+
   // Start playing until the specified count
   play(end = this.total) {
-    // TODO: change icon to pause
-    // document.getElementById('drill-button-playpause').children[0].textContent = 'pause';
+    this.elements.button.playpause.children[0].classList.replace('zmdi-play', 'zmdi-pause');
 
     if (this.state.total < this.total) {
       this.playing = true;
 
       let func = () => {
-        document.getElementById('metronome').play();
+        if (!this.muted) {
+          document.getElementById('metronome').play();
+        }
         this.nextCount();
 
         let t = 1000 * 60 / this.state.tempo;
@@ -275,8 +304,7 @@ class Drill {
 
   // Pause playing
   pause() {
-    // TODO: change icon to play
-    // document.getElementById('drill-button-playpause').children[0].textContent = 'play_arrow';
+    this.elements.button.playpause.children[0].classList.replace('zmdi-pause', 'zmdi-play');
 
     this.playing = false;
     clearTimeout(this.timeoutID);
@@ -308,8 +336,17 @@ class Drill {
     let position = document.getElementById('status-position');
 
     if (p) {
-      performer.children[0].textContent = this.parseName(p);
-      performer.children[1].textContent = p.sets[s][this.subset(p, s, c).subset].stepsize;
+      let subset = this.subset(p, s, c);
+
+      performer.children[0].children[1].textContent = this.parseName(p);
+      // TODO: change to zmdi-run for run-on step
+      if (p.sets[s][this.subset(p, s, c).subset].type === 'move') {
+        performer.children[1].children[0].classList.replace('zmdi-male-alt', 'zmdi-walk');
+        performer.children[1].children[1].textContent = `${p.sets[s][subset.subset].stepsize} to 5`;
+      } else {
+        performer.children[1].children[0].classList.replace('zmdi-walk', 'zmdi-male-alt');
+        performer.children[1].children[1].textContent = p.sets[s][subset.subset].type;
+      }
       performer.classList.replace('d-none', 'd-flex');
       console.log(p.sets[s])
       position.children[0].textContent = this.parseHoriz(p, s, c);
