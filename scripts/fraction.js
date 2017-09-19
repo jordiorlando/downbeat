@@ -74,17 +74,28 @@ class Fraction {
       // Convert from float/decimal to fraction
       if (arr.length === 1) {
         arr[0] = parseFloat(arr[0]);
-        let dec = Math.abs(arr[0] - Math.trunc(arr[0]));
+        let decimal = Math.abs(arr[0] - Math.trunc(arr[0]));
 
-        if (dec) {
-          for (let d = 2; d <= 4; d++) {
-            let n = dec * d;
-            if (n === Math.trunc(n)) {
-              arr[1] = n;
-              arr[2] = d;
-              break;
+        if (decimal) {
+          // TODO: add a round() function to round to the nearest value from a list of desired denominators
+          let approx = {
+            error: 1
+          }
+
+          for (let denominator of [2, 3, 4, 8, 10]) {
+            let numerator = Math.round(decimal * denominator);
+            let error = Math.abs(numerator / denominator - decimal);
+            if (error < approx.error) {
+              approx = {
+                numerator,
+                denominator,
+                error
+              };
             }
           }
+
+          arr[1] = approx.numerator;
+          arr[2] = approx.denominator;
         }
       } else {
         arr[1] = parseInt(arr[1], 10);
@@ -176,8 +187,10 @@ class Fraction {
 
   // Divide by a fraction (returns new Fraction)
   divide(...args) {
-    let f = new Fraction(...args).invert();
-    return this.multiply(f);
+    let f = new Fraction(...args);
+    if (!f.equals(0)) {
+      return this.multiply(f.invert());
+    }
   }
 
   // Calculate the modulo (returns new Fraction)
@@ -205,7 +218,7 @@ class Fraction {
 
     let approx = Math.sqrt(this);
 
-    return approx === a.valueOf() ? a.mixed() : approx;
+    return approx === a.valueOf() ? a.mixed() : new Fraction(approx);
   }
 
   // Normalize the numerator & denominator
