@@ -59,11 +59,16 @@ function parent() {
 
 class Field {
   constructor(elem, id) {
+    this.viewbox = [[-(DIMENSIONS.width / 2 + DIMENSIONS.border), -(DIMENSIONS.height + DIMENSIONS.border)], [DIMENSIONS.width + DIMENSIONS.border * 2, DIMENSIONS.height + DIMENSIONS.border * 2]];
+
     this.svg = d3.select(`#${elem}`).append('svg')
-      // .classed('field-svg', true)
       .attr('id', id)
-      .attr('preserveAspectRatio', 'xMidYMid meet')
-      .attr('viewBox', [-(DIMENSIONS.width / 2 + DIMENSIONS.border), -DIMENSIONS.height, DIMENSIONS.width + DIMENSIONS.border * 2, DIMENSIONS.height].join(' '));
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr('viewBox', this.viewbox.join(' ').replace(/\,/g, ' '))
+      .call(d3.zoom().extent(this.viewbox).scaleExtent([1, 4]).translateExtent(this.viewbox).on("zoom", () => this.svg.attr("transform", d3.event.transform)))
+      .append('g');
+    // .on("wheel.zoom", null);
 
     this.drawField();
   }
@@ -71,35 +76,42 @@ class Field {
   // Draw field and markings
   drawField() {
     this.svg.append('rect')
-      .style('stroke-width', +DIMENSIONS.line.width)
       .attr('x', -DIMENSIONS.width / 2)
       .attr('y', -DIMENSIONS.height)
       .attr('width', DIMENSIONS.width)
       .attr('height', DIMENSIONS.height)
-      .attr('class', 'field-turf field-theme');
+      .classed('field-turf field-theme field-line-width', true);
+
+    // Zero points
+    for (let z = 15; z < 160; z += 15) {
+      this.svg.append('line')
+        .attr('x1', -DIMENSIONS.width / 2)
+        .attr('y1', -z)
+        .attr('x2', DIMENSIONS.width / 2)
+        .attr('y2', -z)
+        .classed('field-zeros field-zero-lines field-theme', true);
+    }
 
     // End zones
     let endzones = [-DIMENSIONS.width / 2 + 15, DIMENSIONS.width / 2 - 15];
-    this.svg.selectAll('.endzone')
+    this.svg.selectAll('.field-endzone')
         .data(endzones)
       .enter().append('rect')
-        .style('stroke-width', +DIMENSIONS.line.width)
         .attr('x', d => d - 15)
         .attr('y', -DIMENSIONS.height)
         .attr('width', 30)
         .attr('height', DIMENSIONS.height)
-        .attr('class', 'field-endzone field-theme')
+        .classed('field-endzone field-theme field-line-width', true)
       .exit().remove();
 
     // 3-yard markers
     for (let h of [-141, 141]) {
       this.svg.append('line')
-        .style('stroke-width', +DIMENSIONS.line.width)
         .attr('x1', h)
         .attr('y1', -(DIMENSIONS.height - DIMENSIONS.line.length) / 2)
         .attr('x2', h)
         .attr('y2', -(DIMENSIONS.height + DIMENSIONS.line.length) / 2)
-        .attr('class', 'field-lines field-theme');
+        .classed('field-lines field-theme field-line-width', true);
     }
 
     // Tee markers
@@ -110,13 +122,12 @@ class Field {
       for (let h of [-x, x]) {
         for (let r of [-45, 45]) {
           this.svg.append('line')
-            .style('stroke-width', +DIMENSIONS.line.width)
             .attr('x1', h)
             .attr('y1', -(y - DIMENSIONS.line.length / 2))
             .attr('x2', h)
             .attr('y2', -(y + DIMENSIONS.line.length / 2))
             .attr('transform', `rotate(${r},${h},${-y})`)
-            .attr('class', `${type} field-lines field-theme`);
+            .classed(`${type} field-lines field-theme field-line-width`, true);
         }
       }
     }
@@ -129,15 +140,13 @@ class Field {
     this.svg.selectAll('.yardline')
         .data(yardlines)
       .enter().append('g')
-        .attr('class', 'yardline')
         .attr('transform', d => `translate(${xScale(d)},0)`)
       .append('line')
-        .style('stroke-width', +DIMENSIONS.line.width)
         .attr('x1', 0)
         .attr('y1', 0)
         .attr('x2', 0)
         .attr('y2', -DIMENSIONS.height)
-        .attr('class', 'field-lines field-theme')
+        .classed('field-lines field-theme field-line-width', true)
         .select(parent)
       .each(function(d, i) {
         let fifty = Math.floor(yardlines.length / 2);
@@ -158,12 +167,11 @@ class Field {
           }
 
           d3.select(this).append('line')
-            .style('stroke-width', +DIMENSIONS.line.width)
             .attr('x1', x1)
             .attr('y1', -y1)
             .attr('x2', x2)
             .attr('y2', -y2)
-            .attr('class', `${type} field-lines field-theme`);
+            .classed(`${type} field-lines field-theme field-line-width`, true);
         };
 
         let drawText = (x, y, size, dir, text, type) => {
@@ -176,7 +184,7 @@ class Field {
             .attr('x', x)
             .attr('y', -y)
             .attr('transform', `rotate(${dir * 180},${x},${-y})`)
-            .attr('class', `${type} field-numbers field-theme`);
+            .classed(`${type} field-numbers field-theme`, true);
         };
 
         // Hash marks
@@ -237,7 +245,7 @@ class Field {
     this.svg.selectAll('.performer')
         .data(performers, d => drill.parseName(d))
       .enter().append('g')
-        .attr('class', 'performer')
+        .classed('performer', true)
         .attr('id', d => `performer_${drill.parseName(d)}`)
         .style('cursor', 'pointer')
         .on('click', p => this.select(p))

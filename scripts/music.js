@@ -3,8 +3,8 @@ class Music {
     this.load(season, show, part);
 
     // Add event listeners
-    document.getElementById('music-button-prev').addEventListener('click', () => this.prevPage());
-    document.getElementById('music-button-next').addEventListener('click', () => this.nextPage());
+    // document.getElementById('music-button-prev').addEventListener('click', () => this.prevPage());
+    // document.getElementById('music-button-next').addEventListener('click', () => this.nextPage());
   }
 
   load(season, show, part) {

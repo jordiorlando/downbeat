@@ -102,34 +102,32 @@
     </div>
   </nav>
 
-  <div class="container-fluid">
+  <div class="container-fluid p-0">
     <div class="tab-content" id="tab-content">
       <div class="tab-pane fade show active" id="drill" role="tabpanel" aria-labelledby="drill-tab">
-        <div class="field-container" id="drawing"></div>
-        <audio src="audio/click.wav" preload="auto" id="metronome">Get a better standards-compliant browser!</audio>
+        <audio src="audio/click.wav" preload="auto" class="d-none" id="metronome">Get a better standards-compliant browser!</audio>
       </div>
       <div class="tab-pane fade" id="music" role="tabpanel" aria-labelledby="music-tab">
+        <canvas class="border border-secondary" id="pdf"></canvas>
         <h2 id="music-title">Title</h2>
-        <!-- <br>
-        <span class="mdl-card__subtitle-text" id="music-part">Part</span> -->
-        <div class="music-card">
-          <canvas id="pdf"></canvas>
-          <div>
-            <button class="mdl-button mdl-js-button mdl-button--icon" id="music-button-prev">
-              <i class="material-icons">keyboard_arrow_left</i>
-            </button>
-            <span><span id="music-page-num"></span> / <span id="music-page-count"></span></span>
-            <button class="mdl-button mdl-js-button mdl-button--icon" id="music-button-next">
-              <i class="material-icons">keyboard_arrow_right</i>
-            </button>
+        <!-- <span class="mdl-card__subtitle-text" id="music-part">Part</span> -->
+        <span><span id="music-page-num"></span> / <span id="music-page-count"></span></span>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="music-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select music
+          </button>
+          <div class="dropdown-menu" aria-labelledby="music-menu-button" id="music-menu">
+            <h6 class="dropdown-header">Music</h6>
           </div>
+        </div>
+        <!-- <div class="music-card">
           <div class="mdl-card__menu">
             <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="music-menu-button">
               <i class="material-icons">more_horiz</i>
             </button>
             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="music-menu-button" id="music-menu"></ul>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="tab-pane fade" id="tools" role="tabpanel" aria-labelledby="tools-tab">
         <h2 class="mdl-card__title-text" id="tools-title">Tuner</h2>

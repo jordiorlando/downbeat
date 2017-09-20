@@ -1,12 +1,67 @@
 var shows, data, drill, music;
 var devMode = true;
-var drillElem = document.getElementById('drill');
-var musicElem = document.getElementById('music');
 
-var drillMenuElement = document.getElementById('drill-menu');
-var musicMenuElement = document.getElementById('music-menu');
+var elements = {
+  pane: {},
+  button: {},
+  checkbox: {},
+  radio: {},
+  menu: {}
+};
 
-var load = function(season, show, part) {
+for (let tab of ['drill', 'music']) {
+  elements.pane[tab] = document.getElementById(tab);
+  elements.menu[tab] = document.getElementById(`${tab}-menu`);
+}
+
+for (let button of ['volume', 'prev', 'playpause', 'next']) {
+  elements.button[button] = document.getElementById(`button-${button}`);
+  elements.button[button].addEventListener('click', () => action(button));
+}
+
+document.addEventListener('keydown', function(e) {
+  switch (e.key) {
+    case 'ArrowLeft':
+      action('prev');
+      break;
+    case ' ':
+      e.preventDefault();
+      action('playpause');
+      break;
+    case 'ArrowRight':
+      action('next');
+      break;
+  }
+}, false);
+
+
+
+function action(a) {
+  if (elements.pane.drill.classList.contains('active')) {
+    switch (a) {
+      case 'prev':
+        drill.prevSet();
+        break;
+      case 'playpause':
+        drill.playPause();
+        break;
+      case 'next':
+        drill.nextSet();
+        break;
+    }
+  } else if (elements.pane.music.classList.contains('active')) {
+    switch (a) {
+      case 'prev':
+        music.prevPage();
+        break;
+      case 'next':
+        music.nextPage();
+        break;
+    }
+  }
+}
+
+function load(season, show, part) {
   d3.json(`data/${devMode ? 'dev' : 'data'}.json`, d => {
     data = d;
 
@@ -22,7 +77,7 @@ var load = function(season, show, part) {
               menuItem.classList.add('dropdown-item');
               menuItem.setAttribute('disabled', 'disabled');
               menuItem.innerText = j;
-              drillMenuElement.appendChild(menuItem);
+              elements.menu.drill.appendChild(menuItem);
 
               hasDrill = true;
             }
@@ -33,30 +88,26 @@ var load = function(season, show, part) {
             menuItem.addEventListener('click', () => {
               drill.load(i, j, k);
             });
-            drillMenuElement.appendChild(menuItem);
+            elements.menu.drill.appendChild(menuItem);
           }
           if (data[i][j][k].music.length) {
             if (!hasMusic) {
-              if (musicMenuElement.lastChild) {
-                musicMenuElement.lastChild.classList.add('mdl-menu__item--full-bleed-divider');
-              }
-
-              let menuItem = document.createElement('li');
-              menuItem.classList.add('mdl-menu__item');
+              let menuItem = document.createElement('a');
+              menuItem.classList.add('dropdown-item');
               menuItem.setAttribute('disabled', 'disabled');
               menuItem.innerText = j;
-              musicMenuElement.appendChild(menuItem);
+              elements.menu.music.appendChild(menuItem);
 
               hasMusic = true;
             }
 
             let menuItem = document.createElement('li');
-            menuItem.classList.add('mdl-menu__item');
+            menuItem.classList.add('dropdown-item');
             menuItem.innerText = k;
             menuItem.addEventListener('click', () => {
               music.load(i, j, k);
             });
-            musicMenuElement.appendChild(menuItem);
+            elements.menu.music.appendChild(menuItem);
           }
 
           if (i === season && j === show && k === part) {
@@ -68,32 +119,6 @@ var load = function(season, show, part) {
     }
   });
 }
-
-document.addEventListener('keydown', function(e) {
-  if (drillElem.classList.contains('active')) {
-    switch (e.key) {
-      case ' ':
-        e.preventDefault();
-        drill.playPause();
-        break;
-      case 'ArrowLeft':
-        drill.prevSet();
-        break;
-      case 'ArrowRight':
-        drill.nextSet();
-        break;
-    }
-  } else if (musicElem.classList.contains('active')) {
-    switch (e.key) {
-      case 'ArrowLeft':
-        music.prevPage();
-        break;
-      case 'ArrowRight':
-        music.nextPage();
-        break;
-    }
-  }
-}, false);
 
 
 

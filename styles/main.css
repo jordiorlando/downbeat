@@ -7,10 +7,6 @@ body {
   /*background-color: #eee;*/
 }
 
-#metronome {
-  display: none;
-}
-
 /* this part adds an icon after external links, using FontAwesome*/
 /* a[href^="http://"]:after, a[href^="https://"]:after {
     content: "\f08e";
@@ -49,11 +45,13 @@ svg {
   line-height: 1;
 }
 
-canvas {
-  border: 1px solid black;
+.zmdi-play {
+  width: 8px;
 }
 
-
+.field-line-width {
+  stroke-width: 0.333333;
+}
 .field-turf.field-theme-bw {
   fill: #fff;
   stroke: #000;
@@ -69,6 +67,17 @@ canvas {
 }
 .field-endzone.field-theme-color {
   fill: #e04e39;
+  stroke: #fff;
+}
+
+.field-zero-lines {
+  stroke-width: 0.2;
+  opacity: 0.8;
+}
+.field-zeros.field-theme-bw {
+  stroke: #000;
+}
+.field-zeros.field-theme-color {
   stroke: #fff;
 }
 

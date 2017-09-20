@@ -1,22 +1,8 @@
 class Drill {
   constructor(season, show, part) {
-    this.field = new Field('drawing', 'd3');
+    this.field = new Field('drill', 'd3');
 
     this.load(season, show, part);
-
-    // Add event listeners
-    this.elements = {
-      button: {},
-      checkbox: {},
-      radio: {}
-    };
-    for (let button of ['volume', 'prev', 'playpause', 'next']) {
-      this.elements.button[button] = document.getElementById(`button-${button}`);
-    }
-    this.elements.button.volume.addEventListener('click', () => this.muteUnmute());
-    this.elements.button.prev.addEventListener('click', () => this.prevSet());
-    this.elements.button.playpause.addEventListener('click', () => this.playPause());
-    this.elements.button.next.addEventListener('click', () => this.nextSet());
 
     for (let marking of ['highschool', 'college', 'pro']) {
       let checkbox = document.getElementById(`checkbox-${marking}`);
@@ -256,12 +242,12 @@ class Drill {
   }
 
   mute() {
-    this.elements.button.volume.children[0].classList.replace('zmdi-volume-up', 'zmdi-volume-off');
+    elements.button.volume.children[0].classList.replace('zmdi-volume-up', 'zmdi-volume-off');
     this.muted = true;
   }
 
   unmute() {
-    this.elements.button.volume.children[0].classList.replace('zmdi-volume-off', 'zmdi-volume-up');
+    elements.button.volume.children[0].classList.replace('zmdi-volume-off', 'zmdi-volume-up');
     this.muted = false;
   }
 
@@ -275,7 +261,7 @@ class Drill {
 
   // Start playing until the specified count
   play(end = this.total) {
-    this.elements.button.playpause.children[0].classList.replace('zmdi-play', 'zmdi-pause');
+    elements.button.playpause.children[0].classList.replace('zmdi-play', 'zmdi-pause');
 
     if (this.state.total < this.total) {
       this.playing = true;
@@ -304,7 +290,7 @@ class Drill {
 
   // Pause playing
   pause() {
-    this.elements.button.playpause.children[0].classList.replace('zmdi-pause', 'zmdi-play');
+    elements.button.playpause.children[0].classList.replace('zmdi-pause', 'zmdi-play');
 
     this.playing = false;
     clearTimeout(this.timeoutID);
