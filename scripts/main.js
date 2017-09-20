@@ -6,9 +6,12 @@ var elements = {
   button: {},
   checkbox: {},
   radio: {},
-  menu: {}
+  menu: {},
+  status: {},
+  metronome: document.getElementById('metronome')
 };
 
+// TODO: use jquery
 for (let tab of ['drill', 'music']) {
   elements.pane[tab] = document.getElementById(tab);
   elements.menu[tab] = document.getElementById(`${tab}-menu`);
@@ -17,6 +20,10 @@ for (let tab of ['drill', 'music']) {
 for (let button of ['volume', 'prev', 'playpause', 'next']) {
   elements.button[button] = document.getElementById(`button-${button}`);
   elements.button[button].addEventListener('click', () => action(button));
+}
+
+for (let status = 1; status <= 4; status++) {
+
 }
 
 document.addEventListener('keydown', function(e) {
@@ -34,11 +41,18 @@ document.addEventListener('keydown', function(e) {
   }
 }, false);
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 
 
 function action(a) {
   if (elements.pane.drill.classList.contains('active')) {
     switch (a) {
+      case 'volume':
+        drill.muteUnmute();
+        break;
       case 'prev':
         drill.prevSet();
         break;

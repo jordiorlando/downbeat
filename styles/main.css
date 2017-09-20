@@ -3,7 +3,7 @@ body {
   /*margin: 0;*/
   /*width: 100%;*/
   /*height: 100%;*/
-  /*overflow: hidden;*/
+  overflow: hidden;
   /*background-color: #eee;*/
 }
 
@@ -45,9 +45,12 @@ svg {
   line-height: 1;
 }
 
-.zmdi-play {
-  width: 8px;
+.zmdi {
+  width: 16px;
 }
+/* .zmdi-play {
+  width: 8px;
+} */
 
 .field-line-width {
   stroke-width: 0.333333;

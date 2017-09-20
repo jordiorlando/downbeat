@@ -66,7 +66,7 @@ class Field {
       .attr("width", "100%")
       .attr("height", "100%")
       .attr('viewBox', this.viewbox.join(' ').replace(/\,/g, ' '))
-      .call(d3.zoom().extent(this.viewbox).scaleExtent([1, 4]).translateExtent(this.viewbox).on("zoom", () => this.svg.attr("transform", d3.event.transform)))
+      .call(d3.zoom().extent(this.viewbox).scaleExtent([1, 8]).translateExtent(this.viewbox).on("zoom", () => this.svg.attr("transform", d3.event.transform)))
       .append('g');
     // .on("wheel.zoom", null);
 

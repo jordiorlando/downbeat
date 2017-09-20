@@ -243,11 +243,15 @@ class Drill {
 
   mute() {
     elements.button.volume.children[0].classList.replace('zmdi-volume-up', 'zmdi-volume-off');
+    // TODO: change tooltip title
+    // elements.button.volume.setAttribute('title', 'Unmute');
     this.muted = true;
   }
 
   unmute() {
     elements.button.volume.children[0].classList.replace('zmdi-volume-off', 'zmdi-volume-up');
+    // TODO: change tooltip title
+    // elements.button.volume.setAttribute('title', 'Mute');
     this.muted = false;
   }
 
@@ -268,7 +272,7 @@ class Drill {
 
       let func = () => {
         if (!this.muted) {
-          document.getElementById('metronome').play();
+          elements.metronome.play();
         }
         this.nextCount();
 
@@ -316,7 +320,8 @@ class Drill {
     let c = this.state.count;
 
     document.getElementById('status-set').textContent = s + 1;
-    document.getElementById('status-count').textContent = `${c} / ${this.state.counts}`;
+    document.getElementById('status-count').children[0].textContent = this.playing ? 'Count' : 'Counts';
+    document.getElementById('status-count').children[1].textContent = this.playing ? `${c} / ${this.state.counts}` : this.state.counts;
 
     let performer = document.getElementById('status-performer');
     let position = document.getElementById('status-position');

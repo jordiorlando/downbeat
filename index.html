@@ -47,17 +47,7 @@
       </div> -->
     </div>
 
-    <div class="d-flex justify-content-around">
-      <!-- <span class="navbar-text mb-0 h3"></span> -->
-      <div class="dropdown">
-        <a class="nav-link navbar-text mb-0 h3" href="#" role="button" id="title" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Select show
-        </a>
-        <div class="dropdown-menu" aria-labelledby="title" id="drill-menu">
-          <h6 class="dropdown-header">Drill</h6>
-        </div>
-      </div>
-    </div>
+    <span class="navbar-text mb-0 h3" id="title"></span>
 
     <div class="d-flex justify-content-around justify-content-lg-end justify-content-xl-end flex-wrap navbar-text w-100">
       <div class="px-3 d-none flex-column align-items-center" id="status-performer">
@@ -78,27 +68,17 @@
         <span>Set</span>
         <span id="status-set">1</span>
       </div>
-      <div class="px-3 d-flex flex-column align-items-center">
-        <span>Counts</span>
-        <span id="status-count">0</span>
+      <div class="px-3 d-flex flex-column align-items-center" id="status-count">
+        <span></span>
+        <span></span>
       </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary" id="button-volume"><i class="zmdi zmdi-volume-up"></i></button>
-        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-          <h6 class="dropdown-header">Audio settings</h6>
-          <button class="dropdown-item disabled" type="button">MIDI + met</button>
-          <button class="dropdown-item disabled" type="button">MIDI only</button>
-          <button class="dropdown-item" type="button">Met only</button>
-        </div>
-      </div>
+      <button type="button" class="btn btn-dark" id="button-volume" data-toggle="tooltip" data-placement="bottom" title="Mute/Unmute"><i class="zmdi zmdi-volume-up"></i></button>
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" id="button-prev"><i class="zmdi zmdi-skip-previous"></i></button>
-        <button type="button" class="btn btn-secondary" id="button-playpause"><i class="zmdi zmdi-play"></i></button>
-        <button type="button" class="btn btn-secondary" id="button-next"><i class="zmdi zmdi-skip-next"></i></button>
+        <button type="button" class="btn btn-dark" id="button-prev" data-toggle="tooltip" data-placement="bottom" title="Previous"><i class="zmdi zmdi-skip-previous"></i></button>
+        <button type="button" class="btn btn-dark" id="button-playpause" data-toggle="tooltip" data-placement="bottom" title="Play/Pause"><i class="zmdi zmdi-play"></i></button>
+        <button type="button" class="btn btn-dark" id="button-next" data-toggle="tooltip" data-placement="bottom" title="Next"><i class="zmdi zmdi-skip-next"></i></button>
       </div>
+      <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#load-modal"><i class="zmdi zmdi-folder"></i></button>
     </div>
   </nav>
 
@@ -112,14 +92,6 @@
         <h2 id="music-title">Title</h2>
         <!-- <span class="mdl-card__subtitle-text" id="music-part">Part</span> -->
         <span><span id="music-page-num"></span> / <span id="music-page-count"></span></span>
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="music-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Select music
-          </button>
-          <div class="dropdown-menu" aria-labelledby="music-menu-button" id="music-menu">
-            <h6 class="dropdown-header">Music</h6>
-          </div>
-        </div>
         <!-- <div class="music-card">
           <div class="mdl-card__menu">
             <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="music-menu-button">
@@ -141,7 +113,7 @@
         </div>
       </div>
       <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-        <h3>Coordinate Rounding</h3>
+        <h3>Coordinate rounding</h3>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-secondary active" id="checkbox-accuracy-2">
             <input type="checkbox" checked autocomplete="off"> 1/2
@@ -159,7 +131,7 @@
             <input type="checkbox" autocomplete="off"> 1/10
           </label>
         </div>
-        <h3>Field Markings</h3>
+        <h3>Field markings</h3>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-secondary" id="checkbox-highschool">
             <input type="checkbox" autocomplete="off"> High School
@@ -171,7 +143,7 @@
             <input type="checkbox" autocomplete="off"> Pro
           </label>
         </div>
-        <h3>Field Theme</h3>
+        <h3>Field theme</h3>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-secondary active" id="radio-bw">
             <input type="radio" name="options" autocomplete="off" checked> Black/White
@@ -179,6 +151,64 @@
           <label class="btn btn-secondary" id="radio-color">
             <input type="radio" name="options" autocomplete="off"> Color
           </label>
+        </div>
+        <h3>Audio settings</h3>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-secondary active" id="radio-audio-midimet">
+            <input type="radio" name="options" autocomplete="off" checked> MIDI + met
+          </label>
+          <label class="btn btn-secondary" id="radio-audio-midi">
+            <input type="radio" name="options" autocomplete="off"> MIDI only
+          </label>
+          <label class="btn btn-secondary" id="radio-audio-met">
+            <input type="radio" name="options" autocomplete="off"> Met only
+          </label>
+        </div>
+        <!-- <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <h6 class="dropdown-header">Audio settings</h6>
+            <button class="dropdown-item disabled" type="button">MIDI + met</button>
+            <button class="dropdown-item disabled" type="button">MIDI only</button>
+            <button class="dropdown-item" type="button">Met only</button>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="load-modal" tabindex="-1" role="dialog" aria-labelledby="load-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="load-modal-label">Load show</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="drill-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select drill
+            </button>
+            <div class="dropdown-menu" aria-labelledby="drill-menu-button" id="drill-menu">
+              <h6 class="dropdown-header">Drill</h6>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="music-menu-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select music
+            </button>
+            <div class="dropdown-menu" aria-labelledby="music-menu-button" id="music-menu">
+              <h6 class="dropdown-header">Music</h6>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Load show</button>
         </div>
       </div>
     </div>
