@@ -73,15 +73,32 @@ svg {
   stroke: #fff;
 }
 
-.field-zero-lines {
-  stroke-width: 0.2;
-  opacity: 0.8;
+.field-step-lines {
+  stroke-width: 0.1;
+  opacity: 0.1;
 }
-.field-zeros.field-theme-bw {
+.field-step-lines.field-theme-bw {
   stroke: #000;
 }
-.field-zeros.field-theme-color {
+.field-step-lines.field-theme-color {
   stroke: #fff;
+}
+
+.field-zero-lines {
+  stroke-width: 0.2;
+  opacity: 0.5;
+}
+.field-zero-lines.field-theme-bw {
+  stroke: #000;
+}
+.field-zero-lines.field-theme-color {
+  stroke: #fff;
+}
+.field-zero-points.field-theme-bw {
+  fill: #000;
+}
+.field-zero-points.field-theme-color {
+  fill: #00f;
 }
 
 .field-lines.field-theme-bw {

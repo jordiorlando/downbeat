@@ -40,14 +40,10 @@
           <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">Settings</a>
         </li>
       </ul>
-      <!-- <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="#drill">Drill <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="#music">Music</a>
-        <a class="nav-item nav-link" href="#tools">Tools</a>
-      </div> -->
+      <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#load-modal"><i class="zmdi zmdi-folder"></i></button>
     </div>
 
-    <span class="navbar-text mb-0 h3" id="title"></span>
+    <span class="navbar-text mb-0 h4" id="title"></span>
 
     <div class="d-flex justify-content-around justify-content-lg-end justify-content-xl-end flex-wrap navbar-text w-100">
       <div class="px-3 d-none flex-column align-items-center" id="status-performer">
@@ -78,7 +74,6 @@
         <button type="button" class="btn btn-dark" id="button-playpause" data-toggle="tooltip" data-placement="bottom" title="Play/Pause"><i class="zmdi zmdi-play"></i></button>
         <button type="button" class="btn btn-dark" id="button-next" data-toggle="tooltip" data-placement="bottom" title="Next"><i class="zmdi zmdi-skip-next"></i></button>
       </div>
-      <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#load-modal"><i class="zmdi zmdi-folder"></i></button>
     </div>
   </nav>
 
@@ -133,22 +128,25 @@
         </div>
         <h3>Field markings</h3>
         <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-secondary" id="checkbox-highschool">
-            <input type="checkbox" autocomplete="off"> High School
+          <label class="btn btn-secondary active" id="checkbox-markings-grid">
+            <input type="checkbox" checked autocomplete="off"> Grid
           </label>
-          <label class="btn btn-secondary active" id="checkbox-college">
+          <label class="btn btn-secondary" id="checkbox-markings-highschool">
+            <input type="checkbox" autocomplete="off"> High school
+          </label>
+          <label class="btn btn-secondary active" id="checkbox-markings-college">
             <input type="checkbox" checked autocomplete="off"> College
           </label>
-          <label class="btn btn-secondary" id="checkbox-pro">
+          <label class="btn btn-secondary" id="checkbox-markings-pro">
             <input type="checkbox" autocomplete="off"> Pro
           </label>
         </div>
         <h3>Field theme</h3>
         <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-secondary active" id="radio-bw">
+          <label class="btn btn-secondary active" id="radio-theme-bw">
             <input type="radio" name="options" autocomplete="off" checked> Black/White
           </label>
-          <label class="btn btn-secondary" id="radio-color">
+          <label class="btn btn-secondary" id="radio-theme-color">
             <input type="radio" name="options" autocomplete="off"> Color
           </label>
         </div>

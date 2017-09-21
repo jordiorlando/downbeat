@@ -1,22 +1,6 @@
 class Drill {
   constructor(season, show, part) {
-    this.field = new Field('drill', 'd3');
-
     this.load(season, show, part);
-
-    for (let marking of ['highschool', 'college', 'pro']) {
-      let checkbox = document.getElementById(`checkbox-${marking}`);
-      this.field.markings(marking, checkbox.classList.contains('active'));
-      checkbox.addEventListener('click', e => drill.field.markings(marking, !e.target.classList.contains('active')));
-    }
-
-    for (let theme of ['bw', 'color']) {
-      let radio = document.getElementById(`radio-${theme}`);
-      if (radio.classList.contains('active')) {
-        this.field.theme(theme);
-      }
-      radio.addEventListener('click', e => drill.field.theme(theme, !e.target.classList.contains('active')));
-    }
   }
 
   load(season, show, part) {
@@ -123,7 +107,7 @@ class Drill {
         this.total += s.counts;
       }
 
-      this.field.load(this.performers);
+      field.load(this.performers);
 
       this.move();
       // selectByName(this.parseName(drill.performers[0]));
@@ -158,7 +142,7 @@ class Drill {
   select(name) {
     for (let p of drill.performers) {
       if (this.parseName(p).toUpperCase() === name.toUpperCase()) {
-        this.field.select(p);
+        field.select(p);
         return p;
       }
     }
@@ -177,7 +161,7 @@ class Drill {
       return `translate(${xScale(x)},${yScale(y)})`;
     };
 
-    this.field.svg.selectAll('.performer').attr('transform', translate);
+    field.svg.selectAll('.performer').attr('transform', translate);
   }
 
   // Go to the next count
@@ -315,7 +299,7 @@ class Drill {
   }
 
   refresh() {
-    let p = this.field.selected;
+    let p = field.selected;
     let s = this.state.set;
     let c = this.state.count;
 
@@ -339,7 +323,7 @@ class Drill {
         performer.children[1].children[1].textContent = p.sets[s][subset.subset].type;
       }
       performer.classList.replace('d-none', 'd-flex');
-      console.log(p.sets[s])
+      // console.log(p.sets[s])
       position.children[0].textContent = this.parseHoriz(p, s, c);
       position.children[1].textContent = this.parseVert(p, s, c);
       position.classList.replace('d-none', 'd-flex');

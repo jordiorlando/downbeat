@@ -66,7 +66,7 @@ class Field {
       .attr("width", "100%")
       .attr("height", "100%")
       .attr('viewBox', this.viewbox.join(' ').replace(/\,/g, ' '))
-      .call(d3.zoom().extent(this.viewbox).scaleExtent([1, 8]).translateExtent(this.viewbox).on("zoom", () => this.svg.attr("transform", d3.event.transform)))
+      .call(d3.zoom().extent(this.viewbox).scaleExtent([1, 10]).translateExtent(this.viewbox).on("zoom", () => this.svg.attr("transform", d3.event.transform)))
       .append('g');
     // .on("wheel.zoom", null);
 
@@ -81,16 +81,6 @@ class Field {
       .attr('width', DIMENSIONS.width)
       .attr('height', DIMENSIONS.height)
       .classed('field-turf field-theme field-line-width', true);
-
-    // Zero points
-    for (let z = 15; z < 160; z += 15) {
-      this.svg.append('line')
-        .attr('x1', -DIMENSIONS.width / 2)
-        .attr('y1', -z)
-        .attr('x2', DIMENSIONS.width / 2)
-        .attr('y2', -z)
-        .classed('field-zeros field-zero-lines field-theme', true);
-    }
 
     // End zones
     let endzones = [-DIMENSIONS.width / 2 + 15, DIMENSIONS.width / 2 - 15];
@@ -127,7 +117,7 @@ class Field {
             .attr('x2', h)
             .attr('y2', -(y + DIMENSIONS.line.length / 2))
             .attr('transform', `rotate(${r},${h},${-y})`)
-            .classed(`${type} field-lines field-theme field-line-width`, true);
+            .classed(`field-${type} field-lines field-theme field-line-width`, true);
         }
       }
     }
@@ -171,7 +161,7 @@ class Field {
             .attr('y1', -y1)
             .attr('x2', x2)
             .attr('y2', -y2)
-            .classed(`${type} field-lines field-theme field-line-width`, true);
+            .classed(`field-${type} field-lines field-theme field-line-width`, true);
         };
 
         let drawText = (x, y, size, dir, text, type) => {
@@ -184,7 +174,7 @@ class Field {
             .attr('x', x)
             .attr('y', -y)
             .attr('transform', `rotate(${dir * 180},${x},${-y})`)
-            .classed(`${type} field-numbers field-theme`, true);
+            .classed(`field-${type} field-numbers field-theme`, true);
         };
 
         // Hash marks
@@ -231,6 +221,47 @@ class Field {
         }
       })
       .exit().remove();
+
+    // Step grid
+    for (let y = 1; y < 85.3; y++) {
+      if (y % 8) {
+        this.svg.append('line')
+          .attr('x1', -DIMENSIONS.width / 2 + 30)
+          .attr('y1', -y * 1.875)
+          .attr('x2', DIMENSIONS.width / 2 - 30)
+          .attr('y2', -y * 1.875)
+          .classed('field-grid field-step-lines field-theme', true);
+      }
+    }
+    for (let x = -79; x < 80; x++) {
+      if (x % 8) {
+        this.svg.append('line')
+          .attr('x1', x * 1.875)
+          .attr('y1', 0)
+          .attr('x2', x * 1.875)
+          .attr('y2', -DIMENSIONS.height)
+          .classed('field-grid field-step-lines field-theme', true);
+      }
+    }
+
+    // Zero grid
+    for (let y = 15; y < 160; y += 15) {
+      this.svg.append('line')
+        .attr('x1', -DIMENSIONS.width / 2 + 30)
+        .attr('y1', -y)
+        .attr('x2', DIMENSIONS.width / 2 - 30)
+        .attr('y2', -y)
+        .classed('field-grid field-zero-lines field-theme', true);
+      if (y !== DIMENSIONS.hashes.front.college) {
+        for (let x = -DIMENSIONS.width / 2 + 30; x <= DIMENSIONS.width / 2 - 30; x += 15) {
+          this.svg.append('circle')
+            .attr('r', 0.125)
+            .attr('cx', x)
+            .attr('cy', -y)
+            .classed('field-grid field-zero-points field-theme', true);
+        }
+      }
+    }
   }
 
   // Draw all performers
@@ -300,7 +331,7 @@ class Field {
         this.markings(type, markings[type]);
       }
     } else {
-      this.svg.selectAll(`.${markings}`).classed('d-none', !show);
+      this.svg.selectAll(`.field-${markings}`).classed('d-none', !show);
     }
   }
 

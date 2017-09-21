@@ -1,3 +1,4 @@
+var field = new Field('drill', 'd3');
 var shows, data, drill, music;
 var devMode = true;
 
@@ -20,6 +21,20 @@ for (let tab of ['drill', 'music']) {
 for (let button of ['volume', 'prev', 'playpause', 'next']) {
   elements.button[button] = document.getElementById(`button-${button}`);
   elements.button[button].addEventListener('click', () => action(button));
+}
+
+for (let markings of ['grid', 'highschool', 'college', 'pro']) {
+  elements.checkbox[markings] = document.getElementById(`checkbox-markings-${markings}`);
+  field.markings(markings, elements.checkbox[markings].classList.contains('active'));
+  elements.checkbox[markings].addEventListener('click', e => field.markings(markings, !e.target.classList.contains('active')));
+}
+
+for (let theme of ['bw', 'color']) {
+  elements.radio[theme] = document.getElementById(`radio-theme-${theme}`);
+  if (elements.radio[theme].classList.contains('active')) {
+    field.theme(theme);
+  }
+  elements.radio[theme].addEventListener('click', e => field.theme(theme, !e.target.classList.contains('active')));
 }
 
 for (let status = 1; status <= 4; status++) {
