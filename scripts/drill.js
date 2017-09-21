@@ -323,9 +323,10 @@ class Drill {
         performer.children[1].children[1].textContent = p.sets[s][subset.subset].type;
       }
       performer.classList.replace('d-none', 'd-flex');
-      // console.log(p.sets[s])
-      position.children[0].textContent = this.parseHoriz(p, s, c);
-      position.children[1].textContent = this.parseVert(p, s, c);
+
+      let pos = this.parsePos(p, s, c);
+      position.children[0].textContent = pos.horiz[0];
+      position.children[1].textContent = pos.vert[0];
       position.classList.replace('d-none', 'd-flex');
     } else {
       performer.classList.replace('d-flex', 'd-none');
@@ -337,7 +338,7 @@ class Drill {
     return p.squad === undefined ? p.type + p.num : p.squad + p.position;
   }
 
-  parseHoriz(p, s, c) {
+  parsePos(p, s, c) {
     let {x, y} = this.position(p, s, c);
     let horiz = x.equals(0) ? '' : (x < 0 ? 'Side 1: ' : 'Side 2: ');
 
@@ -356,11 +357,6 @@ class Drill {
       horiz += yard.equals(0) ? 'On goal line' : `On ${yard} yd line`;
     }
 
-    return p.sets[s].horiz || horiz;
-  }
-
-  parseVert(p, s, c) {
-    let {x, y} = this.position(p, s, c);
     let vert;
 
     // TODO: make "steps" singular when offset <= 1
@@ -386,6 +382,9 @@ class Drill {
       vert = 'On Visitor side line';
     }
 
-    return p.sets[s].vert || vert;
+    return {
+      horiz: [p.sets[s].horiz || horiz],
+      vert: [p.sets[s].vert || vert]
+    };
   }
 }
