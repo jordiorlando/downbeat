@@ -75,41 +75,41 @@ svg {
 
 .field-step-lines {
   stroke-width: 0.1;
-  opacity: 0.1;
 }
-.field-step-lines.field-theme-bw {
-  stroke: #000;
-}
-.field-step-lines.field-theme-color {
-  stroke: #fff;
-}
-
 .field-zero-lines {
-  stroke-width: 0.2;
-  opacity: 0.5;
-}
-.field-zero-lines.field-theme-bw {
-  stroke: #000;
-}
-.field-zero-lines.field-theme-color {
-  stroke: #fff;
-}
-.field-zero-points.field-theme-bw {
-  fill: #000;
-}
-.field-zero-points.field-theme-color {
-  fill: #00f;
+  stroke-width: 0.125;
 }
 
 .field-lines.field-theme-bw {
   stroke: #000;
 }
+.field-step-lines.field-theme-bw {
+  stroke: #000;
+  opacity: 0.1;
+}
+.field-zero-lines.field-theme-bw {
+  stroke: #000;
+  opacity: 0.2;
+}
+.field-zero-points.field-theme-bw,
+.field-numbers.field-theme-bw {
+  fill: #000;
+}
+
 .field-lines.field-theme-color {
   stroke: #fff;
 }
-
-.field-numbers.field-theme-bw {
-  fill: #000;
+.field-step-lines.field-theme-color {
+  stroke: #fff;
+  opacity: 0.2;
+}
+.field-zero-lines.field-theme-color {
+  stroke: #fff;
+  opacity: 0.4;
+}
+.field-zero-points.field-theme-color {
+  fill: #00f;
+  opacity: 0.6;
 }
 .field-numbers.field-theme-color {
   fill: #fff;

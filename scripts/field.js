@@ -122,6 +122,38 @@ class Field {
       }
     }
 
+    // Step grid
+    for (let y = 1; y < 85.3; y++) {
+      if (y % 8) {
+        this.svg.append('line')
+          .attr('x1', -DIMENSIONS.width / 2 + 30)
+          .attr('y1', -y * 1.875)
+          .attr('x2', DIMENSIONS.width / 2 - 30)
+          .attr('y2', -y * 1.875)
+          .classed('field-grid field-step-lines field-theme', true);
+      }
+    }
+    for (let x = -79; x < 80; x++) {
+      if (x % 8) {
+        this.svg.append('line')
+          .attr('x1', x * 1.875)
+          .attr('y1', 0)
+          .attr('x2', x * 1.875)
+          .attr('y2', -DIMENSIONS.height)
+          .classed('field-grid field-step-lines field-theme', true);
+      }
+    }
+
+    // Zero grid
+    for (let y = 15; y < 160; y += 15) {
+      this.svg.append('line')
+        .attr('x1', -DIMENSIONS.width / 2 + 30)
+        .attr('y1', -y)
+        .attr('x2', DIMENSIONS.width / 2 - 30)
+        .attr('y2', -y)
+        .classed('field-grid field-zero-lines field-theme', true);
+    }
+
     // Yard lines
     let yardlines = [];
     for (let i = -50; i <= 50; i += 5) {
@@ -222,36 +254,8 @@ class Field {
       })
       .exit().remove();
 
-    // Step grid
-    for (let y = 1; y < 85.3; y++) {
-      if (y % 8) {
-        this.svg.append('line')
-          .attr('x1', -DIMENSIONS.width / 2 + 30)
-          .attr('y1', -y * 1.875)
-          .attr('x2', DIMENSIONS.width / 2 - 30)
-          .attr('y2', -y * 1.875)
-          .classed('field-grid field-step-lines field-theme', true);
-      }
-    }
-    for (let x = -79; x < 80; x++) {
-      if (x % 8) {
-        this.svg.append('line')
-          .attr('x1', x * 1.875)
-          .attr('y1', 0)
-          .attr('x2', x * 1.875)
-          .attr('y2', -DIMENSIONS.height)
-          .classed('field-grid field-step-lines field-theme', true);
-      }
-    }
-
-    // Zero grid
+    // Zero points
     for (let y = 15; y < 160; y += 15) {
-      this.svg.append('line')
-        .attr('x1', -DIMENSIONS.width / 2 + 30)
-        .attr('y1', -y)
-        .attr('x2', DIMENSIONS.width / 2 - 30)
-        .attr('y2', -y)
-        .classed('field-grid field-zero-lines field-theme', true);
       if (y !== DIMENSIONS.hashes.front.college) {
         for (let x = -DIMENSIONS.width / 2 + 30; x <= DIMENSIONS.width / 2 - 30; x += 15) {
           this.svg.append('circle')
