@@ -68,7 +68,7 @@ var parseVert = function(str) {
   return pos + offset;
 };
 
-PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
+PDFJS.workerSrc = '../node_modules/pdfjs-dist/build/pdf.worker.min.js';
 PDFJS.getDocument('drill/' + drill.name + '.pdf').then(function(pdf) {
   let maxPages = pdf.numPages;
 
