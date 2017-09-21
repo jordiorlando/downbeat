@@ -34,17 +34,6 @@ const DIMENSIONS = {
   }
 };
 
-const COLORS = {
-  performer: {
-    fill:   '#fff',
-    stroke: '#13294b',
-    text:   '#13294b',
-    select: '#e04e39'
-  }
-};
-
-const MARCHER = 3.5;
-
 var xScale = d3.scaleLinear()
   .domain([-96, 96])
   .range([-DIMENSIONS.width / 2, DIMENSIONS.width / 2]);
@@ -66,7 +55,8 @@ class Field {
       .attr("width", "100%")
       .attr("height", "100%")
       .attr('viewBox', this.viewbox.join(' ').replace(/\,/g, ' '))
-      .call(d3.zoom().extent(this.viewbox).scaleExtent([1, 10]).translateExtent(this.viewbox).on("zoom", () => this.svg.attr("transform", d3.event.transform)))
+      .attr('preserveAspectRatio', 'xMidYMid meet')
+      .call(d3.zoom().extent(this.viewbox).scaleExtent([1, 20]).translateExtent(this.viewbox).on("zoom", () => this.svg.attr("transform", d3.event.transform)))
       .append('g');
     // .on("wheel.zoom", null);
 
@@ -80,7 +70,7 @@ class Field {
       .attr('y', -DIMENSIONS.height)
       .attr('width', DIMENSIONS.width)
       .attr('height', DIMENSIONS.height)
-      .classed('field-turf field-theme field-line-width', true);
+      .classed('field-turf field-line-width', true);
 
     // End zones
     let endzones = [-DIMENSIONS.width / 2 + 15, DIMENSIONS.width / 2 - 15];
@@ -91,7 +81,7 @@ class Field {
         .attr('y', -DIMENSIONS.height)
         .attr('width', 30)
         .attr('height', DIMENSIONS.height)
-        .classed('field-endzone field-theme field-line-width', true)
+        .classed('field-endzone field-line-width', true)
       .exit().remove();
 
     // 3-yard markers
@@ -101,7 +91,7 @@ class Field {
         .attr('y1', -(DIMENSIONS.height - DIMENSIONS.line.length) / 2)
         .attr('x2', h)
         .attr('y2', -(DIMENSIONS.height + DIMENSIONS.line.length) / 2)
-        .classed('field-lines field-theme field-line-width', true);
+        .classed('field-lines field-line-width', true);
     }
 
     // Tee markers
@@ -117,7 +107,7 @@ class Field {
             .attr('x2', h)
             .attr('y2', -(y + DIMENSIONS.line.length / 2))
             .attr('transform', `rotate(${r},${h},${-y})`)
-            .classed(`field-${type} field-lines field-theme field-line-width`, true);
+            .classed(`field-${type} field-lines field-line-width`, true);
         }
       }
     }
@@ -130,7 +120,7 @@ class Field {
           .attr('y1', -y * 1.875)
           .attr('x2', DIMENSIONS.width / 2 - 30)
           .attr('y2', -y * 1.875)
-          .classed('field-grid field-step-lines field-theme', true);
+          .classed('field-grid field-step-lines', true);
       }
     }
     for (let x = -79; x < 80; x++) {
@@ -140,7 +130,7 @@ class Field {
           .attr('y1', 0)
           .attr('x2', x * 1.875)
           .attr('y2', -DIMENSIONS.height)
-          .classed('field-grid field-step-lines field-theme', true);
+          .classed('field-grid field-step-lines', true);
       }
     }
 
@@ -151,7 +141,7 @@ class Field {
         .attr('y1', -y)
         .attr('x2', DIMENSIONS.width / 2 - 30)
         .attr('y2', -y)
-        .classed('field-grid field-zero-lines field-theme', true);
+        .classed('field-grid field-zero-lines', true);
     }
 
     // Yard lines
@@ -168,7 +158,7 @@ class Field {
         .attr('y1', 0)
         .attr('x2', 0)
         .attr('y2', -DIMENSIONS.height)
-        .classed('field-lines field-theme field-line-width', true)
+        .classed('field-lines field-line-width', true)
         .select(parent)
       .each(function(d, i) {
         let fifty = Math.floor(yardlines.length / 2);
@@ -193,7 +183,7 @@ class Field {
             .attr('y1', -y1)
             .attr('x2', x2)
             .attr('y2', -y2)
-            .classed(`field-${type} field-lines field-theme field-line-width`, true);
+            .classed(`field-${type} field-lines field-line-width`, true);
         };
 
         let drawText = (x, y, size, dir, text, type) => {
@@ -206,7 +196,7 @@ class Field {
             .attr('x', x)
             .attr('y', -y)
             .attr('transform', `rotate(${dir * 180},${x},${-y})`)
-            .classed(`field-${type} field-numbers field-theme`, true);
+            .classed(`field-${type} field-numbers`, true);
         };
 
         // Hash marks
@@ -262,7 +252,7 @@ class Field {
             .attr('r', 0.125)
             .attr('cx', x)
             .attr('cy', -y)
-            .classed('field-grid field-zero-points field-theme', true);
+            .classed('field-grid field-zero-points', true);
         }
       }
     }
@@ -274,31 +264,27 @@ class Field {
       p.selected = false;
     }
 
-    this.svg.selectAll('.performer').remove();
+    this.svg.selectAll('.field-performer').remove();
 
     // Performer icon
-    this.svg.selectAll('.performer')
+    this.svg.selectAll('.field-performer')
         .data(performers, d => drill.parseName(d))
       .enter().append('g')
-        .classed('performer', true)
         .attr('id', d => `performer_${drill.parseName(d)}`)
-        .style('cursor', 'pointer')
+        .classed('field-performer', true)
+        // .classed('selected', d => d.selected)
         .on('click', p => this.select(p))
       .append('circle')
-        .style('fill', d => COLORS.performer[d.selected ? 'select' : 'fill'])
-        .style('stroke', COLORS.performer.stroke)
-        .style('stroke-width', 0.25)
-        .attr('r', MARCHER / 2)
+        .attr('r', 1)
         .attr('cx', 0)
         .attr('cy', 0)
+        .classed('field-performer-circle', true)
         .select(parent)
       .append('text')
         .text(d => drill.parseName(d))
-        .style('fill', COLORS.performer.text)
-        .attr('font-family', 'Helvetica')
-        .attr('font-size', MARCHER / 2)
+        .attr('y', 0.4)
         .attr('text-anchor', 'middle')
-        .attr('y', MARCHER / 5)
+        .classed('field-performer-text', true)
         .select(parent)
       .exit().remove();
   }
@@ -314,12 +300,8 @@ class Field {
     if (p) {
       p.selected = !p.selected;
 
-      /* p.icon.first().fill({
-        color: COLORS.performer[p.selected ? 'select' : 'fill']
-      }); */
       this.svg.select(`#performer_${drill.parseName(p).replace('\\', '\\\\').replace('*', '\\*')}`)
-        .select('circle')
-        .style('fill', COLORS.performer[p.selected ? 'select' : 'fill']);
+        .classed('selected', p.selected);
 
       drill.refresh();
     }
@@ -341,7 +323,7 @@ class Field {
 
   theme(theme) {
     for (let t of ['bw', 'color']) {
-      this.svg.selectAll('.field-theme').classed(`field-theme-${t}`, theme === t);
+      this.svg.classed(`field-theme-${t}`, theme === t);
     }
   }
 }

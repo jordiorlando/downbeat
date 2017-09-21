@@ -161,7 +161,7 @@ class Drill {
       return `translate(${xScale(x)},${yScale(y)})`;
     };
 
-    field.svg.selectAll('.performer').attr('transform', translate);
+    field.svg.selectAll('.field-performer').attr('transform', translate);
   }
 
   // Go to the next count
