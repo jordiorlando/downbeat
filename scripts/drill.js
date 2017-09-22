@@ -321,32 +321,31 @@ class Drill {
         horiz += `Splitting ${yard} and ${yard + 5} yd lns`;
       } else {} */
 
-      horiz += `${offset.abs()} step${offset.abs() <= 1 ? '' : 's'} ${offset > 0 ? 'inside' : 'outside'} ${yard} yd line`;
+      horiz += `${offset.abs()} ${offset > 0 ? 'inside' : 'outside'} ${yard} yd line`;
     } else {
       horiz += yard.equals(0) ? 'On goal line' : `On ${yard} yd line`;
     }
 
     let vert;
 
-    // TODO: make "steps" singular when offset <= 1
     if (y === 0) {
       vert = 'On home side line';
     } else if (y <= 16) {
-      vert = `${y} steps behind home side line`;
+      vert = `${y} behind home side line`;
     } else if (y < 32) {
-      vert = `${y.subtract(32).negate()} steps in front of home hash`;
+      vert = `${y.subtract(32).negate()} in front of home hash`;
     } else if (y.equals(32)) {
       vert = 'On home hash';
     } else if (y <= new Fraction(42, 2, 3)) {
-      vert = `${y.subtract(32)} steps behind home hash`;
+      vert = `${y.subtract(32)} behind home hash`;
     } else if (y < new Fraction(53, 1, 3)) {
-      vert = `${y.subtract(53, 1, 3).negate()} steps in front of visitor hash`;
+      vert = `${y.subtract(53, 1, 3).negate()} in front of visitor hash`;
     } else if (y.equals(53, 1, 3)) {
       vert = 'On visitor hash';
     } else if (y < new Fraction(69, 1, 3)) {
-      vert = `${y.subtract(53, 1, 3)} steps behind visitor hash`;
+      vert = `${y.subtract(53, 1, 3)} behind visitor hash`;
     } else if (y < new Fraction(85, 1, 3)) {
-      vert = `${y.subtract(85, 1, 3).negate()} steps in front of visitor side line`;
+      vert = `${y.subtract(85, 1, 3).negate()} in front of visitor side line`;
     } else {
       vert = 'On visitor side line';
     }
