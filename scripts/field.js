@@ -189,12 +189,9 @@ class Field {
         let drawText = (x, y, size, dir, text, type) => {
           d3.select(this).append('text')
             .text(text)
-            .attr('font-family', 'Helvetica')
-            .attr('font-size', size)
-            .attr('line-height', 1)
-            .attr('text-anchor', 'middle')
             .attr('x', x)
             .attr('y', -y)
+            .attr('text-anchor', 'middle')
             .attr('transform', `rotate(${dir * 180},${x},${-y})`)
             .classed(`field-${type} field-numbers`, true);
         };
@@ -268,9 +265,9 @@ class Field {
 
     // Performer icon
     this.svg.selectAll('.field-performer')
-        .data(performers, d => drill.parseName(d))
+        .data(performers, d => panes.drill.parseName(d))
       .enter().append('g')
-        .attr('id', d => `performer_${drill.parseName(d)}`)
+        .attr('id', d => `performer_${panes.drill.parseName(d)}`)
         .classed('field-performer', true)
         // .classed('selected', d => d.selected)
         .on('click', p => this.select(p))
@@ -281,8 +278,8 @@ class Field {
         .classed('field-performer-circle', true)
         .select(parent)
       .append('text')
-        .text(d => drill.parseName(d))
-        .attr('y', 0.4)
+        .text(d => panes.drill.parseName(d))
+        .attr('y', 0.36)
         .attr('text-anchor', 'middle')
         .classed('field-performer-text', true)
         .select(parent)
@@ -300,10 +297,10 @@ class Field {
     if (p) {
       p.selected = !p.selected;
 
-      this.svg.select(`#performer_${drill.parseName(p).replace('\\', '\\\\').replace('*', '\\*')}`)
+      this.svg.select(`#performer_${panes.drill.parseName(p).replace('\\', '\\\\').replace('*', '\\*')}`)
         .classed('selected', p.selected);
 
-      drill.refresh();
+      panes.drill.updateUI();
     }
   }
 

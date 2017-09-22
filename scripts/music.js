@@ -1,6 +1,10 @@
 class Music {
   constructor(season, show, part) {
-    this.load(season, show, part);
+    this.element = document.getElementById('music');
+
+    if (season && show && part) {
+      this.load(season, show, part);
+    }
 
     // Add event listeners
     // document.getElementById('music-button-prev').addEventListener('click', () => this.prevPage());
@@ -18,11 +22,11 @@ class Music {
     PDFJS.workerSrc = 'node_modules/pdfjs-dist/build/pdf.worker.min.js';
     PDFJS.getDocument(`data/${season}/${show}/${part}/music/score.pdf`).then(pdf => {
       this.pdf = pdf;
+      this.pages = pdf.numPages;
 
       // Update music information
       document.getElementById('music-title').textContent = part;
       //document.getElementById('music-part').textContent = 'score';
-      document.getElementById('music-page-count').textContent = pdf.numPages;
 
       this.renderPage(this.pageNum);
     });
@@ -56,7 +60,7 @@ class Music {
     });
 
     // Update page counters
-    document.getElementById('music-page-num').textContent = this.pageNum;
+    this.updateUI();
   }
 
   queueRenderPage(num) {
@@ -83,5 +87,47 @@ class Music {
 
     this.pageNum++;
     this.queueRenderPage(this.pageNum);
+  }
+
+  updateUI() {
+    if (this.active) {
+      uiElements.status[0].children[0].textContent = '';
+      uiElements.status[0].children[1].textContent = '';
+      uiElements.status[1].children[0].textContent = '';
+      uiElements.status[1].children[1].textContent = '';
+      uiElements.status[2].children[0].textContent = 'Page';
+      uiElements.status[2].children[1].textContent = `${this.pageNum} / ${this.pages}`;
+      uiElements.status[3].children[0].textContent = 'Measures';
+      uiElements.status[3].children[1].textContent = '1 - 2';
+    }
+  }
+
+  eventHandler(e) {
+    if (e.type === 'keydown') {
+      switch (e.key) {
+        case 'ArrowLeft':
+          this.prevPage();
+          break;
+        case 'ArrowRight':
+          this.nextPage();
+          break;
+      }
+    } else if (e.type === 'click') {
+      if (e.target.tagName === 'BUTTON') {
+        switch (e.target.id) {
+          case 'button-volume':
+            break;
+          case 'button-prev':
+            this.prevPage();
+            break;
+          case 'button-playpause':
+            break;
+          case 'button-next':
+            this.nextPage();
+            break;
+        }
+      }
+    }
+    // console.log('music', e);
   }
 }

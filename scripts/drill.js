@@ -1,6 +1,11 @@
 class Drill {
   constructor(season, show, part) {
-    this.load(season, show, part);
+    this.element = document.getElementById('drill');
+    this.field = new Field('drill', 'd3');
+
+    if (season && show && part) {
+      this.load(season, show, part);
+    }
   }
 
   load(season, show, part) {
@@ -107,10 +112,10 @@ class Drill {
         this.total += s.counts;
       }
 
-      field.load(this.performers);
+      this.field.load(this.performers);
 
       this.move();
-      // selectByName(this.parseName(drill.performers[0]));
+      // selectByName(this.parseName(panes.drill.performers[0]));
     });
   }
 
@@ -140,9 +145,9 @@ class Drill {
   }
 
   select(name) {
-    for (let p of drill.performers) {
+    for (let p of this.performers) {
       if (this.parseName(p).toUpperCase() === name.toUpperCase()) {
-        field.select(p);
+        this.field.select(p);
         return p;
       }
     }
@@ -152,7 +157,7 @@ class Drill {
   move() {
     console.log(this.state);
 
-    this.refresh();
+    this.updateUI();
 
     // Translation function
     let translate = p => {
@@ -161,7 +166,7 @@ class Drill {
       return `translate(${xScale(x)},${yScale(y)})`;
     };
 
-    field.svg.selectAll('.field-performer').attr('transform', translate);
+    this.field.svg.selectAll('.field-performer').attr('transform', translate);
   }
 
   // Go to the next count
@@ -226,16 +231,16 @@ class Drill {
   }
 
   mute() {
-    elements.button.volume.children[0].classList.replace('zmdi-volume-up', 'zmdi-volume-off');
+    uiElements.button.volume.children[0].classList.replace('zmdi-volume-up', 'zmdi-volume-off');
     // TODO: change tooltip title
-    // elements.button.volume.setAttribute('title', 'Unmute');
+    // uiElements.button.volume.setAttribute('title', 'Unmute');
     this.muted = true;
   }
 
   unmute() {
-    elements.button.volume.children[0].classList.replace('zmdi-volume-off', 'zmdi-volume-up');
+    uiElements.button.volume.children[0].classList.replace('zmdi-volume-off', 'zmdi-volume-up');
     // TODO: change tooltip title
-    // elements.button.volume.setAttribute('title', 'Mute');
+    // uiElements.button.volume.setAttribute('title', 'Mute');
     this.muted = false;
   }
 
@@ -249,14 +254,14 @@ class Drill {
 
   // Start playing until the specified count
   play(end = this.total) {
-    elements.button.playpause.children[0].classList.replace('zmdi-play', 'zmdi-pause');
+    uiElements.button.playpause.children[0].classList.replace('zmdi-play', 'zmdi-pause');
 
     if (this.state.total < this.total) {
       this.playing = true;
 
       let func = () => {
         if (!this.muted) {
-          elements.metronome.play();
+          uiElements.metronome.play();
         }
         this.nextCount();
 
@@ -278,7 +283,7 @@ class Drill {
 
   // Pause playing
   pause() {
-    elements.button.playpause.children[0].classList.replace('zmdi-pause', 'zmdi-play');
+    uiElements.button.playpause.children[0].classList.replace('zmdi-pause', 'zmdi-play');
 
     this.playing = false;
     clearTimeout(this.timeoutID);
@@ -296,42 +301,6 @@ class Drill {
   stop() {
     this.pause();
     this.set(0);
-  }
-
-  refresh() {
-    let p = field.selected;
-    let s = this.state.set;
-    let c = this.state.count;
-
-    document.getElementById('status-set').textContent = s + 1;
-    document.getElementById('status-count').children[0].textContent = this.playing ? 'Count' : 'Counts';
-    document.getElementById('status-count').children[1].textContent = this.playing ? `${c} / ${this.state.counts}` : this.state.counts;
-
-    let performer = document.getElementById('status-performer');
-    let position = document.getElementById('status-position');
-
-    if (p) {
-      let subset = this.subset(p, s, c);
-
-      performer.children[0].children[1].textContent = this.parseName(p);
-      // TODO: change to zmdi-run for run-on step
-      if (p.sets[s][this.subset(p, s, c).subset].type === 'move') {
-        performer.children[1].children[0].classList.replace('zmdi-male-alt', 'zmdi-walk');
-        performer.children[1].children[1].textContent = `${p.sets[s][subset.subset].stepsize} to 5`;
-      } else {
-        performer.children[1].children[0].classList.replace('zmdi-walk', 'zmdi-male-alt');
-        performer.children[1].children[1].textContent = p.sets[s][subset.subset].type;
-      }
-      performer.classList.replace('d-none', 'd-flex');
-
-      let pos = this.parsePos(p, s, c);
-      position.children[0].textContent = pos.horiz[0];
-      position.children[1].textContent = pos.vert[0];
-      position.classList.replace('d-none', 'd-flex');
-    } else {
-      performer.classList.replace('d-flex', 'd-none');
-      position.classList.replace('d-flex', 'd-none');
-    }
   }
 
   parseName(p) {
@@ -361,30 +330,126 @@ class Drill {
 
     // TODO: make "steps" singular when offset <= 1
     if (y === 0) {
-      vert = 'On Home side line';
+      vert = 'On home side line';
     } else if (y <= 16) {
-      vert = `${y} steps behind Home side line`;
+      vert = `${y} steps behind home side line`;
     } else if (y < 32) {
-      vert = `${y.subtract(32).negate()} steps in front of Home hash`;
+      vert = `${y.subtract(32).negate()} steps in front of home hash`;
     } else if (y.equals(32)) {
-      vert = 'On Home hash';
+      vert = 'On home hash';
     } else if (y <= new Fraction(42, 2, 3)) {
-      vert = `${y.subtract(32)} steps behind Home hash`;
+      vert = `${y.subtract(32)} steps behind home hash`;
     } else if (y < new Fraction(53, 1, 3)) {
-      vert = `${y.subtract(53, 1, 3).negate()} steps in front of Visitor hash`;
+      vert = `${y.subtract(53, 1, 3).negate()} steps in front of visitor hash`;
     } else if (y.equals(53, 1, 3)) {
-      vert = 'On Visitor hash';
+      vert = 'On visitor hash';
     } else if (y < new Fraction(69, 1, 3)) {
-      vert = `${y.subtract(53, 1, 3)} steps behind Visitor hash`;
+      vert = `${y.subtract(53, 1, 3)} steps behind visitor hash`;
     } else if (y < new Fraction(85, 1, 3)) {
-      vert = `${y.subtract(85, 1, 3).negate()} steps in front of Visitor side line`;
+      vert = `${y.subtract(85, 1, 3).negate()} steps in front of visitor side line`;
     } else {
-      vert = 'On Visitor side line';
+      vert = 'On visitor side line';
     }
+
+    let zeroOffset = y.modulo(8);
+    let zero = y.subtract(zeroOffset).divide(8);
+    let direction = 'behind';
+    if (zero.equals(0) || (zero < 10 && zeroOffset > 4)) {
+      zeroOffset = zeroOffset.subtract(8).negate();
+      zero = zero.add(1);
+      direction = 'in front of';
+    }
+    if (zero.equals(1)) {
+      zero += 'st';
+    } else if (zero.equals(2)) {
+      zero += 'nd';
+    } else if (zero.equals(3)) {
+      zero += 'rd';
+    } else {
+      zero += 'th';
+    }
+    let altVert = zeroOffset.equals(0) ? `On ${zero} zero` : `${zeroOffset} ${direction} ${zero} zero`;
+    console.log(altVert)
 
     return {
       horiz: [p.sets[s].horiz || horiz],
-      vert: [p.sets[s].vert || vert]
+      vert: [p.sets[s].vert || vert, altVert]
     };
+  }
+
+  updateUI() {
+    if (this.active) {
+      let p = this.field.selected;
+      let s = this.state.set;
+      let c = this.state.count;
+
+      uiElements.status[2].children[0].textContent = 'Set';
+      uiElements.status[2].children[1].textContent = s + 1;
+      uiElements.status[3].children[0].textContent = this.playing ? 'Count' : 'Counts';
+      uiElements.status[3].children[1].textContent = this.playing ? `${c} / ${this.state.counts}` : this.state.counts;
+
+      if (p) {
+        let subset = this.subset(p, s, c);
+
+        uiElements.status[0].children[0].textContent = this.parseName(p);
+        // TODO: change to zmdi-run for run-on step
+        if (p.sets[s][this.subset(p, s, c).subset].type === 'move') {
+          uiElements.status[0].children[1].textContent = `${p.sets[s][subset.subset].stepsize} to 5`;
+        } else {
+          uiElements.status[0].children[1].textContent = p.sets[s][subset.subset].type;
+        }
+
+        let pos = this.parsePos(p, s, c);
+        uiElements.status[1].children[0].textContent = pos.horiz[0];
+        uiElements.status[1].children[1].textContent = pos.vert[this.altVert ? 1 : 0];
+      } else {
+        uiElements.status[0].children[0].textContent = '';
+        uiElements.status[0].children[1].textContent = '';
+        uiElements.status[1].children[0].textContent = '';
+        uiElements.status[1].children[1].textContent = '';
+      }
+    }
+  }
+
+  eventHandler(e) {
+    if (e.type === 'keydown') {
+      switch (e.key) {
+        case 'ArrowLeft':
+          this.prevSet();
+          break;
+        case ' ':
+          e.preventDefault();
+          this.playPause();
+          break;
+        case 'ArrowRight':
+          this.nextSet();
+          break;
+      }
+    } else if (e.type === 'click') {
+      if (e.target.tagName === 'BUTTON') {
+        switch (e.target.id) {
+          case 'button-volume':
+            this.muteUnmute();
+            break;
+          case 'button-prev':
+            this.prevSet();
+            break;
+          case 'button-playpause':
+            this.playPause();
+            break;
+          case 'button-next':
+            this.nextSet();
+            break;
+        }
+      } else if (e.currentTarget.classList.contains('status-element')) {
+        switch (uiElements.status.indexOf(e.currentTarget)) {
+          case 1:
+            this.altVert = this.altVert ? false : true;
+            this.updateUI(1);
+            break;
+        }
+      }
+    }
+    // console.log('drill', e);
   }
 }

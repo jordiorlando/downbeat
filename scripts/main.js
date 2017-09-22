@@ -1,9 +1,12 @@
-var field = new Field('drill', 'd3');
-var shows, data, drill, music;
 var devMode = true;
-
-var elements = {
-  pane: {},
+var shows;
+var panes = {
+  drill: new Drill(),
+  music: new Music(),
+  tools: new Tools(),
+  settings: new Settings()
+};
+var uiElements = {
   button: {},
   checkbox: {},
   radio: {},
@@ -11,102 +14,75 @@ var elements = {
   status: {},
   metronome: document.getElementById('metronome')
 };
-
-// TODO: use jquery
-for (let tab of ['drill', 'music']) {
-  elements.pane[tab] = document.getElementById(tab);
-  elements.menu[tab] = document.getElementById(`${tab}-menu`);
+var activePane;
+for (let pane in panes) {
+  if (panes[pane].element.classList.contains('active')) {
+    panes[pane].active = true;
+    activePane = pane;
+  } else {
+    panes[pane].active = false;
+  }
 }
 
+// TODO: use jquery
 for (let button of ['volume', 'prev', 'playpause', 'next']) {
-  elements.button[button] = document.getElementById(`button-${button}`);
-  elements.button[button].addEventListener('click', () => action(button));
+  uiElements.button[button] = document.getElementById(`button-${button}`);
+  uiElements.button[button].addEventListener('click', e => panes[activePane].eventHandler(e));
 }
 
 for (let markings of ['grid', 'highschool', 'college', 'pro']) {
-  elements.checkbox[markings] = document.getElementById(`checkbox-markings-${markings}`);
-  field.markings(markings, elements.checkbox[markings].classList.contains('active'));
-  elements.checkbox[markings].addEventListener('click', e => field.markings(markings, !e.target.classList.contains('active')));
+  uiElements.checkbox[markings] = document.getElementById(`checkbox-markings-${markings}`);
+  panes.drill.field.markings(markings, uiElements.checkbox[markings].classList.contains('active'));
+  uiElements.checkbox[markings].addEventListener('click', e => panes.drill.field.markings(markings, !e.target.classList.contains('active')));
 }
 
 for (let theme of ['bw', 'color']) {
-  elements.radio[theme] = document.getElementById(`radio-theme-${theme}`);
-  if (elements.radio[theme].classList.contains('active')) {
-    field.theme(theme);
+  uiElements.radio[theme] = document.getElementById(`radio-theme-${theme}`);
+  if (uiElements.radio[theme].classList.contains('active')) {
+    panes.drill.field.theme(theme);
   }
-  elements.radio[theme].addEventListener('click', e => field.theme(theme, !e.target.classList.contains('active')));
+  uiElements.radio[theme].addEventListener('click', e => panes.drill.field.theme(theme, !e.target.classList.contains('active')));
 }
 
-for (let status = 1; status <= 4; status++) {
-
+for (let tab of ['drill', 'music']) {
+  uiElements.menu[tab] = document.getElementById(`${tab}-menu`);
 }
 
-document.addEventListener('keydown', function(e) {
-  switch (e.key) {
-    case 'ArrowLeft':
-      action('prev');
-      break;
-    case ' ':
-      e.preventDefault();
-      action('playpause');
-      break;
-    case 'ArrowRight':
-      action('next');
-      break;
-  }
-}, false);
+uiElements.status = Array.prototype.slice.call(document.getElementsByClassName('status-element'));
+uiElements.status.forEach(elem => elem.addEventListener('click', e => panes[activePane].eventHandler(e)));
 
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+document.addEventListener('keydown', e => panes[activePane].eventHandler(e), false);
 
 
 
-function action(a) {
-  if (elements.pane.drill.classList.contains('active')) {
-    switch (a) {
-      case 'volume':
-        drill.muteUnmute();
-        break;
-      case 'prev':
-        drill.prevSet();
-        break;
-      case 'playpause':
-        drill.playPause();
-        break;
-      case 'next':
-        drill.nextSet();
-        break;
-    }
-  } else if (elements.pane.music.classList.contains('active')) {
-    switch (a) {
-      case 'prev':
-        music.prevPage();
-        break;
-      case 'next':
-        music.nextPage();
-        break;
-    }
-  }
-}
+$('a[data-toggle="tab"]').on('shown.bs.tab', e => {
+  panes[e.relatedTarget.id.replace('-tab', '')].active = false;
+  activePane = e.target.id.replace('-tab', '');
+  panes[activePane].active = true;
+  panes[activePane].updateUI();
+});
+
+$(() => $('[data-toggle="tooltip"]').tooltip());
+
+
 
 function load(season, show, part) {
   d3.json(`data/${devMode ? 'dev' : 'data'}.json`, d => {
-    data = d;
+    shows = d;
 
-    for (let i in data) {
-      for (let j in data[i]) {
+    for (let i in shows) {
+      for (let j in shows[i]) {
         let hasDrill = false;
         let hasMusic = false;
 
-        for (let k in data[i][j]) {
-          if (data[i][j][k].drill.length) {
+        for (let k in shows[i][j]) {
+          if (shows[i][j][k].drill.length) {
             if (!hasDrill) {
               let menuItem = document.createElement('a');
               menuItem.classList.add('dropdown-item');
               menuItem.setAttribute('disabled', 'disabled');
               menuItem.innerText = j;
-              elements.menu.drill.appendChild(menuItem);
+              uiElements.menu.drill.appendChild(menuItem);
 
               hasDrill = true;
             }
@@ -115,17 +91,17 @@ function load(season, show, part) {
             menuItem.classList.add('dropdown-item');
             menuItem.innerText = k;
             menuItem.addEventListener('click', () => {
-              drill.load(i, j, k);
+              panes.drill.load(i, j, k);
             });
-            elements.menu.drill.appendChild(menuItem);
+            uiElements.menu.drill.appendChild(menuItem);
           }
-          if (data[i][j][k].music.length) {
+          if (shows[i][j][k].music.length) {
             if (!hasMusic) {
               let menuItem = document.createElement('a');
               menuItem.classList.add('dropdown-item');
               menuItem.setAttribute('disabled', 'disabled');
               menuItem.innerText = j;
-              elements.menu.music.appendChild(menuItem);
+              uiElements.menu.music.appendChild(menuItem);
 
               hasMusic = true;
             }
@@ -134,14 +110,14 @@ function load(season, show, part) {
             menuItem.classList.add('dropdown-item');
             menuItem.innerText = k;
             menuItem.addEventListener('click', () => {
-              music.load(i, j, k);
+              panes.music.load(i, j, k);
             });
-            elements.menu.music.appendChild(menuItem);
+            uiElements.menu.music.appendChild(menuItem);
           }
 
           if (i === season && j === show && k === part) {
-            drill = new Drill(season, show, part);
-            music = new Music(season, show, part);
+            panes.drill.load(season, show, part);
+            panes.music.load(season, show, part);
           }
         }
       }

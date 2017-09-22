@@ -2,15 +2,18 @@ html,
 body {
   width: 100%;
   height: 100%;
+}
+
+.navbar {
+  height: 64px;
+}
+.tab-content {
+  flex: 1 1 auto;
+  height: 0;
+}
+#drill {
   overflow: hidden;
 }
-
-.zmdi {
-  width: 16px;
-}
-
-
-
 svg {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -19,7 +22,27 @@ svg {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-  line-height: 1;
+}
+
+.status-element {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.status-element span {
+  color: #fff;
+  opacity: 0.5;
+}
+.status-element:hover span {
+  opacity: 0.75;
+}
+
+.zmdi {
+  width: 16px;
 }
 
 
@@ -32,12 +55,20 @@ svg {
 .field-zero-lines {
   stroke-width: 0.125;
 }
+.field-numbers {
+  font-family: Helvetica;
+  font-size: 6px;
+  line-height: 1;
+}
 .field-performer {
   cursor: pointer;
 }
 .field-performer-text {
   font-family: Helvetica;
   font-size: 1px;
+}
+.field-performer-circle {
+  stroke-width: 0.1;
 }
 
 
@@ -57,12 +88,16 @@ svg {
 }
 .field-theme-bw .field-zero-points,
 .field-theme-bw .field-numbers,
-.field-theme-bw .field-performer .field-performer-circle,
 .field-theme-bw .field-performer.selected .field-performer-text {
   fill: #444;
 }
+.field-theme-bw .field-performer .field-performer-circle {
+  fill: #444;
+  /*stroke: #444;*/
+}
 .field-theme-bw .field-performer.selected .field-performer-circle {
   fill: #ff0;
+  stroke: #444;
 }
 .field-theme-bw .field-performer .field-performer-text {
   fill: #fff;
@@ -79,8 +114,7 @@ svg {
 .field-theme-color .field-turf {
   fill: #689f38;
 }
-.field-theme-color .field-endzone,
-.field-theme-color .field-performer.selected .field-performer-circle {
+.field-theme-color .field-endzone {
   fill: #e04e39;
 }
 .field-theme-color .field-step-lines {
@@ -99,4 +133,9 @@ svg {
 }
 .field-theme-color .field-performer .field-performer-circle {
   fill: #13294b;
+  /*stroke: #13294b;*/
+}
+.field-theme-color .field-performer.selected .field-performer-circle {
+  fill: #e04e39;
+  stroke: #fff;
 }

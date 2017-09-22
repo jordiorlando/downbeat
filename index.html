@@ -19,14 +19,14 @@
 
 <body>
   <div class="d-flex flex-column h-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between text-nowrap">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-nowrap">
       <!-- <a class="navbar-brand" href="#">Downbeat</a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
-        <span class="navbar-brand mb-0 h1">Downbeat</span>
+        <span class="navbar-brand mb-0 h1" id="title">Downbeat</span>
         <ul class="navbar-nav nav" id="tab-bar" role="tablist"> <!--nav-tabs-->
           <li class="nav-item">
             <a class="nav-link active" id="drill-tab" data-toggle="tab" href="#drill" role="tab" aria-controls="drill" aria-expanded="true">Drill</a>
@@ -44,68 +44,42 @@
         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#load-modal"><i class="zmdi zmdi-folder"></i></button>
       </div>
 
-      <span class="navbar-text mb-0 h4" id="title"></span>
+      <!-- <span class="navbar-text mb-0 h4" id="title"></span> -->
 
-      <div class="d-flex justify-content-around justify-content-lg-end justify-content-xl-end flex-wrap navbar-text w-100">
-        <div class="px-3 d-none flex-column align-items-center" id="status-performer">
-          <div>
-            <i class="zmdi zmdi-account"></i>
-            <span></span>
-          </div>
-          <div>
-            <i class="zmdi zmdi-walk"></i>
-            <span></span>
-          </div>
-        </div>
-        <div class="px-3 d-none flex-column align-items-center" id="status-position">
-          <span></span>
-          <span></span>
-        </div>
-        <div class="px-3 d-flex flex-column align-items-center">
-          <span>Set</span>
-          <span id="status-set">1</span>
-        </div>
-        <div class="px-3 d-flex flex-column align-items-center" id="status-count">
-          <span></span>
-          <span></span>
-        </div>
-        <button type="button" class="btn btn-dark" id="button-volume" data-toggle="tooltip" data-placement="bottom" title="Mute/Unmute"><i class="zmdi zmdi-volume-up"></i></button>
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-dark" id="button-prev" data-toggle="tooltip" data-placement="bottom" title="Previous"><i class="zmdi zmdi-skip-previous"></i></button>
-          <button type="button" class="btn btn-dark" id="button-playpause" data-toggle="tooltip" data-placement="bottom" title="Play/Pause"><i class="zmdi zmdi-play"></i></button>
-          <button type="button" class="btn btn-dark" id="button-next" data-toggle="tooltip" data-placement="bottom" title="Next"><i class="zmdi zmdi-skip-next"></i></button>
-        </div>
+      <!-- <div class="d-flex justify-content-around justify-content-lg-end justify-content-xl-end flex-wrap navbar-text w-100"> -->
+      <div class="px-3 d-flex flex-column align-items-center status-element">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="px-3 d-flex flex-column align-items-center status-element">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="px-3 d-flex flex-column align-items-center status-element">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="px-3 d-flex flex-column align-items-center status-element">
+        <span></span>
+        <span></span>
+      </div>
+      <button type="button" class="btn btn-dark" id="button-volume" data-toggle="tooltip" data-placement="bottom" title="Mute/Unmute"><i class="zmdi zmdi-volume-up"></i></button>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-dark" id="button-prev" data-toggle="tooltip" data-placement="bottom" title="Previous"><i class="zmdi zmdi-skip-previous"></i></button>
+        <button type="button" class="btn btn-dark" id="button-playpause" data-toggle="tooltip" data-placement="bottom" title="Play/Pause"><i class="zmdi zmdi-play"></i></button>
+        <button type="button" class="btn btn-dark" id="button-next" data-toggle="tooltip" data-placement="bottom" title="Next"><i class="zmdi zmdi-skip-next"></i></button>
       </div>
     </nav>
 
-    <div class="tab-content h-100" id="tab-content">
-      <div class="tab-pane fade h-100 show active" id="drill" role="tabpanel" aria-labelledby="drill-tab">
-        <audio src="audio/click.wav" preload="auto" class="d-none" id="metronome">Get a better standards-compliant browser!</audio>
-      </div>
+    <div class="tab-content" id="tab-content">
+      <div class="tab-pane fade h-100 show active" id="drill" role="tabpanel" aria-labelledby="drill-tab"></div>
       <div class="tab-pane fade h-100" id="music" role="tabpanel" aria-labelledby="music-tab">
-        <canvas class="border border-secondary h-100" id="pdf"></canvas>
-        <h2 id="music-title">Title</h2>
-        <!-- <span class="mdl-card__subtitle-text" id="music-part">Part</span> -->
-        <span><span id="music-page-num"></span> / <span id="music-page-count"></span></span>
-        <!-- <div class="music-card">
-          <div class="mdl-card__menu">
-            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="music-menu-button">
-              <i class="material-icons">more_horiz</i>
-            </button>
-            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="music-menu-button" id="music-menu"></ul>
-          </div>
-        </div> -->
+        <canvas class="d-block h-100 mx-auto" id="pdf"></canvas> <!-- border border-secondary -->
+        <h2 class="d-none" id="music-title">Title</h2>
+        <span class="d-none" id="music-part">Part</span>
       </div>
       <div class="tab-pane fade h-100" id="tools" role="tabpanel" aria-labelledby="tools-tab">
-        <h2 class="mdl-card__title-text" id="tools-title">Tuner</h2>
-        <div class="tools-card">
-          <div class="mdl-card__menu">
-            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="tools-menu-button">
-              <i class="material-icons">more_horiz</i>
-            </button>
-            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="tools-menu-button" id="tools-menu"></ul>
-          </div>
-        </div>
+        <audio src="audio/click.wav" preload="auto" class="d-none" id="metronome">Get a better standards-compliant browser!</audio>
       </div>
       <div class="tab-pane fade h-100" id="settings" role="tabpanel" aria-labelledby="settings-tab">
         <h3>Coordinate rounding</h3>
@@ -222,9 +196,11 @@
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
   <script src="scripts/fraction.js"></script>
-  <script src="scripts/field.js"></script>
   <script src="scripts/drill.js"></script>
+  <script src="scripts/field.js"></script>
   <script src="scripts/music.js"></script>
+  <script src="scripts/tools.js"></script>
+  <script src="scripts/settings.js"></script>
   <script src="scripts/main.js"></script>
 </body>
 

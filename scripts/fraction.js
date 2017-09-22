@@ -197,16 +197,18 @@ class Fraction {
   modulo(...args) {
     let a = new Fraction(this).improper();
     let b = new Fraction(...args).improper();
-
-    let neg = a.negative;
-    a.negative = false;
     b.negative = false;
 
-    while (a >= b) {
-      a = a.subtract(b);
+    if (a.negative) {
+      while (a <= 0) {
+        a = a.add(b);
+      }
+    } else {
+      while (a >= b) {
+        a = a.subtract(b);
+      }
     }
 
-    a.negative = neg;
     return a.mixed();
   }
 
