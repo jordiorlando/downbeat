@@ -1,5 +1,5 @@
 var devMode = true;
-var shows;
+var data;
 var panes = {
   drill: new Drill(),
   music: new Music(),
@@ -10,8 +10,12 @@ var uiElements = {
   button: {},
   checkbox: {},
   radio: {},
-  menu: {},
-  status: {},
+  select: {},
+  status: [],
+  modal: {
+    load: $('#load-modal'),
+    loadShow: document.getElementById('load-show')
+  },
   metronome: document.getElementById('metronome')
 };
 var activePane;
@@ -44,8 +48,8 @@ for (let theme of ['bw', 'color']) {
   uiElements.radio[theme].addEventListener('click', e => panes.drill.field.theme(theme, !e.target.classList.contains('active')));
 }
 
-for (let tab of ['drill', 'music']) {
-  uiElements.menu[tab] = document.getElementById(`${tab}-menu`);
+for (let name of ['season', 'show', 'part']) {
+  uiElements.select[name] = document.getElementById(`select-${name}`);
 }
 
 uiElements.status = Array.prototype.slice.call(document.getElementsByClassName('status-element'));
@@ -62,73 +66,74 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', e => {
   panes[activePane].updateUI();
 });
 
-$(() => $('[data-toggle="tooltip"]').tooltip());
 
 
+d3.json(`data/${devMode ? 'dev' : 'data'}.json`, d => {
+  data = d;
+  console.log(data)
 
-function load(season, show, part) {
-  d3.json(`data/${devMode ? 'dev' : 'data'}.json`, d => {
-    shows = d;
+  $('#select-season').change(e => {
+    $('#load-show').prop('disabled', true);
+    $('.part-option').addClass('d-none');
+    $('#select-part').val('none');
+    $('.show-option').addClass('d-none');
+    $('#select-show').val('none');
+    $(`.show-${e.target.value}`).removeClass('d-none');
+  });
 
-    for (let i in shows) {
-      for (let j in shows[i]) {
-        let hasDrill = false;
-        let hasMusic = false;
+  $('#select-show').change(e => {
+    $('#load-show').prop('disabled', true);
+    $('.part-option').addClass('d-none');
+    $('#select-part').val('none');
+    $(`.part-${e.target.value}`).removeClass('d-none');
+  });
 
-        for (let k in shows[i][j]) {
-          if (shows[i][j][k].drill.length) {
-            if (!hasDrill) {
-              let menuItem = document.createElement('a');
-              menuItem.classList.add('dropdown-item');
-              menuItem.setAttribute('disabled', 'disabled');
-              menuItem.innerText = j;
-              uiElements.menu.drill.appendChild(menuItem);
-
-              hasDrill = true;
-            }
-
-            let menuItem = document.createElement('a');
-            menuItem.classList.add('dropdown-item');
-            menuItem.innerText = k;
-            menuItem.addEventListener('click', () => {
-              panes.drill.load(i, j, k);
-            });
-            uiElements.menu.drill.appendChild(menuItem);
-          }
-          if (shows[i][j][k].music.length) {
-            if (!hasMusic) {
-              let menuItem = document.createElement('a');
-              menuItem.classList.add('dropdown-item');
-              menuItem.setAttribute('disabled', 'disabled');
-              menuItem.innerText = j;
-              uiElements.menu.music.appendChild(menuItem);
-
-              hasMusic = true;
-            }
-
-            let menuItem = document.createElement('li');
-            menuItem.classList.add('dropdown-item');
-            menuItem.innerText = k;
-            menuItem.addEventListener('click', () => {
-              panes.music.load(i, j, k);
-            });
-            uiElements.menu.music.appendChild(menuItem);
-          }
-
-          if (i === season && j === show && k === part) {
-            panes.drill.load(season, show, part);
-            panes.music.load(season, show, part);
-          }
-        }
-      }
+  $('#select-part').change(e => {
+    // TODO: jquery
+    if (uiElements.select.part.selectedIndex) {
+      $('#load-show').prop('disabled', false);
+    } else {
+      $('#load-show').prop('disabled', true);
     }
   });
-}
 
+  uiElements.modal.loadShow.addEventListener('click', e => {
+    let season = data.seasons[uiElements.select.season.value];
+    let show = season.shows[uiElements.select.show.value.split('-').pop()];
+    let part = show.parts[uiElements.select.part.value.split('-').pop()];
+    console.log(season, show, part);
 
+    panes.drill.load(season.path, show.path, part.path);
+    panes.music.load(season.path, show.path, part.path);
 
-if (devMode) {
-  load('dev', 'Show 1', 'The Stars and Stripes Forever');
-} else {
-  load('2016', 'Show 4 - Buddy Rich Show', 'Buddy Rich Show');
-}
+    uiElements.modal.load.modal('hide');
+  });
+
+  data.seasons.forEach((season, i) => {
+    let option = document.createElement('option');
+    option.setAttribute('value', i);
+    option.innerText = season.name;
+    option.classList.add('season-option');
+    uiElements.select.season.appendChild(option);
+
+    season.shows.forEach((show, j) => {
+      let option = document.createElement('option');
+      option.setAttribute('value', `${i}-${j}`);
+      option.innerText = show.name;
+      option.classList.add('d-none');
+      option.classList.add('show-option');
+      option.classList.add(`show-${i}`);
+      uiElements.select.show.appendChild(option);
+
+      show.parts.forEach((part, k) => {
+        let option = document.createElement('option');
+        option.setAttribute('value', `${i}-${j}-${k}`);
+        option.innerText = part.name;
+        option.classList.add('d-none');
+        option.classList.add('part-option');
+        option.classList.add(`part-${i}-${j}`);
+        uiElements.select.part.appendChild(option);
+      });
+    });
+  });
+});

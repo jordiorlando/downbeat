@@ -255,13 +255,17 @@ class Field {
     }
   }
 
+  clear() {
+    this.svg.selectAll('.field-performer').remove();
+  }
+
   // Draw all performers
   load(performers) {
+    this.clear();
+
     for (let p of performers) {
       p.selected = false;
     }
-
-    this.svg.selectAll('.field-performer').remove();
 
     // Performer icon
     this.svg.selectAll('.field-performer')

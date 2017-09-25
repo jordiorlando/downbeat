@@ -15,7 +15,7 @@ class Music {
     this.pageNum = 1;
     this.pageRendering = false;
     this.pageNumPending = null;
-    this.scale = 1.5;
+    this.scale = 5;
     this.canvas = document.getElementById('pdf');
     this.ctx = this.canvas.getContext('2d');
 
@@ -37,6 +37,7 @@ class Music {
 
     // Using promise to fetch the page
     this.pdf.getPage(num).then(page => {
+      // TODO: support zooming
       let viewport = page.getViewport(this.scale);
       this.canvas.height = viewport.height;
       this.canvas.width = viewport.width;

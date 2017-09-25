@@ -8,6 +8,11 @@ class Drill {
     }
   }
 
+  clear() {
+    this.name = '';
+    this.field.clear();
+  }
+
   load(season, show, part) {
     let pos = function(p, s, a) {
       s = parseInt(s, 10);
