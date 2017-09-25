@@ -1,14 +1,8 @@
 class Music {
   constructor(season, show, part) {
-    this.element = document.getElementById('music');
-
     if (season && show && part) {
       this.load(season, show, part);
     }
-
-    // Add event listeners
-    // document.getElementById('music-button-prev').addEventListener('click', () => this.prevPage());
-    // document.getElementById('music-button-next').addEventListener('click', () => this.nextPage());
   }
 
   load(season, show, part) {
@@ -16,7 +10,7 @@ class Music {
     this.pageRendering = false;
     this.pageNumPending = null;
     this.scale = 5;
-    this.canvas = document.getElementById('pdf');
+    this.canvas = $('#pdf')[0];
     this.ctx = this.canvas.getContext('2d');
 
     PDFJS.workerSrc = 'node_modules/pdfjs-dist/build/pdf.worker.min.js';
@@ -25,8 +19,8 @@ class Music {
       this.pages = pdf.numPages;
 
       // Update music information
-      document.getElementById('music-title').textContent = part;
-      //document.getElementById('music-part').textContent = 'score';
+      $('#music-title').text(part);
+      //$('#music-part').text('score');
 
       this.renderPage(this.pageNum);
     });
@@ -129,6 +123,5 @@ class Music {
         }
       }
     }
-    // console.log('music', e);
   }
 }

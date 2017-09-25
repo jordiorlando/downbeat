@@ -1,7 +1,5 @@
 class Tools {
-  constructor() {
-    this.element = document.getElementById('tools');
-  }
+  constructor() {}
 
   updateUI() {
     if (this.active) {

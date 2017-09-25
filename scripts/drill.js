@@ -1,6 +1,5 @@
 class Drill {
   constructor(season, show, part) {
-    this.element = document.getElementById('drill');
     this.field = new Field('drill', 'd3');
 
     if (season && show && part) {
@@ -9,7 +8,8 @@ class Drill {
   }
 
   clear() {
-    this.name = '';
+    delete this.name;
+    delete this.state;
     this.field.clear();
   }
 
@@ -36,7 +36,7 @@ class Drill {
     };
 
     d3.json(`data/${season}/${show}/${part}/drill/drill.json`, d => {
-      document.getElementById('title').textContent = d.name;
+      $('#title').text(d.name);
 
       // Copy drill metadata and data
       this.name = d.name;
@@ -160,8 +160,7 @@ class Drill {
 
   // Update all performer positions
   move() {
-    console.log(this.state);
-
+    // console.log(this.state);
     this.updateUI();
 
     // Translation function
@@ -226,26 +225,32 @@ class Drill {
 
   // Go to the previous set
   prevSet() {
-    // FIXME: spend a full count-time at count 0 before moving to count 1 when calling prevSet() while this.playing = true
-    this.set(this.state.count > 1 ? this.state.set : this.state.set - 1)
+    if (this.state) {
+      // FIXME: spend a full count-time at count 0 before moving to count 1 when calling prevSet() while this.playing = true
+      this.set(this.state.count > 1 ? this.state.set : this.state.set - 1)
+    }
   }
 
   // Go to the next set
   nextSet() {
-    this.set(this.state.set + 1);
+    if (this.state) {
+      this.set(this.state.set + 1);
+    }
   }
 
   mute() {
-    uiElements.button.volume.children[0].classList.replace('zmdi-volume-up', 'zmdi-volume-off');
+    $('#button-volume').children().removeClass('zmdi-volume-up');
+    $('#button-volume').children().addClass('zmdi-volume-off');
     // TODO: change tooltip title
-    // uiElements.button.volume.setAttribute('title', 'Unmute');
+    // $('#button-volume').setAttribute('title', 'Unmute');
     this.muted = true;
   }
 
   unmute() {
-    uiElements.button.volume.children[0].classList.replace('zmdi-volume-off', 'zmdi-volume-up');
+    $('#button-volume').children().removeClass('zmdi-volume-off');
+    $('#button-volume').children().addClass('zmdi-volume-up');
     // TODO: change tooltip title
-    // uiElements.button.volume.setAttribute('title', 'Mute');
+    // $('#button-volume').setAttribute('title', 'Mute');
     this.muted = false;
   }
 
@@ -259,39 +264,45 @@ class Drill {
 
   // Start playing until the specified count
   play(end = this.total) {
-    uiElements.button.playpause.children[0].classList.replace('zmdi-play', 'zmdi-pause');
+    if (this.state) {
+      $('#button-playpause').children().removeClass('zmdi-play');
+      $('#button-playpause').children().addClass('zmdi-pause');
 
-    if (this.state.total < this.total) {
-      this.playing = true;
+      if (this.state.total < this.total) {
+        this.playing = true;
 
-      let func = () => {
-        if (!this.muted) {
-          uiElements.metronome.play();
-        }
-        this.nextCount();
+        let func = () => {
+          if (!this.muted) {
+            $('#metronome')[0].play();
+          }
+          this.nextCount();
 
-        let t = 1000 * 60 / this.state.tempo;
-        if (this.state.pulse === 'half') {
-          t *= 2;
-        }
+          let t = 1000 * 60 / this.state.tempo;
+          if (this.state.pulse === 'half') {
+            t *= 2;
+          }
 
-        if (this.state.total < end) {
-          this.timeoutID = setTimeout(func, t);
-        } else {
-          this.pause();
-        }
-      };
+          if (this.state.total < end) {
+            this.timeoutID = setTimeout(func, t);
+          } else {
+            this.pause();
+          }
+        };
 
-      func();
+        func();
+      }
     }
   }
 
   // Pause playing
   pause() {
-    uiElements.button.playpause.children[0].classList.replace('zmdi-pause', 'zmdi-play');
+    if (this.state) {
+      $('#button-playpause').children().removeClass('zmdi-pause');
+      $('#button-playpause').children().addClass('zmdi-play');
 
-    this.playing = false;
-    clearTimeout(this.timeoutID);
+      this.playing = false;
+      clearTimeout(this.timeoutID);
+    }
   }
 
   playPause() {
@@ -373,7 +384,6 @@ class Drill {
       zero += 'th';
     }
     let altVert = zeroOffset.equals(0) ? `On ${zero} zero` : `${zeroOffset} ${direction} ${zero} zero`;
-    console.log(altVert)
 
     return {
       horiz: [p.sets[s].horiz || horiz],
@@ -382,7 +392,7 @@ class Drill {
   }
 
   updateUI() {
-    if (this.active) {
+    if (this.active && this.state) {
       let p = this.field.selected;
       let s = this.state.set;
       let c = this.state.count;
@@ -454,6 +464,5 @@ class Drill {
         }
       }
     }
-    // console.log('drill', e);
   }
 }
