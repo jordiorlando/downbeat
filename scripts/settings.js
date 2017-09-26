@@ -13,6 +13,17 @@ class Settings {
     for (let button of ['volume', 'prev', 'playpause', 'next']) {
       $(`#button-${button}`).click(e => panes[activePane].eventHandler(e));
     }
+
+    if (screenfull.enabled) {
+      $('#button-fullscreen').removeClass('d-none');
+      $('#button-fullscreen').click(() => {
+        screenfull.toggle();
+      });
+      screenfull.on('change', () => {
+        $('#button-fullscreen').children().toggleClass('zmdi-fullscreen', !screenfull.isFullscreen);
+        $('#button-fullscreen').children().toggleClass('zmdi-fullscreen-exit', screenfull.isFullscreen);
+      });
+    }
   }
 
   load() {

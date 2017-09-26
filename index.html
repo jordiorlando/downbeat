@@ -7,7 +7,11 @@
   <meta name="description" content="">
   <meta name="author" content="Jordi Pakey-Rodriguez">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Downbeat</title>
+
+  <link rel="manifest" href="/manifest.json">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -69,6 +73,7 @@
         <button type="button" class="btn btn-dark" id="button-playpause" title="Play/Pause"><i class="zmdi zmdi-play"></i></button>
         <button type="button" class="btn btn-dark" id="button-next" title="Next"><i class="zmdi zmdi-skip-next"></i></button>
       </div>
+      <button type="button" class="btn btn-dark d-none" id="button-fullscreen" title="Fullscreen"><i class="zmdi zmdi-fullscreen"></i></button>
     </nav>
 
     <div class="tab-content" id="tab-content">
@@ -203,6 +208,7 @@
     </div>
   </div>
 
+  <script src="node_modules/screenfull/dist/screenfull.js"></script>
   <script src="node_modules/d3/build/d3.min.js"></script>
   <script src="node_modules/pdfjs-dist/build/pdf.min.js"></script>
   <script src="node_modules/file-saver/FileSaver.min.js"></script>
