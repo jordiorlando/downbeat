@@ -1,6 +1,6 @@
 var data, panes, activePane;
 
-d3.json('data/dev.json', d => {
+d3.json('data/2017.json', d => {
   data = d;
   panes = {
     drill: new Drill(),

@@ -129,22 +129,20 @@
   ],
   "seasons": [
     {
-      "name": "dev",
-      "path": "dev",
+      "name": "2017",
+      "path": "2017",
       "shows": [
         {
-          "name": "Show 1",
-          "path": "Show 1",
+          "name": "Show 3 - Superheroes Show",
+          "path": "Show 3 - Superheroes Show",
           "parts": [
             {
-              "name": "The Stars and Stripes Forever",
-              "path": "The Stars and Stripes Forever",
+              "name": "Closer",
+              "path": "Closer",
               "drill": [
                 "drill"
               ],
-              "music": [
-                "score"
-              ]
+              "music": []
             }
           ]
         }
