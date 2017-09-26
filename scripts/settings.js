@@ -5,6 +5,11 @@ var uiElements = {
 
 class Settings {
   constructor() {
+    this.settings = {
+      accuracy: [[2, true], [3, true], [4, true], [8, false], [10, false]]
+    };
+
+
     $(document).keydown(e => panes[activePane].eventHandler(e));
 
     uiElements.status = Array.prototype.slice.call(document.getElementsByClassName('status-element'));
@@ -26,7 +31,26 @@ class Settings {
     }
   }
 
+  get(setting) {
+    return this.settings[setting] instanceof Array ? this.settings[setting].reduce((a, v) => {
+      if (v[1]) {
+        a.push(v[0]);
+      }
+      return a;
+    }, []) : this.settings[setting];
+  }
+
+  set(setting, key, value) {
+    this.settings[setting][key] = value;
+  }
+
   load() {
+    this.settings.accuracy.forEach((val, i) => {
+      this.settings.accuracy[i][1] = $(`#checkbox-accuracy-${val[0]}`).hasClass('active');
+      $(`#checkbox-accuracy-${val[0]}`).click(e => panes.settings.set('accuracy', i, [val[0], !e.target.classList.contains('active')]));
+      panes.drill.move();
+    });
+
     for (let markings of ['grid', 'highschool', 'college', 'pro']) {
       panes.drill.field.markings(markings, $(`#checkbox-markings-${markings}`).hasClass('active'));
       $(`#checkbox-markings-${markings}`).click(e => panes.drill.field.markings(markings, !e.target.classList.contains('active')));

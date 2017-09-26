@@ -88,6 +88,8 @@ class Drill {
                   if (!dp.equals(0)) {
                     p.sets[s][a].stepsize = new Fraction(counts * 8).divide(dp);
                     // console.log(dx, dy, dp, ss, 'to', 5)
+                  } else {
+                    p.sets[s][a].type = 'mark-time';
                   }
                 }
               }
@@ -142,10 +144,11 @@ class Drill {
   // Function to calculate the position for a given performer, set, and count
   position(p, s, c) {
     let {subset, count} = this.subset(p, s, c);
+    let accuracy = panes.settings.get('accuracy');
 
     return {
-      x: p.sets[s][subset].positions[count].x,
-      y: p.sets[s][subset].positions[count].y
+      x: p.sets[s][subset].positions[count].x.round(accuracy),
+      y: p.sets[s][subset].positions[count].y.round(accuracy)
     };
   }
 
@@ -324,8 +327,10 @@ class Drill {
   }
 
   parsePos(p, s, c) {
+    let accuracy = panes.settings.get('accuracy');
     let {x, y} = this.position(p, s, c);
-    let horiz = x.equals(0) ? '' : (x < 0 ? 'Side 1: ' : 'Side 2: ');
+    let horiz;
+    let side = x.equals(0) ? '' : (x < 0 ? 'sd 1 ' : 'sd 2 ');
 
     let yard = x.abs().subtract(80).negate();
     let offset = yard.modulo(8);
@@ -337,9 +342,9 @@ class Drill {
         horiz += `Splitting ${yard} and ${yard + 5} yd lns`;
       } else {} */
 
-      horiz += `${offset.abs()} ${offset > 0 ? 'inside' : 'outside'} ${yard} yd line`;
+      horiz = `${offset.abs()} ${offset > 0 ? 'inside' : 'outside'} ${x.equals(0) ? '' : (x < 0 ? 'sd 1 ' : 'sd 2 ')}${yard} yd ln`;
     } else {
-      horiz += yard.equals(0) ? 'On goal line' : `On ${yard} yd line`;
+      horiz = yard.equals(0) ? 'On goal ln' : `On ${yard} yd ln`;
     }
 
     let vert;
@@ -355,13 +360,13 @@ class Drill {
     } else if (y <= new Fraction(42, 2, 3)) {
       vert = `${y.subtract(32)} behind home hash`;
     } else if (y < new Fraction(53, 1, 3)) {
-      vert = `${y.subtract(53, 1, 3).negate()} in front of visitor hash`;
+      vert = `${y.subtract(53, 1, 3).round(accuracy).negate()} in front of visitor hash`;
     } else if (y.equals(53, 1, 3)) {
       vert = 'On visitor hash';
     } else if (y < new Fraction(69, 1, 3)) {
-      vert = `${y.subtract(53, 1, 3)} behind visitor hash`;
+      vert = `${y.subtract(53, 1, 3).round(accuracy)} behind visitor hash`;
     } else if (y < new Fraction(85, 1, 3)) {
-      vert = `${y.subtract(85, 1, 3).negate()} in front of visitor side line`;
+      vert = `${y.subtract(85, 1, 3).round(accuracy).negate()} in front of visitor side line`;
     } else {
       vert = 'On visitor side line';
     }
@@ -408,7 +413,7 @@ class Drill {
         uiElements.status[0].children[0].textContent = this.parseName(p);
         // TODO: change to zmdi-run for run-on step
         if (p.sets[s][this.subset(p, s, c).subset].type === 'move') {
-          uiElements.status[0].children[1].textContent = `${p.sets[s][subset.subset].stepsize} to 5`;
+          uiElements.status[0].children[1].textContent = `${p.sets[s][subset.subset].stepsize.round(panes.settings.get('accuracy'))} to 5`;
         } else {
           uiElements.status[0].children[1].textContent = p.sets[s][subset.subset].type;
         }
