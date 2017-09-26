@@ -6,44 +6,49 @@ class Fraction {
 
   // Get whole integer portion
   get whole() {
-    return this.fraction[0];
+    return this.values[0];
   }
 
   // Set whole integer portion
   set whole(n) {
-    this.fraction[0] = parseInt(n, 10);
+    this.values[0] = parseInt(n, 10);
   }
 
   // Get numerator
   get numerator() {
-    return this.fraction[1];
+    return this.values[1];
   }
 
   // Set numerator
   set numerator(n) {
-    this.fraction[1] = parseInt(n, 10);
+    this.values[1] = parseInt(n, 10);
   }
 
   // Get denominator
   get denominator() {
-    return this.fraction[2];
+    return this.values[2];
   }
 
   // Set denominator
   set denominator(n) {
-    this.fraction[2] = parseInt(n, 10);
+    this.values[2] = parseInt(n, 10);
+  }
+
+  // Get fraction
+  get fraction() {
+    return this.values.slice(1);
   }
 
   // Normalize the sign
   _sign() {
-    for (let i in this.fraction) {
-      if (Object.is(this.fraction[i] * 0, -0)) {
-        this.fraction[i] *= -1;
+    for (let i in this.values) {
+      if (Object.is(this.values[i] * 0, -0)) {
+        this.values[i] *= -1;
         this.negative = !this.negative;
       }
     }
 
-    if (!this.fraction[0] && !this.fraction[1]) {
+    if (!this.values[0] && !this.values[1]) {
       this.negative = false;
     }
   }
@@ -54,8 +59,8 @@ class Fraction {
 
     this.mixed();
 
-    for (let i in this.fraction) {
-      if (this.fraction[i] !== f.fraction[i]) {
+    for (let i in this.values) {
+      if (this.values[i] !== f.values[i]) {
         return false;
       }
     }
@@ -66,45 +71,28 @@ class Fraction {
   // Set the value
   set(...args) {
     if (args[0] instanceof Fraction) {
-      this.fraction = [...args[0].fraction];
+      this.values = [...args[0].values];
       this.negative = args[0].negative;
     } else {
       let arr = args[0] instanceof Array ? args[0] : args;
 
       // Convert from float/decimal to fraction
       if (arr.length === 1) {
-        arr[0] = parseFloat(arr[0]);
-        let decimal = Math.abs(arr[0] - Math.trunc(arr[0]));
+        let decimal = parseFloat(arr[0]);
+        arr[0] = parseInt(arr[0], 10);
+        let digits = decimal.toString().length - arr[0].toString().length - 1;
 
-        if (decimal) {
-          // TODO: add a round() function to round to the nearest value from a list of desired denominators
-          let approx = {
-            error: 1
-          }
-
-          for (let denominator of [2, 3, 4, 8, 10]) {
-            let numerator = Math.round(decimal * denominator);
-            let error = Math.abs(numerator / denominator - decimal);
-            if (error < approx.error) {
-              approx = {
-                numerator,
-                denominator,
-                error
-              };
-            }
-          }
-
-          arr[1] = approx.numerator;
-          arr[2] = approx.denominator;
+        if (digits > 0) {
+          arr[2] = Math.pow(10, digits);
+          arr[1] = Math.abs(arr[0] - decimal) * arr[2];
         }
-      } else {
-        arr[1] = parseInt(arr[1], 10);
-        arr[2] = parseInt(arr[2], 10);
       }
 
       arr[0] = parseInt(arr[0], 10);
+      arr[1] = parseInt(arr[1], 10);
+      arr[2] = parseInt(arr[2], 10);
 
-      this.fraction = [
+      this.values = [
         isNaN(arr[0]) ? 0 : arr[0],
         isNaN(arr[1]) ? 0 : arr[1],
         isNaN(arr[2]) ? 1 : arr[2]
@@ -141,9 +129,9 @@ class Fraction {
   invert() {
     let f = new Fraction(this).improper();
 
-    let numerator = f.fraction[1];
-    f.fraction[1] = f.fraction[2];
-    f.fraction[2] = numerator;
+    let numerator = f.values[1];
+    f.values[1] = f.values[2];
+    f.values[2] = numerator;
 
     return f.mixed();
   }
@@ -153,14 +141,14 @@ class Fraction {
     let a = new Fraction(this).improper();
     let b = new Fraction(...args).improper();
 
-    a.fraction[1] *= b.fraction[2];
-    b.fraction[1] *= a.fraction[2];
+    a.values[1] *= b.values[2];
+    b.values[1] *= a.values[2];
 
-    let lcm = a.fraction[2] * b.fraction[2];
-    a.fraction[2] = lcm;
-    b.fraction[2] = lcm;
+    let lcm = a.values[2] * b.values[2];
+    a.values[2] = lcm;
+    b.values[2] = lcm;
 
-    a.fraction[1] += a.negative === b.negative ? b.fraction[1] : -b.fraction[1];
+    a.values[1] += a.negative === b.negative ? b.values[1] : -b.values[1];
 
     a._sign();
     return a.mixed();
@@ -177,8 +165,8 @@ class Fraction {
     let a = new Fraction(this).improper();
     let b = new Fraction(...args).improper();
 
-    a.fraction[1] *= b.fraction[1];
-    a.fraction[2] *= b.fraction[2];
+    a.values[1] *= b.values[1];
+    a.values[2] *= b.values[2];
 
     a.negative = a.negative !== b.negative;
 
@@ -223,6 +211,43 @@ class Fraction {
     return approx === a.valueOf() ? a.mixed() : new Fraction(approx);
   }
 
+  // Round to the nearest given denominator (returns new Fraction)
+  round(...args) {
+    if (args[0] instanceof Array) {
+      args = args[0];
+    }
+
+    if (!args.length) {
+      args.push(1);
+    }
+
+    let a = new Fraction(this).mixed();
+
+    if (!args.includes(a.denominator)) {
+      let decimal = a.numerator / a.denominator;
+      let leastError = 1;
+
+      for (let denominator of args) {
+        let numerator = Math.round(decimal * denominator);
+        let error = Math.abs(numerator / denominator - decimal);
+        if (error < leastError || (error === leastError && denominator < a.denominator)) {
+          leastError = error;
+          a.numerator = numerator;
+          a.denominator = denominator;
+        }
+      }
+
+      // Check if the fraction equals 1
+      if (a.numerator === a.denominator) {
+        a.whole++;
+        a.numerator = 0;
+        a.denominator = 1;
+      }
+    }
+
+    return a;
+  }
+
   // Normalize the numerator & denominator
   normalize() {
     let gcd = function(a, b) {
@@ -233,19 +258,19 @@ class Fraction {
       return gcd(b, a % b);
     };
 
-    let g = gcd(this.fraction[1], this.fraction[2]);
+    let g = gcd(this.values[1], this.values[2]);
 
-    this.fraction[1] /= g;
-    this.fraction[2] /= g;
+    this.values[1] /= g;
+    this.values[2] /= g;
 
     return this;
   }
 
   // Convert to a mixed fraction
   mixed() {
-    while (this.fraction[1] >= this.fraction[2]) {
-      this.fraction[0]++;
-      this.fraction[1] -= this.fraction[2];
+    while (this.values[1] >= this.values[2]) {
+      this.values[0]++;
+      this.values[1] -= this.values[2];
     }
 
     return this.normalize();
@@ -253,9 +278,9 @@ class Fraction {
 
   // Convert to an improper fraction
   improper() {
-    while (this.fraction[0]) {
-      this.fraction[0]--;
-      this.fraction[1] += this.fraction[2];
+    while (this.values[0]) {
+      this.values[0]--;
+      this.values[1] += this.values[2];
     }
 
     return this.normalize();
@@ -282,7 +307,7 @@ class Fraction {
   }
 
   toJSON() {
-    let fraction = [this.negative ? -this.fraction[0] : this.fraction[0], this.fraction[1], this.fraction[2]];
+    let fraction = [this.negative ? -this.values[0] : this.values[0], this.values[1], this.values[2]];
     return fraction[1] === 0 ? fraction[0] : fraction;
   }
 }
