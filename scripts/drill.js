@@ -330,7 +330,6 @@ class Drill {
     let accuracy = panes.settings.get('accuracy');
     let {x, y} = this.position(p, s, c);
     let horiz;
-    let side = x.equals(0) ? '' : (x < 0 ? 'sd 1 ' : 'sd 2 ');
 
     let yard = x.abs().subtract(80).negate();
     let offset = yard.modulo(8);
@@ -342,17 +341,17 @@ class Drill {
         horiz += `Splitting ${yard} and ${yard + 5} yd lns`;
       } else {} */
 
-      horiz = `${offset.abs()} ${offset > 0 ? 'inside' : 'outside'} ${x.equals(0) ? '' : (x < 0 ? 'sd 1 ' : 'sd 2 ')}${yard} yd ln`;
+      horiz = `${offset.abs()} ${offset > 0 ? 'inside' : 'outside'} ${x.equals(0) ? '' : (x < 0 ? 'side 1 ' : 'side 2 ')}${yard}yd ln`;
     } else {
-      horiz = yard.equals(0) ? 'On goal ln' : `On ${yard} yd ln`;
+      horiz = yard.equals(0) ? 'On goal ln' : `On ${yard}yd ln`;
     }
 
     let vert;
 
     if (y === 0) {
-      vert = 'On home side line';
+      vert = 'On home side ln';
     } else if (y <= 16) {
-      vert = `${y} behind home side line`;
+      vert = `${y} behind home side ln`;
     } else if (y < 32) {
       vert = `${y.subtract(32).negate()} in front of home hash`;
     } else if (y.equals(32)) {
@@ -366,9 +365,9 @@ class Drill {
     } else if (y < new Fraction(69, 1, 3)) {
       vert = `${y.subtract(53, 1, 3).round(accuracy)} behind visitor hash`;
     } else if (y < new Fraction(85, 1, 3)) {
-      vert = `${y.subtract(85, 1, 3).round(accuracy).negate()} in front of visitor side line`;
+      vert = `${y.subtract(85, 1, 3).round(accuracy).negate()} in front of visitor side ln`;
     } else {
-      vert = 'On visitor side line';
+      vert = 'On visitor side ln';
     }
 
     let zeroOffset = y.modulo(8);
