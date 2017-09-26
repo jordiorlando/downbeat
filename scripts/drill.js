@@ -210,7 +210,7 @@ class Drill {
     }
 
     this.state.set    = s;
-    this.state.count  = 0;
+    this.state.count  = this.sets[s].counts;
     this.state.tempo  = this.sets[s].tempo;
     this.state.pulse  = this.sets[s].pulse;
     this.state.counts = this.sets[s].counts;
@@ -227,7 +227,7 @@ class Drill {
   prevSet() {
     if (this.state) {
       // FIXME: spend a full count-time at count 0 before moving to count 1 when calling prevSet() while this.playing = true
-      this.set(this.state.count > 1 ? this.state.set : this.state.set - 1)
+      this.set(this.state.set - 1)
     }
   }
 
@@ -398,7 +398,7 @@ class Drill {
       let c = this.state.count;
 
       uiElements.status[2].children[0].textContent = 'Set';
-      uiElements.status[2].children[1].textContent = s + 1;
+      uiElements.status[2].children[1].textContent = this.sets[s].name;
       uiElements.status[3].children[0].textContent = this.playing ? 'Count' : 'Counts';
       uiElements.status[3].children[1].textContent = this.playing ? `${c} / ${this.state.counts}` : this.state.counts;
 
