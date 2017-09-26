@@ -87,4 +87,6 @@ d3.json('data/2017.json', d => {
       });
     });
   });
+
+  panes.drill.load('2017', 'Show 3 - Superheroes Show', 'Closer');
 });
