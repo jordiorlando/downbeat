@@ -280,4 +280,9 @@ class Fraction {
     let val = this.whole + this.numerator / this.denominator;
     return this.negative ? -1 * val : val;
   }
+
+  toJSON() {
+    let fraction = [this.negative ? -this.fraction[0] : this.fraction[0], this.fraction[1], this.fraction[2]];
+    return fraction[1] === 0 ? fraction[0] : fraction;
+  }
 }
