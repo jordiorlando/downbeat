@@ -86,89 +86,91 @@
         <audio src="audio/click.wav" preload="auto" class="d-none" id="metronome">Get a better standards-compliant browser!</audio>
       </div>
       <div class="tab-pane fade h-100" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-        <h3>Coordinate rounding</h3>
-        <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-secondary active" id="checkbox-accuracy-2">
-            <input type="checkbox" checked autocomplete="off"> 1/2
-          </label>
-          <label class="btn btn-secondary active" id="checkbox-accuracy-3">
-            <input type="checkbox" checked autocomplete="off"> 1/3
-          </label>
-          <label class="btn btn-secondary active" id="checkbox-accuracy-4">
-            <input type="checkbox" checked autocomplete="off"> 1/4
-          </label>
-          <label class="btn btn-secondary" id="checkbox-accuracy-8">
-            <input type="checkbox" autocomplete="off"> 1/8
-          </label>
-          <label class="btn btn-secondary" id="checkbox-accuracy-10">
-            <input type="checkbox" autocomplete="off"> 1/10
-          </label>
-        </div>
-        <h3>Field markings</h3>
-        <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-secondary active" id="checkbox-markings-grid">
-            <input type="checkbox" checked autocomplete="off"> Grid
-          </label>
-          <label class="btn btn-secondary" id="checkbox-markings-highschool">
-            <input type="checkbox" autocomplete="off"> High school
-          </label>
-          <label class="btn btn-secondary active" id="checkbox-markings-college">
-            <input type="checkbox" checked autocomplete="off"> College
-          </label>
-          <label class="btn btn-secondary" id="checkbox-markings-pro">
-            <input type="checkbox" autocomplete="off"> Pro
-          </label>
-        </div>
-        <h3>Field theme</h3>
-        <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-secondary active" id="radio-theme-bw">
-            <input type="radio" name="options" autocomplete="off" checked> Black/White
-          </label>
-          <label class="btn btn-secondary" id="radio-theme-color">
-            <input type="radio" name="options" autocomplete="off"> Color
-          </label>
-        </div>
-        <h3>Audio settings</h3>
-        <div class="btn-group" data-toggle="buttons">
-          <!-- <label class="btn btn-secondary" id="radio-audio-midimet">
+        <div class="container">
+          <h3>Coordinate rounding</h3>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-secondary active" id="checkbox-accuracy-2">
+              <input type="checkbox" checked autocomplete="off"> 1/2
+            </label>
+            <label class="btn btn-secondary active" id="checkbox-accuracy-3">
+              <input type="checkbox" checked autocomplete="off"> 1/3
+            </label>
+            <label class="btn btn-secondary active" id="checkbox-accuracy-4">
+              <input type="checkbox" checked autocomplete="off"> 1/4
+            </label>
+            <label class="btn btn-secondary" id="checkbox-accuracy-8">
+              <input type="checkbox" autocomplete="off"> 1/8
+            </label>
+            <label class="btn btn-secondary" id="checkbox-accuracy-10">
+              <input type="checkbox" autocomplete="off"> 1/10
+            </label>
+          </div>
+          <h3>Field markings</h3>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-secondary active" id="checkbox-markings-grid">
+              <input type="checkbox" checked autocomplete="off"> Grid
+            </label>
+            <label class="btn btn-secondary" id="checkbox-markings-highschool">
+              <input type="checkbox" autocomplete="off"> High school
+            </label>
+            <label class="btn btn-secondary active" id="checkbox-markings-college">
+              <input type="checkbox" checked autocomplete="off"> College
+            </label>
+            <label class="btn btn-secondary" id="checkbox-markings-pro">
+              <input type="checkbox" autocomplete="off"> Pro
+            </label>
+          </div>
+          <h3>Field theme</h3>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-secondary active" id="radio-theme-bw">
+              <input type="radio" name="options" autocomplete="off" checked> Black/White
+            </label>
+            <label class="btn btn-secondary" id="radio-theme-color">
+              <input type="radio" name="options" autocomplete="off"> Color
+            </label>
+          </div>
+          <h3>Audio settings</h3>
+          <div class="btn-group" data-toggle="buttons">
+            <!-- <label class="btn btn-secondary" id="radio-audio-midimet">
             <input type="radio" name="options" autocomplete="off" checked> MIDI + met
-          </label>
-          <label class="btn btn-secondary" id="radio-audio-midi">
-            <input type="radio" name="options" autocomplete="off"> MIDI only
-          </label> -->
-          <label class="btn btn-secondary" id="radio-audio-met">
-            <input type="radio" name="options" autocomplete="off"> Met only
-          </label>
-          <label class="btn btn-secondary active" id="radio-audio-none">
-            <input type="radio" name="options" autocomplete="off"> None
-          </label>
-        </div>
+              </label>
+              <label class="btn btn-secondary" id="radio-audio-midi">
+              <input type="radio" name="options" autocomplete="off"> MIDI only
+            </label> -->
+            <label class="btn btn-secondary" id="radio-audio-met">
+              <input type="radio" name="options" autocomplete="off"> Met only
+            </label>
+            <label class="btn btn-secondary active" id="radio-audio-none">
+              <input type="radio" name="options" autocomplete="off"> None
+            </label>
+          </div>
 
-        <form>
-          <div class="form-group">
-            <label for="select-performer-type">Select performer type</label>
-            <select class="custom-select" id="select-performer-type">
-              <option value="none" selected>Select type</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="select-performer-squad">Select performer squad</label>
-            <select class="custom-select" id="select-performer-squad">
-              <option value="none" selected>Select squad</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="select-performer-position">Select performer position</label>
-            <select class="custom-select" id="select-performer-position">
-              <option value="none" selected>Select position</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-            </select>
-          </div>
-          <!-- <button type="submit" class="btn btn-primary" disabled>Submit</button> -->
-        </form>
+          <form>
+            <div class="form-group">
+              <label for="select-performer-type">Select performer type</label>
+              <select class="custom-select" id="select-performer-type">
+                <option value="none" selected>Select type</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="select-performer-squad">Select performer squad</label>
+              <select class="custom-select" id="select-performer-squad">
+                <option value="none" selected>Select squad</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="select-performer-position">Select performer position</label>
+              <select class="custom-select" id="select-performer-position">
+                <option value="none" selected>Select position</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+            </div>
+            <!-- <button type="submit" class="btn btn-primary" disabled>Submit</button> -->
+          </form>
+        </div>
       </div>
     </div>
   </div>

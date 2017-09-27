@@ -50,20 +50,20 @@ class Settings {
   load() {
     this.settings.accuracy.forEach((val, i) => {
       this.settings.accuracy[i][1] = $(`#checkbox-accuracy-${val[0]}`).hasClass('active');
-      $(`#checkbox-accuracy-${val[0]}`).click(e => panes.settings.set('accuracy', i, [val[0], !e.target.classList.contains('active')]));
+      $(`#checkbox-accuracy-${val[0]}`).click(e => panes.settings.set('accuracy', i, [val[0], !e.currentTarget.classList.contains('active')]));
       panes.drill.move();
     });
 
     for (let markings of ['grid', 'highschool', 'college', 'pro']) {
       panes.drill.field.markings(markings, $(`#checkbox-markings-${markings}`).hasClass('active'));
-      $(`#checkbox-markings-${markings}`).click(e => panes.drill.field.markings(markings, !e.target.classList.contains('active')));
+      $(`#checkbox-markings-${markings}`).click(e => panes.drill.field.markings(markings, !e.currentTarget.classList.contains('active')));
     }
 
     for (let theme of ['bw', 'color']) {
       if ($(`#radio-theme-${theme}`).hasClass('active')) {
         panes.drill.field.theme(theme);
       }
-      $(`#radio-theme-${theme}`).click(e => panes.drill.field.theme(theme, !e.target.classList.contains('active')));
+      $(`#radio-theme-${theme}`).click(e => panes.drill.field.theme(theme, !e.currentTarget.classList.contains('active')));
     }
 
     for (let type of data.performers) {
