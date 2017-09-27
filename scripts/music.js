@@ -108,8 +108,8 @@ class Music {
           break;
       }
     } else if (e.type === 'click') {
-      if (e.target.tagName === 'BUTTON') {
-        switch (e.target.id) {
+      if (e.currentTarget.tagName === 'BUTTON') {
+        switch (e.currentTarget.id) {
           case 'button-volume':
             break;
           case 'button-prev':

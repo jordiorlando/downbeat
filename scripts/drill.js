@@ -436,8 +436,8 @@ class Drill {
           break;
       }
     } else if (e.type === 'click') {
-      if (e.target.tagName === 'BUTTON') {
-        switch (e.target.id) {
+      if (e.currentTarget.tagName === 'BUTTON') {
+        switch (e.currentTarget.id) {
           case 'button-volume':
             this.muteUnmute();
             break;
