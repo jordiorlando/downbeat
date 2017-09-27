@@ -12,6 +12,9 @@ class Settings {
 
     $(document).keydown(e => panes[activePane].eventHandler(e));
 
+    $('a[data-toggle="tab"]').click(e => $('#navbarNav').collapse('hide'));
+    $('#load-button').click(e => $('#navbarNav').collapse('hide'));
+
     uiElements.status = Array.prototype.slice.call(document.getElementsByClassName('status-element'));
     $('.status-element').click(e => panes[activePane].eventHandler(e));
 

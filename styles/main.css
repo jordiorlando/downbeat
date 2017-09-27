@@ -4,8 +4,9 @@ body {
   height: 100%;
 }
 
-.navbar {
-  min-height: 64px;
+.navbar-container {
+  height: 64px;
+  z-index: 1030;
 }
 .tab-content {
   flex: 1 1 auto;
