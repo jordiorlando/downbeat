@@ -32,7 +32,8 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <span class="navbar-brand mb-0 h1" id="title">Downbeat</span>
-        <ul class="navbar-nav nav" id="tab-bar" role="tablist"> <!--nav-tabs-->
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#load-modal" id="load-button">Load</button>
+        <ul class="navbar-nav nav flex-row" id="tab-bar" role="tablist"> <!--nav-tabs-->
           <li class="nav-item">
             <a class="nav-link active" id="drill-tab" data-toggle="tab" href="#drill" role="tab" aria-controls="drill" aria-expanded="true">Drill</a>
           </li>
@@ -46,7 +47,6 @@
             <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">Settings</a>
           </li>
         </ul>
-        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#load-modal" id="load-button">Load</button>
       </div>
 
       <!-- <div class="d-flex justify-content-around justify-content-lg-end justify-content-xl-end flex-wrap navbar-text w-100"> -->

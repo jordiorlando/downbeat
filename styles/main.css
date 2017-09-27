@@ -11,6 +11,10 @@ body {
 .navbar {
   min-height: 64px;
 }
+.navbar-collapse .navbar-nav .nav-link {
+  padding-left:  .5rem;
+  padding-right: .5rem;
+}
 .tab-content {
   flex: 1 1 auto;
   height: 0;
