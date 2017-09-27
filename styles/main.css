@@ -8,6 +8,9 @@ body {
   height: 64px;
   z-index: 1030;
 }
+.navbar {
+  min-height: 64px;
+}
 .tab-content {
   flex: 1 1 auto;
   height: 0;
