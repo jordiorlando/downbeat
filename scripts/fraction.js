@@ -288,16 +288,44 @@ class Fraction {
 
   // Get the string representation
   toString() {
-    let sign = this.negative ? '-' : '';
+    let str = `${this.negative ? '-' : ''}${this.whole ? this.whole : ''}`;
 
-    if (!this.numerator) {
-      return `${sign}${this.whole}`;
-    }
-    if (!this.whole) {
-      return `${sign}${this.numerator}/${this.denominator}`;
+    // HACK: replace with unicode entities externally?
+    if (this.numerator === 0) {
+      return str;
+    } else if (this.numerator === 1 && this.denominator === 2) {
+      return `${str}½`;
+    } else if (this.numerator === 1 && this.denominator === 3) {
+      return `${str}⅓`;
+    } else if (this.numerator === 2 && this.denominator === 3) {
+      return `${str}⅔`;
+    } else if (this.numerator === 1 && this.denominator === 4) {
+      return `${str}¼`;
+    } else if (this.numerator === 3 && this.denominator === 4) {
+      return `${str}¾`;
+    } else if (this.numerator === 1 && this.denominator === 5) {
+      return `${str}⅕`;
+    } else if (this.numerator === 2 && this.denominator === 5) {
+      return `${str}⅖`;
+    } else if (this.numerator === 3 && this.denominator === 5) {
+      return `${str}⅗`;
+    } else if (this.numerator === 4 && this.denominator === 5) {
+      return `${str}⅘`;
+    } else if (this.numerator === 1 && this.denominator === 6) {
+      return `${str}⅙`;
+    } else if (this.numerator === 5 && this.denominator === 6) {
+      return `${str}⅚`;
+    } else if (this.numerator === 1 && this.denominator === 8) {
+      return `${str}⅛`;
+    } else if (this.numerator === 3 && this.denominator === 8) {
+      return `${str}⅜`;
+    } else if (this.numerator === 5 && this.denominator === 8) {
+      return `${str}⅝`;
+    } else if (this.numerator === 7 && this.denominator === 8) {
+      return `${str}⅞`;
     }
 
-    return `${sign}${this.whole} ${this.numerator}/${this.denominator}`;
+    return `${str}${this.numerator}/${this.denominator}`;
   }
 
   // Get the decimal approximation
