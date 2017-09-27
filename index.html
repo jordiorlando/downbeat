@@ -23,9 +23,9 @@
 
 <body>
   <div class="d-flex flex-column h-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-nowrap">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-nowrap justify-content-end">
       <!-- <a class="navbar-brand" href="#">Downbeat</a> -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -48,8 +48,6 @@
         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#load-modal">Load</button>
       </div>
 
-      <!-- <span class="navbar-text mb-0 h4" id="title"></span> -->
-
       <!-- <div class="d-flex justify-content-around justify-content-lg-end justify-content-xl-end flex-wrap navbar-text w-100"> -->
       <div class="px-3 d-flex flex-column align-items-center status-element">
         <span></span>
@@ -67,7 +65,6 @@
         <span></span>
         <span></span>
       </div>
-      <button type="button" class="btn btn-dark" id="button-volume" title="Mute/Unmute"><i class="zmdi zmdi-volume-up"></i></button>
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-dark" id="button-prev" title="Previous"><i class="zmdi zmdi-skip-previous"></i></button>
         <button type="button" class="btn btn-dark" id="button-playpause" title="Play/Pause"><i class="zmdi zmdi-play"></i></button>
@@ -131,14 +128,17 @@
         </div>
         <h3>Audio settings</h3>
         <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-secondary active" id="radio-audio-midimet">
+          <!-- <label class="btn btn-secondary" id="radio-audio-midimet">
             <input type="radio" name="options" autocomplete="off" checked> MIDI + met
           </label>
           <label class="btn btn-secondary" id="radio-audio-midi">
             <input type="radio" name="options" autocomplete="off"> MIDI only
-          </label>
+          </label> -->
           <label class="btn btn-secondary" id="radio-audio-met">
             <input type="radio" name="options" autocomplete="off"> Met only
+          </label>
+          <label class="btn btn-secondary active" id="radio-audio-none">
+            <input type="radio" name="options" autocomplete="off"> None
           </label>
         </div>
 
@@ -197,7 +197,6 @@
                 <option value="none" selected>Select part</option>
               </select>
             </div>
-            <!-- <button type="submit" class="btn btn-primary" disabled>Submit</button> -->
           </form>
         </div>
         <div class="modal-footer">

@@ -242,18 +242,10 @@ class Drill {
   }
 
   mute() {
-    $('#button-volume').children().removeClass('zmdi-volume-up');
-    $('#button-volume').children().addClass('zmdi-volume-off');
-    // TODO: change tooltip title
-    // $('#button-volume').setAttribute('title', 'Unmute');
     this.muted = true;
   }
 
   unmute() {
-    $('#button-volume').children().removeClass('zmdi-volume-off');
-    $('#button-volume').children().addClass('zmdi-volume-up');
-    // TODO: change tooltip title
-    // $('#button-volume').setAttribute('title', 'Mute');
     this.muted = false;
   }
 
@@ -353,19 +345,19 @@ class Drill {
     } else if (y <= 16) {
       vert = `${y} behind home side ln`;
     } else if (y < 32) {
-      vert = `${y.subtract(32).negate()} in front of home hash`;
+      vert = `${y.subtract(32).negate()} front of home hash`;
     } else if (y.equals(32)) {
       vert = 'On home hash';
     } else if (y <= new Fraction(42, 2, 3)) {
       vert = `${y.subtract(32)} behind home hash`;
     } else if (y < new Fraction(53, 1, 3)) {
-      vert = `${y.subtract(53, 1, 3).round(accuracy).negate()} in front of visitor hash`;
+      vert = `${y.subtract(53, 1, 3).round(accuracy).negate()} front of visitor hash`;
     } else if (y.equals(53, 1, 3)) {
       vert = 'On visitor hash';
     } else if (y < new Fraction(69, 1, 3)) {
       vert = `${y.subtract(53, 1, 3).round(accuracy)} behind visitor hash`;
     } else if (y < new Fraction(85, 1, 3)) {
-      vert = `${y.subtract(85, 1, 3).round(accuracy).negate()} in front of visitor side ln`;
+      vert = `${y.subtract(85, 1, 3).round(accuracy).negate()} front of visitor side ln`;
     } else {
       vert = 'On visitor side ln';
     }
@@ -376,7 +368,7 @@ class Drill {
     if (zero.equals(0) || (zero < 10 && zeroOffset > 4)) {
       zeroOffset = zeroOffset.subtract(8).negate();
       zero = zero.add(1);
-      direction = 'in front of';
+      direction = 'front of';
     }
     if (zero.equals(1)) {
       zero += 'st';

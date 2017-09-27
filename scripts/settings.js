@@ -15,12 +15,12 @@ class Settings {
     uiElements.status = Array.prototype.slice.call(document.getElementsByClassName('status-element'));
     $('.status-element').click(e => panes[activePane].eventHandler(e));
 
-    for (let button of ['volume', 'prev', 'playpause', 'next']) {
+    for (let button of ['prev', 'playpause', 'next']) {
       $(`#button-${button}`).click(e => panes[activePane].eventHandler(e));
     }
 
     if (screenfull.enabled) {
-      $('#button-fullscreen').removeClass('d-none');
+      // $('#button-fullscreen').removeClass('d-none');
       $('#button-fullscreen').click(() => {
         screenfull.toggle();
       });
@@ -70,6 +70,13 @@ class Settings {
           $('#select-performer-squad').append(`<option value="${squad}" class="d-none">${squad}</option>`);
         }
       }
+    }
+
+    for (let audio of ['met', 'none']) {
+      if ($(`#radio-audio-${audio}`).hasClass('active')) {
+        panes.drill[audio === 'none' ? 'mute' : 'unmute']();
+      }
+      $(`#radio-audio-${audio}`).click(e => panes.drill[audio === 'none' ? 'mute' : 'unmute']());
     }
   }
 
