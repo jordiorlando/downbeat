@@ -340,7 +340,7 @@ class Drill {
 
     let vert;
 
-    if (y === 0) {
+    if (y.equals(0)) {
       vert = 'On home side ln';
     } else if (y <= 16) {
       vert = `${y} behind home side ln`;
