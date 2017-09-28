@@ -47,7 +47,7 @@ class Drill {
       for (let p of this.performers) {
         for (let s in p.sets) {
           // If set is an object, format it as an array of just one move subset
-          if (!(p.sets[s] instanceof Array)) {
+          if (!Array.isArray(p.sets[s])) {
             p.sets[s].type = parseInt(s, 10) ? 'move' : 'start';
             p.sets[s].counts = this.sets[s].counts;
             p.sets[s] = [p.sets[s]];

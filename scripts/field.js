@@ -309,7 +309,7 @@ class Field {
   }
 
   markings(markings, show) {
-    if (markings instanceof Array) {
+    if (Array.isArray(markings)) {
       for (let type of markings) {
         this.markings(type, show);
       }

@@ -74,7 +74,7 @@ class Fraction {
       this.values = [...args[0].values];
       this.negative = args[0].negative;
     } else {
-      let arr = args[0] instanceof Array ? args[0] : args;
+      let arr = Array.isArray(args[0]) ? args[0] : args;
 
       // Convert from float/decimal to fraction
       if (arr.length === 1) {
@@ -213,7 +213,7 @@ class Fraction {
 
   // Round to the nearest given denominator (returns new Fraction)
   round(...args) {
-    if (args[0] instanceof Array) {
+    if (Array.isArray(args[0])) {
       args = args[0];
     }
 

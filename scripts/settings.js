@@ -35,7 +35,7 @@ class Settings {
   }
 
   get(setting) {
-    return this.settings[setting] instanceof Array ? this.settings[setting].reduce((a, v) => {
+    return Array.isArray(this.settings[setting]) ? this.settings[setting].reduce((a, v) => {
       if (v[1]) {
         a.push(v[0]);
       }
