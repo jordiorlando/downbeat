@@ -35,21 +35,40 @@ class Drill {
       };
     };
 
-    d3.json(`data/${season}/${show}/${part}/drill/drill.json`, d => {
+    $.getJSON(`data/${season}/${show}/${part}/drill/drill.json`, d => {
       $('#title').text(d.name);
 
       // Copy drill metadata and data
       this.name = d.name;
       this.sets = d.sets;
-      this.performers = d.performers;
+      this.performers = d.schema === '0.0.2' ? $.map(d.performers, val => {
+        let performer = {
+          name: val.n,
+          type: val.n.slice(0, 1)
+        };
+
+        let squad = parseInt(val.n.slice(1), 10);
+        let position = val.n.slice(-2);
+
+        if (isNaN(parseInt(position, 10))) {
+          performer.squad = squad;
+          performer.position = position;
+        } else {
+          performer.num = squad;
+        }
+
+        performer.sets = val.s;
+
+        return performer;
+      }) : d.performers;
 
       // Calculate positions for every subset
       for (let p of this.performers) {
         for (let s in p.sets) {
           // If set is an object, format it as an array of just one move subset
           if (!Array.isArray(p.sets[s])) {
-            p.sets[s].type = parseInt(s, 10) ? 'move' : 'start';
-            p.sets[s].counts = this.sets[s].counts;
+            p.sets[s].t = parseInt(s, 10) ? 'm' : 's';
+            p.sets[s].c = this.sets[s].c;
             p.sets[s] = [p.sets[s]];
           }
 
@@ -60,10 +79,10 @@ class Drill {
             p.sets[s][a].y = y instanceof Fraction ? y : new Fraction(y);
 
             let px, py;
-            let counts = p.sets[s][a].counts;
+            let counts = p.sets[s][a].c;
             p.sets[s][a].positions = [];
 
-            if (p.sets[s][a].type === 'move') {
+            if (p.sets[s][a].t === 'm') {
               if (a > 0) {
                 px = p.sets[s][a - 1].x;
                 py = p.sets[s][a - 1].y;
@@ -77,7 +96,7 @@ class Drill {
               x = p.sets[s][a].x;
               y = p.sets[s][a].y;
 
-              if (p.sets[s][a].type === 'move') {
+              if (p.sets[s][a].t === 'm') {
                 x = px.add(x.subtract(px).multiply(0, c, counts));
                 y = py.add(y.subtract(py).multiply(0, c, counts));
 
@@ -89,7 +108,7 @@ class Drill {
                     p.sets[s][a].stepsize = new Fraction(counts * 8).divide(dp);
                     // console.log(dx, dy, dp, ss, 'to', 5)
                   } else {
-                    p.sets[s][a].type = 'mark-time';
+                    p.sets[s][a].t = 'mt';
                   }
                 }
               }
@@ -108,15 +127,15 @@ class Drill {
         total:  0,
         set:    0,
         count:  0,
-        tempo:  this.sets[0].tempo,
-        pulse:  this.sets[0].pulse,
-        counts: this.sets[0].counts // TODO: this.sets[0].countsdrill
+        tempo:  this.sets[0].t || 138,
+        pulse:  this.sets[0].pl,
+        counts: this.sets[0].c // TODO: this.sets[0].countsdrill
       };
 
       // Total number of counts in this drill
       this.total = 0;
       for (let s of this.sets) {
-        this.total += s.counts;
+        this.total += s.c;
       }
 
       this.field.load(this.performers);
@@ -130,13 +149,13 @@ class Drill {
   subset(p, s, c) {
     // Loop through all subsets until the current one is found
     for (let a in p.sets[s]) {
-      if (c <= p.sets[s][a].counts) {
+      if (c <= p.sets[s][a].c) {
         return {
           subset: a,
           count: c
         };
       } else {
-        c -= p.sets[s][a].counts;
+        c -= p.sets[s][a].c;
       }
     }
   }
@@ -144,11 +163,10 @@ class Drill {
   // Function to calculate the position for a given performer, set, and count
   position(p, s, c) {
     let {subset, count} = this.subset(p, s, c);
-    let accuracy = panes.settings.get('accuracy');
 
     return {
-      x: p.sets[s][subset].positions[count].x.round(accuracy),
-      y: p.sets[s][subset].positions[count].y.round(accuracy)
+      x: p.sets[s][subset].positions[count].x,
+      y: p.sets[s][subset].positions[count].y
     };
   }
 
@@ -178,16 +196,16 @@ class Drill {
 
   // Go to the next count
   nextCount() {
-    if (this.state.count < this.sets[this.state.set].counts) {
+    if (this.state.count < this.sets[this.state.set].c) {
       this.state.total++;
       this.state.count++;
     } else if (this.state.set + 1 < this.sets.length) {
       this.state.total++;
       this.state.set++;
       this.state.count  = 1;
-      this.state.tempo  = this.sets[this.state.set].tempo;
-      this.state.pulse  = this.sets[this.state.set].pulse;
-      this.state.counts = this.sets[this.state.set].counts;
+      this.state.tempo  = this.sets[this.state.set].t || 138;
+      this.state.pulse  = this.sets[this.state.set].pl;
+      this.state.counts = this.sets[this.state.set].c;
     } else {
       return;
     }
@@ -209,14 +227,14 @@ class Drill {
     // Calculate total counts
     this.state.total = 0;
     for (let i = 0; i <= s; i++) {
-      this.state.total += this.sets[i].counts;
+      this.state.total += this.sets[i].c;
     }
 
     this.state.set    = s;
-    this.state.count  = this.sets[s].counts;
-    this.state.tempo  = this.sets[s].tempo;
-    this.state.pulse  = this.sets[s].pulse;
-    this.state.counts = this.sets[s].counts;
+    this.state.count  = this.sets[s].c;
+    this.state.tempo  = this.sets[s].t || 138;
+    this.state.pulse  = this.sets[s].pl;
+    this.state.counts = this.sets[s].c;
 
     this.move();
 
@@ -273,7 +291,7 @@ class Drill {
           this.nextCount();
 
           let t = 1000 * 60 / this.state.tempo;
-          if (this.state.pulse === 'half') {
+          if (this.state.pulse === 0.5 || this.state.pulse === 'half') {
             t *= 2;
           }
 
@@ -321,6 +339,8 @@ class Drill {
   parsePos(p, s, c) {
     let accuracy = panes.settings.get('accuracy');
     let {x, y} = this.position(p, s, c);
+    x = x.round(accuracy);
+    y = y.round(accuracy);
     let horiz;
 
     let yard = x.abs().subtract(80).negate();
@@ -394,7 +414,7 @@ class Drill {
       let c = this.state.count;
 
       uiElements.status[2].children[0].textContent = 'Set';
-      uiElements.status[2].children[1].textContent = this.sets[s].name;
+      uiElements.status[2].children[1].textContent = this.sets[s].n;
       uiElements.status[3].children[0].textContent = this.playing ? 'Count' : 'Counts';
       uiElements.status[3].children[1].textContent = this.playing ? `${c} / ${this.state.counts}` : this.state.counts;
 
@@ -403,10 +423,10 @@ class Drill {
 
         uiElements.status[0].children[0].textContent = this.parseName(p);
         // TODO: change to zmdi-run for run-on step
-        if (p.sets[s][this.subset(p, s, c).subset].type === 'move') {
+        if (p.sets[s][this.subset(p, s, c).subset].t === 'm') {
           uiElements.status[0].children[1].textContent = `${p.sets[s][subset.subset].stepsize.round(panes.settings.get('accuracy'))} to 5`;
         } else {
-          uiElements.status[0].children[1].textContent = p.sets[s][subset.subset].type;
+          uiElements.status[0].children[1].textContent = p.sets[s][subset.subset].t;
         }
 
         let pos = this.parsePos(p, s, c);

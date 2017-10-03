@@ -1,6 +1,6 @@
 var data, panes, activePane;
 
-d3.json('data/2017.json', d => {
+$.getJSON('data/2017.json', d => {
   data = d;
   panes = {
     drill: new Drill(),
@@ -88,5 +88,5 @@ d3.json('data/2017.json', d => {
     });
   });
 
-  panes.drill.load('2017', 'Show 3 - Superheroes Show', 'Closer');
+  panes.drill.load('Traditional', 'Pregame', 'Revised Entrance 3');
 });

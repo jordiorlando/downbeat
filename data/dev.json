@@ -1,106 +1,50 @@
 {
+  "schema": "0.0.2",
   "performers": [
     {
       "name": "Baritone",
       "symbol": "B",
-      "squads": [
-        1,
-        2,
-        3,
-        4
-      ]
+      "squads": [1, 2, 3, 4]
     },
     {
       "name": "Trombone",
       "symbol": "R",
-      "squads": [
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12
-      ]
+      "squads": [5, 6, 7, 8, 9, 10, 11, 12]
     },
     {
       "name": "Mellophone",
       "symbol": "M",
-      "squads": [
-        13,
-        14,
-        15,
-        16
-      ]
+      "squads": [13, 14, 15, 16]
     },
     {
       "name": "Trumpet",
       "symbol": "T",
-      "squads": [
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29,
-        30
-      ]
+      "squads": [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
     },
     {
       "name": "Tenor Saxophone",
       "symbol": "L",
-      "squads": [
-        31,
-        32
-      ]
+      "squads": [31, 32]
     },
     {
       "name": "Alto Saxophone",
       "symbol": "A",
-      "squads": [
-        33,
-        34,
-        35,
-        36
-      ]
+      "squads": [33, 34, 35, 36]
     },
     {
       "name": "Clarinet",
       "symbol": "C",
-      "squads": [
-        37,
-        38,
-        39,
-        40
-      ]
+      "squads": [37, 38, 39, 40]
     },
     {
       "name": "Piccolo",
       "symbol": "P",
-      "squads": [
-        41,
-        42,
-        43,
-        44
-      ]
+      "squads": [41, 42, 43, 44]
     },
     {
       "name": "Sousaphone",
       "symbol": "8",
-      "squads": [
-        45,
-        46,
-        47,
-        48
-      ]
+      "squads": [45, 46, 47, 48]
     },
     {
       "name": "Snare Drum",
@@ -138,13 +82,7 @@
           "parts": [
             {
               "name": "The Stars and Stripes Forever",
-              "path": "The Stars and Stripes Forever",
-              "drill": [
-                "drill"
-              ],
-              "music": [
-                "score"
-              ]
+              "path": "The Stars and Stripes Forever"
             }
           ]
         }
