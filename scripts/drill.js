@@ -48,7 +48,7 @@ class Drill {
         };
 
         let squad = parseInt(val.n.slice(1), 10);
-        let position = val.n.slice(-2);
+        let position = val.n.slice(-1);
 
         if (isNaN(parseInt(position, 10))) {
           performer.squad = squad;
