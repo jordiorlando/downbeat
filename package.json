@@ -15,8 +15,5 @@
     "pdfjs-dist": "^1.9.568",
     "popper.js": "^1.12.5",
     "screenfull": "^3.3.1"
-  },
-  "devDependencies": {
-    "live-server": "^1.2.0"
   }
 }
