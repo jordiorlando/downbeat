@@ -1,4 +1,4 @@
-const DIMENSIONS = {
+const FIELD = {
   width: 360,
   height: 160,
   border: 6,
@@ -36,10 +36,10 @@ const DIMENSIONS = {
 
 var xScale = d3.scaleLinear()
   .domain([-96, 96])
-  .range([-DIMENSIONS.width / 2, DIMENSIONS.width / 2]);
+  .range([-FIELD.width / 2, FIELD.width / 2]);
 var yScale = d3.scaleLinear()
   .domain([0, new Fraction(85, 1, 3)])
-  .range([0, -DIMENSIONS.height]);
+  .range([0, -FIELD.height]);
 function parent() {
   return this.parentNode;
 }
@@ -48,15 +48,18 @@ function parent() {
 
 class Field {
   constructor(elem, id) {
-    this.viewbox = [[-(DIMENSIONS.width / 2 + DIMENSIONS.border), -(DIMENSIONS.height + DIMENSIONS.border)], [DIMENSIONS.width + DIMENSIONS.border * 2, DIMENSIONS.height + DIMENSIONS.border * 2]];
+    const X0 = -(FIELD.width / 2 + FIELD.border);
+    const Y0 = -(FIELD.height + FIELD.border);
+    const X1 = FIELD.width / 2 + FIELD.border;
+    const Y1 = FIELD.border;
 
     this.svg = d3.select(`#${elem}`).append('svg')
       .attr('id', id)
       .attr("width", "100%")
       .attr("height", "100%")
-      .attr('viewBox', this.viewbox.join(' ').replace(/\,/g, ' '))
+      .attr('viewBox', `${X0} ${Y0} ${X1-X0} ${Y1-Y0}`)
       .attr('preserveAspectRatio', 'xMidYMid meet')
-      .call(d3.zoom().extent(this.viewbox).scaleExtent([1, 20]).translateExtent(this.viewbox).on("zoom", () => this.svg.attr("transform", d3.event.transform)))
+      .call(d3.zoom().extent([[X0, Y0], [X1, Y1]]).scaleExtent([1, 20]).translateExtent([[X0, Y0], [X1, Y1]]).on("zoom", () => this.svg.attr("transform", d3.event.transform)))
       .append('g');
     // .on("wheel.zoom", null);
 
@@ -66,21 +69,21 @@ class Field {
   // Draw field and markings
   drawField() {
     this.svg.append('rect')
-      .attr('x', -DIMENSIONS.width / 2)
-      .attr('y', -DIMENSIONS.height)
-      .attr('width', DIMENSIONS.width)
-      .attr('height', DIMENSIONS.height)
+      .attr('x', -FIELD.width / 2)
+      .attr('y', -FIELD.height)
+      .attr('width', FIELD.width)
+      .attr('height', FIELD.height)
       .classed('field-turf field-line-width', true);
 
     // End zones
-    let endzones = [-DIMENSIONS.width / 2 + 15, DIMENSIONS.width / 2 - 15];
+    let endzones = [-FIELD.width / 2 + 15, FIELD.width / 2 - 15];
     this.svg.selectAll('.field-endzone')
         .data(endzones)
       .enter().append('rect')
         .attr('x', d => d - 15)
-        .attr('y', -DIMENSIONS.height)
+        .attr('y', -FIELD.height)
         .attr('width', 30)
-        .attr('height', DIMENSIONS.height)
+        .attr('height', FIELD.height)
         .classed('field-endzone field-line-width', true)
       .exit().remove();
 
@@ -88,24 +91,24 @@ class Field {
     for (let h of [-141, 141]) {
       this.svg.append('line')
         .attr('x1', h)
-        .attr('y1', -(DIMENSIONS.height - DIMENSIONS.line.length) / 2)
+        .attr('y1', -(FIELD.height - FIELD.line.length) / 2)
         .attr('x2', h)
-        .attr('y2', -(DIMENSIONS.height + DIMENSIONS.line.length) / 2)
+        .attr('y2', -(FIELD.height + FIELD.line.length) / 2)
         .classed('field-lines field-line-width', true);
     }
 
     // Tee markers
-    for (let type in DIMENSIONS.tee) {
-      let x = (50 - DIMENSIONS.tee[type]) * 3;
-      let y = DIMENSIONS.height / 2;
+    for (let type in FIELD.tee) {
+      let x = (50 - FIELD.tee[type]) * 3;
+      let y = FIELD.height / 2;
 
       for (let h of [-x, x]) {
         for (let r of [-45, 45]) {
           this.svg.append('line')
             .attr('x1', h)
-            .attr('y1', -(y - DIMENSIONS.line.length / 2))
+            .attr('y1', -(y - FIELD.line.length / 2))
             .attr('x2', h)
-            .attr('y2', -(y + DIMENSIONS.line.length / 2))
+            .attr('y2', -(y + FIELD.line.length / 2))
             .attr('transform', `rotate(${r},${h},${-y})`)
             .classed(`field-${type} field-lines field-line-width`, true);
         }
@@ -116,9 +119,9 @@ class Field {
     for (let y = 1; y < 85.3; y++) {
       if (y % 8) {
         this.svg.append('line')
-          .attr('x1', -DIMENSIONS.width / 2 + 30)
+          .attr('x1', -FIELD.width / 2 + 30)
           .attr('y1', -y * 1.875)
-          .attr('x2', DIMENSIONS.width / 2 - 30)
+          .attr('x2', FIELD.width / 2 - 30)
           .attr('y2', -y * 1.875)
           .classed('field-grid field-step-lines', true);
       }
@@ -129,7 +132,7 @@ class Field {
           .attr('x1', x * 1.875)
           .attr('y1', 0)
           .attr('x2', x * 1.875)
-          .attr('y2', -DIMENSIONS.height)
+          .attr('y2', -FIELD.height)
           .classed('field-grid field-step-lines', true);
       }
     }
@@ -137,9 +140,9 @@ class Field {
     // Zero grid
     for (let y = 15; y < 160; y += 15) {
       this.svg.append('line')
-        .attr('x1', -DIMENSIONS.width / 2 + 30)
+        .attr('x1', -FIELD.width / 2 + 30)
         .attr('y1', -y)
-        .attr('x2', DIMENSIONS.width / 2 - 30)
+        .attr('x2', FIELD.width / 2 - 30)
         .attr('y2', -y)
         .classed('field-grid field-zero-lines', true);
     }
@@ -157,7 +160,7 @@ class Field {
         .attr('x1', 0)
         .attr('y1', 0)
         .attr('x2', 0)
-        .attr('y2', -DIMENSIONS.height)
+        .attr('y2', -FIELD.height)
         .classed('field-lines field-line-width', true)
         .select(parent)
       .each(function(d, i) {
@@ -197,18 +200,18 @@ class Field {
         };
 
         // Hash marks
-        for (let hash in DIMENSIONS.hashes) {
-          for (let type in DIMENSIONS.hashes[hash]) {
+        for (let hash in FIELD.hashes) {
+          for (let type in FIELD.hashes[hash]) {
             if (i > 0 && i < yardlines.length - 1) {
-              drawLine(0, DIMENSIONS.hashes[hash][type], DIMENSIONS.line.length, 'h', type);
+              drawLine(0, FIELD.hashes[hash][type], FIELD.line.length, 'h', type);
             }
 
             if (i !== fifty) {
               let m = i > fifty ? -1 : 1;
-              let o = (hash === 'front' ? -1 : 1) * DIMENSIONS.line.length / 2;
+              let o = (hash === 'front' ? -1 : 1) * FIELD.line.length / 2;
 
               for (let h = 1; h < 5; h++) {
-                drawLine(m * h * 3, DIMENSIONS.hashes[hash][type] + o, DIMENSIONS.line.length, 'v', type);
+                drawLine(m * h * 3, FIELD.hashes[hash][type] + o, FIELD.line.length, 'v', type);
               }
             }
           }
@@ -217,24 +220,24 @@ class Field {
         // Yard marks
         if (i !== fifty) {
           let m = i > fifty ? -1 : 1;
-          let arr = [(DIMENSIONS.line.length + DIMENSIONS.line.width * 3) / 2];
-          arr.push(DIMENSIONS.height - arr[0]);
+          let arr = [(FIELD.line.length + FIELD.line.width * 3) / 2];
+          arr.push(FIELD.height - arr[0]);
 
           for (let h = 1; h < 5; h++) {
             for (let v of arr) {
-              drawLine(m * h * 3, v, DIMENSIONS.line.length, 'v');
+              drawLine(m * h * 3, v, FIELD.line.length, 'v');
             }
           }
         }
 
         // Yard numbers
         if (i && (i < yardlines.length - 1) && (i % 2 === 0)) {
-          for (let type in DIMENSIONS.numbers.top) {
-            let arr = [DIMENSIONS.numbers.top[type] - DIMENSIONS.numbers.height];
-            arr.push(DIMENSIONS.height - arr[0]);
+          for (let type in FIELD.numbers.top) {
+            let arr = [FIELD.numbers.top[type] - FIELD.numbers.height];
+            arr.push(FIELD.height - arr[0]);
 
             for (let v in arr) {
-              drawText(0, arr[v], DIMENSIONS.numbers.height, v, 50 - Math.abs(yardlines[i] * 5 / 8), type);
+              drawText(0, arr[v], FIELD.numbers.height, v, 50 - Math.abs(yardlines[i] * 5 / 8), type);
             }
           }
         }
@@ -243,8 +246,8 @@ class Field {
 
     // Zero points
     for (let y = 15; y < 160; y += 15) {
-      if (y !== DIMENSIONS.hashes.front.college) {
-        for (let x = -DIMENSIONS.width / 2 + 30; x <= DIMENSIONS.width / 2 - 30; x += 15) {
+      if (y !== FIELD.hashes.front.college) {
+        for (let x = -FIELD.width / 2 + 30; x <= FIELD.width / 2 - 30; x += 15) {
           this.svg.append('circle')
             .attr('r', 0.125)
             .attr('cx', x)
