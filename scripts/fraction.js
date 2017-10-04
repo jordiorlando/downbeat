@@ -292,7 +292,7 @@ class Fraction {
 
     // HACK: replace with unicode entities externally?
     if (this.numerator === 0) {
-      return str;
+      return str || '0';
     } else if (this.numerator === 1 && this.denominator === 2) {
       return `${str}½`;
     } else if (this.numerator === 1 && this.denominator === 3) {
