@@ -5,21 +5,58 @@ var uiElements = {
 
 class Settings {
   constructor() {
-    this.settings = {
-      accuracy: [[2, true], [3, true], [4, true], [8, false], [10, false]]
+    this.valid = {
+      accuracy: [2, 3, 4, 8, 10],
+      markings: ['grid', 'highschool', 'college', 'pro'],
+      theme: ['bw', 'color']
+    }
+    this.defaults = {
+      accuracy: [2, 3, 4],
+      markings: ['grid', 'college'],
+      theme: 'bw'
     };
+    this.callbacks = {};
+
+    ['sessionStorage', 'localStorage'].forEach(type => {
+      try {
+        let storage = window[type];
+        let x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        this[`${type}Available`] = true;
+      } catch (e) {
+        this[`${type}Available`] = e instanceof DOMException && (
+          // everything except Firefox
+          e.code === 22 ||
+          // Firefox
+          e.code === 1014 ||
+          // test name field too, because code might not be present
+          // everything except Firefox
+          e.name === 'QuotaExceededError' ||
+          // Firefox
+          e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+          // acknowledge QuotaExceededError only if there's something already stored
+          storage.length !== 0;
+      }
+    });
+
+    for (let key in this.defaults) {
+      if (!this.localStorageAvailable || !(`settings-${key}` in localStorage)) {
+        this.set(key, this.defaults[key]);
+      }
+    }
 
 
-    $(document).keydown(e => panes[activePane].eventHandler(e));
+    $(document).keydown(e => panes[panes.active].eventHandler(e));
 
     $('a[data-toggle="tab"]').click(e => $('#navbarNav').collapse('hide'));
     $('#load-button').click(e => $('#navbarNav').collapse('hide'));
 
     uiElements.status = Array.prototype.slice.call(document.getElementsByClassName('status-element'));
-    $('.status-element').click(e => panes[activePane].eventHandler(e));
+    $('.status-element').click(e => panes[panes.active].eventHandler(e));
 
     for (let button of ['prev', 'playpause', 'next']) {
-      $(`#button-${button}`).click(e => panes[activePane].eventHandler(e));
+      $(`#button-${button}`).click(e => panes[panes.active].eventHandler(e));
     }
 
     if (screenfull.enabled) {
@@ -32,40 +69,34 @@ class Settings {
         $('#button-fullscreen').children().toggleClass('zmdi-fullscreen-exit', screenfull.isFullscreen);
       });
     }
-  }
 
-  get(setting) {
-    return Array.isArray(this.settings[setting]) ? this.settings[setting].reduce((a, v) => {
-      if (v[1]) {
-        a.push(v[0]);
-      }
-      return a;
-    }, []) : this.settings[setting];
-  }
 
-  set(setting, key, value) {
-    this.settings[setting][key] = value;
+
+    // Hook up settings storage to page inputs
+    for (let key in this.valid) {
+      let curr = this.get(key);
+
+      this.valid[key].forEach(val => {
+        // Check if this is a multi-option setting
+        let multi = Array.isArray(this.defaults[key]);
+        let id = `#${multi ? 'checkbox' : 'radio'}-${key}-${val}`;
+
+        // Make the page input active state reflect the current setting
+        if (curr === val || curr.includes(val)) {
+          $(id).addClass('active');
+        }
+
+        // Attach event listeners to the page inputs
+        if (multi) {
+          $(id).click(e => this.toggle(key, val, !e.currentTarget.classList.contains('active')));
+        } else {
+          $(id).click(e => this.set(key, val));
+        }
+      });
+    }
   }
 
   load() {
-    this.settings.accuracy.forEach((val, i) => {
-      this.settings.accuracy[i][1] = $(`#checkbox-accuracy-${val[0]}`).hasClass('active');
-      $(`#checkbox-accuracy-${val[0]}`).click(e => panes.settings.set('accuracy', i, [val[0], !e.currentTarget.classList.contains('active')]));
-      panes.drill.move();
-    });
-
-    for (let markings of ['grid', 'highschool', 'college', 'pro']) {
-      panes.drill.field.markings(markings, $(`#checkbox-markings-${markings}`).hasClass('active'));
-      $(`#checkbox-markings-${markings}`).click(e => panes.drill.field.markings(markings, !e.currentTarget.classList.contains('active')));
-    }
-
-    for (let theme of ['bw', 'color']) {
-      if ($(`#radio-theme-${theme}`).hasClass('active')) {
-        panes.drill.field.theme(theme);
-      }
-      $(`#radio-theme-${theme}`).click(e => panes.drill.field.theme(theme, !e.currentTarget.classList.contains('active')));
-    }
-
     for (let type of data.performers) {
       $('#select-performer-type').append(`<option value=${type.symbol}>${type.name}</option>`);
       if (type.squads) {
@@ -77,9 +108,61 @@ class Settings {
 
     for (let audio of ['met', 'none']) {
       if ($(`#radio-audio-${audio}`).hasClass('active')) {
-        panes.drill[audio === 'none' ? 'mute' : 'unmute']();
+        panes.tools.metronome[audio === 'none' ? 'mute' : 'unmute']();
       }
-      $(`#radio-audio-${audio}`).click(e => panes.drill[audio === 'none' ? 'mute' : 'unmute']());
+      $(`#radio-audio-${audio}`).click(e => panes.tools.metronome[audio === 'none' ? 'mute' : 'unmute']());
+    }
+  }
+
+  get(key) {
+    return this.localStorageAvailable ? JSON.parse(localStorage.getItem(`settings-${key}`)) : this.settings[key];
+  }
+
+  set(key, val) {
+    if (this.isValid(key, val)) {
+      let old = this.get(key);
+
+      if (this.localStorageAvailable) {
+        localStorage.setItem(`settings-${key}`, JSON.stringify(val));
+      } else {
+        this.settings[key] = val;
+      }
+
+      if (this.callbacks[key]) {
+        this.callbacks[key].forEach(func => func(old, val));
+      }
+    }
+  }
+
+  toggle(key, val, set) {
+    if (Array.isArray(this.defaults[key])) {
+      let curr = this.get(key);
+      this.set(key, this.valid[key].filter(v => (v === val && set) || (v !== val && curr.includes(v))));
+    }
+  }
+
+  isValid(key, val) {
+    let valid = true;
+    (Array.isArray(val) ? val : [val]).forEach(v => valid &= this.valid[key].includes(v));
+
+    return valid;
+  }
+
+  forEach(key, func) {
+    let val = this.get(key);
+    this.valid[key].forEach(curr => func(curr, val));
+  }
+
+  onChange(key, func, callNow) {
+    if (this.callbacks[key]) {
+      this.callbacks[key].push(func);
+    } else {
+      this.callbacks[key] = [func];
+    }
+
+    if (callNow) {
+      let val = this.get(key);
+      func(val, val);
     }
   }
 
@@ -93,7 +176,5 @@ class Settings {
     }
   }
 
-  eventHandler(e) {
-
-  }
+  eventHandler(e) {}
 }

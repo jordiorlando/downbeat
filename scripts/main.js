@@ -1,27 +1,23 @@
-var data, panes, activePane;
+var panes = {};
+panes.settings = new Settings();
+panes.tools = new Tools();
+panes.music = new Music();
+panes.drill = new Drill();
+for (let pane in panes) {
+  panes[pane].active = $(`#${pane}`).hasClass('active');
+  panes.active = panes[pane].active ? pane : panes.active;
+}
+$('a[data-toggle="tab"]').on('shown.bs.tab', e => {
+  panes[e.relatedTarget.id.replace('-tab', '')].active = false;
+  panes.active = e.target.id.replace('-tab', '');
+  panes[panes.active].active = true;
+  panes[panes.active].updateUI();
+});
 
+var data;
 $.getJSON('data/2017.json', d => {
   data = d;
-  panes = {
-    drill: new Drill(),
-    music: new Music(),
-    tools: new Tools(),
-    settings: new Settings()
-  }
-
-  for (let pane in panes) {
-    panes[pane].active = $(`#${pane}`).hasClass('active');
-    activePane = panes[pane].active ? pane : activePane;
-  }
-  $('a[data-toggle="tab"]').on('shown.bs.tab', e => {
-    panes[e.relatedTarget.id.replace('-tab', '')].active = false;
-    activePane = e.target.id.replace('-tab', '');
-    panes[activePane].active = true;
-    panes[activePane].updateUI();
-  });
-
   panes.settings.load();
-
 
   $('#select-season').change(e => {
     $('#load-show').prop('disabled', true);

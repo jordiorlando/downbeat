@@ -34,20 +34,16 @@ const FIELD = {
   }
 };
 
-var xScale = d3.scaleLinear()
-  .domain([-96, 96])
-  .range([-FIELD.width / 2, FIELD.width / 2]);
-var yScale = d3.scaleLinear()
-  .domain([0, new Fraction(85, 1, 3)])
-  .range([0, -FIELD.height]);
-function parent() {
-  return this.parentNode;
-}
-
-
 
 class Field {
   constructor(elem, id) {
+    this.xScale = d3.scaleLinear()
+      .domain([-96, 96])
+      .range([-FIELD.width / 2, FIELD.width / 2]);
+    this.yScale = d3.scaleLinear()
+      .domain([0, new Fraction(85, 1, 3)])
+      .range([0, -FIELD.height]);
+
     const X0 = -(FIELD.width / 2 + FIELD.border);
     const Y0 = -(FIELD.height + FIELD.border);
     const X1 = FIELD.width / 2 + FIELD.border;
@@ -64,6 +60,9 @@ class Field {
     // .on("wheel.zoom", null);
 
     this.drawField();
+
+    panes.settings.onChange('markings', old => panes.settings.forEach('markings', (curr, val) => this.svg.selectAll(`.field-${curr}`).classed('d-none', !val.includes(curr))), true);
+    panes.settings.onChange('theme', old => panes.settings.forEach('theme', (curr, val) => this.svg.classed(`field-theme-${curr}`, val.includes(curr))), true);
   }
 
   // Draw field and markings
@@ -155,14 +154,16 @@ class Field {
     this.svg.selectAll('.yardline')
         .data(yardlines)
       .enter().append('g')
-        .attr('transform', d => `translate(${xScale(d)},0)`)
+        .attr('transform', d => `translate(${this.xScale(d)},0)`)
       .append('line')
         .attr('x1', 0)
         .attr('y1', 0)
         .attr('x2', 0)
         .attr('y2', -FIELD.height)
         .classed('field-lines field-line-width', true)
-        .select(parent)
+        .select(function() {
+          return this.parentNode;
+        })
       .each(function(d, i) {
         let fifty = Math.floor(yardlines.length / 2);
 
@@ -283,13 +284,17 @@ class Field {
         .attr('cx', 0)
         .attr('cy', 0)
         .classed('field-performer-circle', true)
-        .select(parent)
+        .select(function() {
+          return this.parentNode;
+        })
       .append('text')
         .text(d => panes.drill.parseName(d))
         .attr('y', 0.36)
         .attr('text-anchor', 'middle')
         .classed('field-performer-text', true)
-        .select(parent)
+        .select(function() {
+          return this.parentNode;
+        })
       .exit().remove();
   }
 
@@ -311,23 +316,11 @@ class Field {
     }
   }
 
-  markings(markings, show) {
-    if (Array.isArray(markings)) {
-      for (let type of markings) {
-        this.markings(type, show);
-      }
-    } else if (markings instanceof Object) {
-      for (let type in markings) {
-        this.markings(type, markings[type]);
-      }
-    } else {
-      this.svg.selectAll(`.field-${markings}`).classed('d-none', !show);
-    }
+  markings() {
+    panes.settings.forEach('markings', (curr, val) => this.svg.selectAll(`.field-${curr}`).classed('d-none', !val.includes(curr)));
   }
 
-  theme(theme) {
-    for (let t of ['bw', 'color']) {
-      this.svg.classed(`field-theme-${t}`, theme === t);
-    }
+  theme() {
+    panes.settings.forEach('theme', (curr, val) => this.svg.classed(`field-theme-${curr}`, val.includes(curr)));
   }
 }

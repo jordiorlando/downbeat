@@ -1,7 +1,6 @@
 class Drill {
   constructor(season, show, part) {
     this.field = new Field('drill', 'd3');
-
     if (season && show && part) {
       this.load(season, show, part);
     }
@@ -180,18 +179,27 @@ class Drill {
   }
 
   // Update all performer positions
-  move() {
-    // console.log(this.state);
-    this.updateUI();
-
-    // Translation function
-    let translate = p => {
+  move(duration = 0) {
+    this.field.svg.selectAll('.field-performer').transition().duration(duration).ease(d3.easeLinear).attr('transform', p => {
       let {x, y} = this.position(p, this.state.set, this.state.count);
+      return `translate(${this.field.xScale(x)},${this.field.yScale(y)})`;
+    }).on('end', (d, i) => {
+      if (i === 0) {
+        panes.tools.metronome.playOnce();
+        this.updateUI();
 
-      return `translate(${xScale(x)},${yScale(y)})`;
-    };
-
-    this.field.svg.selectAll('.field-performer').attr('transform', translate);
+        if (this.playing && this.state.total < this.total) {
+          this.nextCount();
+        } else {
+          // HACK: make updateUI automatically handle this
+          if (duration) {
+            this.playing = true;
+            this.updateUI();
+          }
+          this.pause();
+        }
+      }
+    });
   }
 
   // Go to the next count
@@ -210,15 +218,17 @@ class Drill {
       return;
     }
 
-    this.move();
+    let duration = this.playing ? 1000 * 60 / this.state.tempo : 0;
+    if (this.state.pulse === 0.5 || this.state.pulse === 'half') {
+      duration *= 2;
+    }
+    this.move(duration);
   }
 
   // Go to a given set
   set(s) {
     // Check if valid set
-    if (s < 0 || s >= this.sets.length) {
-      return;
-    }
+    s = Math.min(Math.max(s, 0), this.sets.length - 1);
 
     // Save playing state and pause
     let playing = this.playing;
@@ -248,62 +258,24 @@ class Drill {
   prevSet() {
     if (this.state) {
       // FIXME: spend a full count-time at count 0 before moving to count 1 when calling prevSet() while this.playing = true
-      this.set(this.state.set - 1)
+      this.set(this.state.set - (this.playing ? 2 : 1))
     }
   }
 
   // Go to the next set
   nextSet() {
     if (this.state) {
-      this.set(this.state.set + 1);
+      this.set(this.state.set + (this.playing || this.state.count < this.state.counts ? 0 : 1));
     }
   }
 
-  mute() {
-    this.muted = true;
-  }
-
-  unmute() {
-    this.muted = false;
-  }
-
-  muteUnmute() {
-    if (this.muted) {
-      this.unmute();
-    } else {
-      this.mute();
-    }
-  }
-
-  // Start playing until the specified count
-  play(end = this.total) {
-    if (this.state) {
+  // Start playing
+  play() {
+    if (this.state && (this.playing = this.state.total < this.total)) {
       $('#button-playpause').children().removeClass('zmdi-play');
       $('#button-playpause').children().addClass('zmdi-pause');
 
-      if (this.state.total < this.total) {
-        this.playing = true;
-
-        let func = () => {
-          if (!this.muted) {
-            $('#metronome')[0].play();
-          }
-          this.nextCount();
-
-          let t = 1000 * 60 / this.state.tempo;
-          if (this.state.pulse === 0.5 || this.state.pulse === 'half') {
-            t *= 2;
-          }
-
-          if (this.state.total < end) {
-            this.timeoutID = setTimeout(func, t);
-          } else {
-            this.pause();
-          }
-        };
-
-        func();
-      }
+      this.nextCount();
     }
   }
 
@@ -314,16 +286,12 @@ class Drill {
       $('#button-playpause').children().addClass('zmdi-play');
 
       this.playing = false;
-      clearTimeout(this.timeoutID);
+      // this.field.svg.selectAll('.field-performer').interrupt();
     }
   }
 
   playPause() {
-    if (this.playing) {
-      this.pause();
-    } else {
-      this.play();
-    }
+    this[this.playing ? 'pause' : 'play']();
   }
 
   // Stop playing
@@ -423,7 +391,7 @@ class Drill {
 
         uiElements.status[0].children[0].textContent = this.parseName(p);
         // TODO: change to zmdi-run for run-on step
-        if (p.sets[s][this.subset(p, s, c).subset].t === 'm') {
+        if (p.sets[s][subset.subset].t === 'm') {
           uiElements.status[0].children[1].textContent = `${p.sets[s][subset.subset].stepsize.round(panes.settings.get('accuracy'))} to 5`;
         } else {
           uiElements.status[0].children[1].textContent = p.sets[s][subset.subset].t;
@@ -432,6 +400,10 @@ class Drill {
         let pos = this.parsePos(p, s, c);
         uiElements.status[1].children[0].textContent = pos.horiz[0];
         uiElements.status[1].children[1].textContent = pos.vert[this.altVert ? 1 : 0];
+
+        let {x, y} = this.position(p, s, c);
+        $('#labelX').text(`X: ${x}`);
+        $('#labelY').text(`Y: ${y}`);
       } else {
         uiElements.status[0].children[0].textContent = '';
         uiElements.status[0].children[1].textContent = '';
@@ -458,9 +430,6 @@ class Drill {
     } else if (e.type === 'click') {
       if (e.currentTarget.tagName === 'BUTTON') {
         switch (e.currentTarget.id) {
-          case 'button-volume':
-            this.muteUnmute();
-            break;
           case 'button-prev':
             this.prevSet();
             break;

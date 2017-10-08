@@ -1,5 +1,33 @@
-class Tools {
+class Metronome {
   constructor() {}
+
+  playOnce() {
+    if (!this.muted) {
+      $('#metronome')[0].play();
+    }
+  }
+
+  mute() {
+    this.muted = true;
+  }
+
+  unmute() {
+    this.muted = false;
+  }
+
+  muteUnmute() {
+    this[this.muted ? 'unmute' : 'mute']();
+  }
+}
+
+class Tuner {
+  constructor() {}
+}
+
+class Tools {
+  constructor() {
+    this.metronome = new Metronome();
+  }
 
   updateUI() {
     if (this.active) {
@@ -12,6 +40,12 @@ class Tools {
   }
 
   eventHandler(e) {
-
+    if (e.type === 'click' && e.currentTarget.tagName === 'BUTTON') {
+      switch (e.currentTarget.id) {
+        case 'button-volume':
+          this.metronome.muteUnmute();
+          break;
+      }
+    }
   }
 }

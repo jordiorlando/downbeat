@@ -24,55 +24,55 @@
 <body>
   <div class="d-flex flex-column h-100">
     <div class="navbar-container zindex-fixed">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-nowrap justify-content-end">
-      <!-- <a class="navbar-brand" href="#">Downbeat</a> -->
-      <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-nowrap justify-content-end">
+        <!-- <a class="navbar-brand" href="#">Downbeat</a> -->
+        <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <span class="navbar-brand mb-0 h1" id="title">Downbeat</span>
-        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#load-modal" id="load-button">Load</button>
-        <ul class="navbar-nav nav flex-row" id="tab-bar" role="tablist"> <!--nav-tabs-->
-          <li class="nav-item">
-            <a class="nav-link active" id="drill-tab" data-toggle="tab" href="#drill" role="tab" aria-controls="drill" aria-expanded="true">Drill</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="music-tab" data-toggle="tab" href="#music" role="tab" aria-controls="music">Music</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="tools-tab" data-toggle="tab" href="#tools" role="tab" aria-controls="tools">Tools</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">Settings</a>
-          </li>
-        </ul>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <span class="navbar-brand mb-0 h1" id="title">Downbeat</span>
+          <button type="button" class="btn btn-light" data-toggle="modal" data-target="#load-modal" id="load-button">Load</button>
+          <ul class="navbar-nav nav flex-row" id="tab-bar" role="tablist"> <!--nav-tabs-->
+            <li class="nav-item">
+              <a class="nav-link active" id="drill-tab" data-toggle="tab" href="#drill" role="tab" aria-controls="drill" aria-expanded="true">Drill</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="music-tab" data-toggle="tab" href="#music" role="tab" aria-controls="music">Music</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tools-tab" data-toggle="tab" href="#tools" role="tab" aria-controls="tools">Tools</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">Settings</a>
+            </li>
+          </ul>
+        </div>
 
-      <!-- <div class="d-flex justify-content-around justify-content-lg-end justify-content-xl-end flex-wrap navbar-text w-100"> -->
-      <div class="px-3 d-flex flex-column align-items-center status-element status-width-2">
-        <span></span>
-        <span></span>
-      </div>
-      <div class="px-3 d-flex flex-column align-items-center status-element status-width-8">
-        <span></span>
-        <span></span>
-      </div>
-      <div class="px-3 d-flex flex-column align-items-center status-element status-width-1">
-        <span></span>
-        <span></span>
-      </div>
-      <div class="px-3 d-flex flex-column align-items-center status-element status-width-2">
-        <span></span>
-        <span></span>
-      </div>
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-dark" id="button-prev" title="Previous"><i class="zmdi zmdi-skip-previous"></i></button>
-        <button type="button" class="btn btn-dark" id="button-playpause" title="Play/Pause"><i class="zmdi zmdi-play"></i></button>
-        <button type="button" class="btn btn-dark" id="button-next" title="Next"><i class="zmdi zmdi-skip-next"></i></button>
-      </div>
-      <button type="button" class="btn btn-dark d-none" id="button-fullscreen" title="Fullscreen"><i class="zmdi zmdi-fullscreen"></i></button>
-    </nav>
+        <!-- <div class="d-flex justify-content-around justify-content-lg-end justify-content-xl-end flex-wrap navbar-text w-100"> -->
+        <div class="px-3 d-flex flex-column align-items-center status-element status-width-2">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="px-3 d-flex flex-column align-items-center status-element status-width-8">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="px-3 d-flex flex-column align-items-center status-element status-width-1">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="px-3 d-flex flex-column align-items-center status-element status-width-2">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-dark" id="button-prev" title="Previous"><i class="zmdi zmdi-skip-previous"></i></button>
+          <button type="button" class="btn btn-dark" id="button-playpause" title="Play/Pause"><i class="zmdi zmdi-play"></i></button>
+          <button type="button" class="btn btn-dark" id="button-next" title="Next"><i class="zmdi zmdi-skip-next"></i></button>
+        </div>
+        <button type="button" class="btn btn-dark d-none" id="button-fullscreen" title="Fullscreen"><i class="zmdi zmdi-fullscreen"></i></button>
+      </nav>
     </div>
 
     <div class="tab-content" id="tab-content">
@@ -89,14 +89,14 @@
         <div class="container">
           <h3>Coordinate rounding</h3>
           <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-secondary active" id="checkbox-accuracy-2">
-              <input type="checkbox" checked autocomplete="off"> 1/2
+            <label class="btn btn-secondary" id="checkbox-accuracy-2">
+              <input type="checkbox" autocomplete="off"> 1/2
             </label>
-            <label class="btn btn-secondary active" id="checkbox-accuracy-3">
-              <input type="checkbox" checked autocomplete="off"> 1/3
+            <label class="btn btn-secondary" id="checkbox-accuracy-3">
+              <input type="checkbox" autocomplete="off"> 1/3
             </label>
-            <label class="btn btn-secondary active" id="checkbox-accuracy-4">
-              <input type="checkbox" checked autocomplete="off"> 1/4
+            <label class="btn btn-secondary" id="checkbox-accuracy-4">
+              <input type="checkbox" autocomplete="off"> 1/4
             </label>
             <label class="btn btn-secondary" id="checkbox-accuracy-8">
               <input type="checkbox" autocomplete="off"> 1/8
@@ -122,7 +122,7 @@
           </div>
           <h3>Field theme</h3>
           <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-secondary active" id="radio-theme-bw">
+            <label class="btn btn-secondary" id="radio-theme-bw">
               <input type="radio" name="options" autocomplete="off" checked> Black/White
             </label>
             <label class="btn btn-secondary" id="radio-theme-color">
