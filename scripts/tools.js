@@ -1,5 +1,7 @@
 class Metronome {
-  constructor() {}
+  constructor() {
+    panes.settings.onChange('audio', (old, val) => this[val === 'none' ? 'mute' : 'unmute']());
+  }
 
   playOnce() {
     if (!this.muted) {

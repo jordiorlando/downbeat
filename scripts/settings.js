@@ -8,12 +8,14 @@ class Settings {
     this.valid = {
       accuracy: [2, 3, 4, 8, 10],
       markings: ['grid', 'highschool', 'college', 'pro'],
-      theme: ['bw', 'color']
+      theme: ['bw', 'color'],
+      audio: ['met', 'none']
     }
     this.defaults = {
       accuracy: [2, 3, 4],
       markings: ['grid', 'college'],
-      theme: 'bw'
+      theme: 'bw',
+      audio: 'met'
     };
     this.callbacks = {};
 
@@ -71,7 +73,6 @@ class Settings {
     }
 
 
-
     // Hook up settings storage to page inputs
     for (let key in this.valid) {
       let curr = this.get(key);
@@ -104,13 +105,6 @@ class Settings {
           $('#select-performer-squad').append(`<option value="${squad}" class="d-none">${squad}</option>`);
         }
       }
-    }
-
-    for (let audio of ['met', 'none']) {
-      if ($(`#radio-audio-${audio}`).hasClass('active')) {
-        panes.tools.metronome[audio === 'none' ? 'mute' : 'unmute']();
-      }
-      $(`#radio-audio-${audio}`).click(e => panes.tools.metronome[audio === 'none' ? 'mute' : 'unmute']());
     }
   }
 
