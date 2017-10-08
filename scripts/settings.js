@@ -19,6 +19,8 @@ class Settings {
     };
     this.callbacks = {};
 
+
+    // Test for local storage support
     ['sessionStorage', 'localStorage'].forEach(type => {
       try {
         let storage = window[type];
@@ -42,36 +44,12 @@ class Settings {
       }
     });
 
+    // Load all default values
     for (let key in this.defaults) {
       if (!this.localStorageAvailable || !(`settings-${key}` in localStorage)) {
         this.set(key, this.defaults[key]);
       }
     }
-
-
-    $(document).keydown(e => panes[panes.active].eventHandler(e));
-
-    $('a[data-toggle="tab"]').click(e => $('#navbarNav').collapse('hide'));
-    $('#load-button').click(e => $('#navbarNav').collapse('hide'));
-
-    uiElements.status = Array.prototype.slice.call(document.getElementsByClassName('status-element'));
-    $('.status-element').click(e => panes[panes.active].eventHandler(e));
-
-    for (let button of ['prev', 'playpause', 'next']) {
-      $(`#button-${button}`).click(e => panes[panes.active].eventHandler(e));
-    }
-
-    if (screenfull.enabled) {
-      // $('#button-fullscreen').removeClass('d-none');
-      $('#button-fullscreen').click(() => {
-        screenfull.toggle();
-      });
-      screenfull.on('change', () => {
-        $('#button-fullscreen').children().toggleClass('zmdi-fullscreen', !screenfull.isFullscreen);
-        $('#button-fullscreen').children().toggleClass('zmdi-fullscreen-exit', screenfull.isFullscreen);
-      });
-    }
-
 
     // Hook up settings storage to page inputs
     for (let key in this.valid) {
@@ -95,6 +73,30 @@ class Settings {
         }
       });
     }
+
+
+    // Hide the navbar and load modal when they lose focus
+    $('a[data-toggle="tab"]').click(e => $('#navbarNav').collapse('hide'));
+    $('#load-button').click(e => $('#navbarNav').collapse('hide'));
+
+    // Set up status bar framework
+    uiElements.status = Array.from($('.status-element'));
+    $('.status-element').click(e => panes[panes.active].eventHandler(e));
+
+    // Register the keydown event handlers for each pane
+    $(document).keydown(e => panes[panes.active].eventHandler(e));
+
+    // Add button click handlers
+    for (let button of ['prev', 'playpause', 'next']) {
+      $(`#button-${button}`).click(e => panes[panes.active].eventHandler(e));
+    }
+
+    // Test for fullscreen support
+    if (screenfull.enabled) {
+      // $('#button-fullscreen').removeClass('d-none');
+      $('#button-fullscreen').click(() => screenfull.toggle());
+      screenfull.on('change', () => $('#button-fullscreen').children().toggleClass('zmdi-fullscreen', !screenfull.isFullscreen).toggleClass('zmdi-fullscreen-exit', screenfull.isFullscreen));
+    }
   }
 
   load() {
@@ -108,10 +110,12 @@ class Settings {
     }
   }
 
+  // Get the value of the given setting
   get(key) {
     return this.localStorageAvailable ? JSON.parse(localStorage.getItem(`settings-${key}`)) : this.settings[key];
   }
 
+  // Set the value of the given setting
   set(key, val) {
     if (this.isValid(key, val)) {
       let old = this.get(key);
@@ -128,6 +132,7 @@ class Settings {
     }
   }
 
+  // Toggle the given value of the given setting (for multi-settings only)
   toggle(key, val, set) {
     if (Array.isArray(this.defaults[key])) {
       let curr = this.get(key);
@@ -135,6 +140,7 @@ class Settings {
     }
   }
 
+  // Check if the given value is valid for the given setting
   isValid(key, val) {
     let valid = true;
     (Array.isArray(val) ? val : [val]).forEach(v => valid &= this.valid[key].includes(v));
@@ -142,11 +148,14 @@ class Settings {
     return valid;
   }
 
+  // Execute the given function once for each valid value of the given setting
   forEach(key, func) {
     let val = this.get(key);
     this.valid[key].forEach(curr => func(curr, val));
   }
 
+  // Register the given change callback for the given setting
+  // Optionally execute the callback once right now (if callNow = true)
   onChange(key, func, callNow) {
     if (this.callbacks[key]) {
       this.callbacks[key].push(func);

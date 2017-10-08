@@ -315,12 +315,4 @@ class Field {
       panes.drill.updateUI();
     }
   }
-
-  markings() {
-    panes.settings.forEach('markings', (curr, val) => this.svg.selectAll(`.field-${curr}`).classed('d-none', !val.includes(curr)));
-  }
-
-  theme() {
-    panes.settings.forEach('theme', (curr, val) => this.svg.classed(`field-theme-${curr}`, val.includes(curr)));
-  }
 }
