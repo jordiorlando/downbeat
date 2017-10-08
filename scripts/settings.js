@@ -6,7 +6,7 @@ var uiElements = {
 class Settings {
   constructor() {
     this.valid = {
-      accuracy: [2, 3, 4, 8, 10],
+      accuracy: [2, 3, 4, 8],
       markings: ['grid', 'highschool', 'college', 'pro'],
       theme: ['bw', 'color'],
       audio: ['met', 'none']
