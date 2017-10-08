@@ -1,7 +1,11 @@
 {
+  "name": "Downbeat App",
   "short_name": "Downbeat",
-  "name": "Downbeat",
+  "description": "The Downbeat drill and music app for marching bands",
+  "lang": "en-US",
   "start_url": "/index.html",
   "display": "fullscreen",
-  "orientation": "landscape"
+  "orientation": "landscape",
+  "background_color": "#fff",
+  "theme_color": "#212529"
 }
